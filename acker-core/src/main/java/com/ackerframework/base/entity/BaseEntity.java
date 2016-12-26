@@ -33,7 +33,7 @@ public abstract class BaseEntity implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     protected Date modifyTime;    // 更新日期
 
-    protected Boolean hasRemoved;
+    protected Boolean hasRemoved = false;
 
     public Integer getId() {
         return id;

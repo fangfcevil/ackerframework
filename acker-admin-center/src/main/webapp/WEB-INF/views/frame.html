@@ -12,7 +12,7 @@
             <img src="${request.contextPath}/static/images/storm_admin.png" width="199" height="70">
         </div>
     <#--导航菜单-->
-        <div data-options="region:'center',border:false" style="background-color: #2E363F">
+        <div data-options="region:'center',border:false" style="background-color: #1f262d">
             <ul class="easyui-tree" data-options="animate:true,url:'${request.contextPath}/frame/navs',
          onClick:onClickNav">
             </ul>
@@ -39,9 +39,11 @@
                     <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>${loginUser.nickName} </a>
             </div>
             <div id="user_menu_item" data-options="itemHeight:30">
+                <div data-options="">${loginUser.roleName} - ${loginUser.orgName}</div>
+                <div class="menu-sep"></div>
                 <div data-options="">用户详情</div>
                 <div data-options="">我的任务</div>
-                <div data-options="">${loginUser.roleName} - ${loginUser.orgName}</div>
+
             </div>
             <div id="language_menu_item" data-options="itemHeight:30">
                 <div data-options="" onclick="changeLanguage('zh_CN')">中文</div>

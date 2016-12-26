@@ -12,6 +12,28 @@
     padding: 0 4px;
 }
 
+.tree-expanded {
+    background: url("");
+}
+
+.tree-collapsed {
+    background: url("");
+}
+
+.tree-expanded-hover {
+    background: url("");
+}
+
+.tree-collapsed-hover {
+    background: url("");
+}
+
+.tree-node-level-0 {
+    background-color: #2e363f;
+    border-top: 1px solid #37414b;
+    border-bottom: 1px solid #1f262d;
+}
+
 .tabs-header {
     border-color: #FFF;
 }
@@ -24,4 +46,16 @@
 
 .tabs li.tabs-selected a.tabs-inner {
     border-bottom: 1px solid #902525;
+}
+
+.menu-text {
+    padding-left: 10px;
+}
+
+.menu-line {
+    display: none;
+}
+
+.menu-sep {
+    margin: 3px 0px 3px 0px;
 }

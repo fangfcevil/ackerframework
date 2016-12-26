@@ -9,7 +9,6 @@
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login"></property>
         <property name="successUrl" value="/chosen"></property>
-        <property name="unauthorizedUrl" value="/unauthorized"></property>
         <property name="filters">
             <map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>

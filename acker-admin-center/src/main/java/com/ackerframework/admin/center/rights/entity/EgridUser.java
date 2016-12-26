@@ -7,7 +7,7 @@ import com.ackerframework.utils.GenerateEasyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EgridUsers extends User {
+public class EgridUser extends User {
 
     private String gridOptions;
     private String photoToGrid;

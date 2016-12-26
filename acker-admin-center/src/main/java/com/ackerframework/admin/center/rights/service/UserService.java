@@ -1,18 +1,16 @@
 package com.ackerframework.admin.center.rights.service;
 
 import com.ackerframework.admin.center.rights.dao.UserDao;
-import com.ackerframework.admin.center.rights.entity.EgridUsers;
+import com.ackerframework.admin.center.rights.entity.EgridUser;
 import com.ackerframework.admin.center.rights.entity.User;
 import com.ackerframework.admin.center.rights.params.UserParam;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseService;
-import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -24,10 +22,6 @@ public class UserService extends BaseService<UserDao, User> {
     public User getByUserName(String userName) {
         User user = userDao.getByName(new UserParam(userName));
         return user;
-    }
-
-    public List<EgridUsers> getGridList(UserParam userParam) {
-        return userDao.getGridList(userParam);
     }
 
     @Override

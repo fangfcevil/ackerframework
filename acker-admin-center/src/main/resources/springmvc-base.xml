@@ -86,4 +86,15 @@
         <!-- 设置cookie可见的地址，默认是“/”即对网站所有地址都是可见的-->
         <property name="cookiePath" value="/"></property>
     </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!--权限认证-->
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/unauthorized</prop>
+                <!--身份认证-->
+                <prop key="org.apache.shiro.authz.UnauthenticatedException">/unauthenticated</prop>
+            </props>
+        </property>
+    </bean>
 </beans>
