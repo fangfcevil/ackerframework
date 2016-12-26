@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><@spring.message "login.title"/></title>
+    <!-- Font Awesome -->
+    <link href="${request.contextPath}/static/css/awesome.css" type="text/css" rel="stylesheet">
+    <link href="${request.contextPath}/static/css/acker.login.default.css" type="text/css" rel="stylesheet">
+</head>
+
+<body>
+<form class="box login" action="${request.contextPath}/login" method="post">
+    <fieldset class="boxBody">
+        <label>登录账号:</label>
+        <input type="text" tabindex="1" name="username" required value="${userName}">
+        <label><a href="#" class="rLink" tabindex="5">忘记密码?</a>密码:</label>
+        <input type="password" name="password" tabindex="2" required>
+    </fieldset>
+    <footer>
+        <label><input type="checkbox" name="rememberMe" tabindex="3">记住我</label>
+        <input type="submit" class="btnLogin" value="Login" tabindex="4">
+        <label>${errorMessage}</label>
+    </footer>
+</form>
+<footer id="main">
+    <a href="#">Copyright© 2016-2017 ArckermanSoft 版权所有</a>
+</footer>
+</body>
+</html>

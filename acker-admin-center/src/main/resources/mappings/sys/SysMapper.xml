@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ackerframework.admin.center.sys.dao.SysDao">
+    <!--所有的组织权限-->
+    <select id="getUserRightses" resultType="com.ackerframework.admin.center.sys.entity.UserRights">
+          SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
+                  sys_role.role_name,sys_organization.org_name,sys_organization.org_code
+            FROM sys_rights
+            JOIN sys_role ON sys_rights.role_id = sys_role.id
+            JOIN sys_organization ON sys_rights.org_id = sys_organization.id
+           WHERE sys_rights.user_id = #{userId}
+    </select>
+    <!--单个的组织权限-->
+    <select id="getUserRights" resultType="com.ackerframework.admin.center.sys.entity.UserRights">
+        SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
+        sys_role.role_name,sys_organization.org_name,sys_organization.org_code
+        FROM sys_rights
+        JOIN sys_role ON sys_rights.role_id = sys_role.id
+        JOIN sys_organization ON sys_rights.org_id = sys_organization.id
+        WHERE sys_rights.user_id = #{userId} AND sys_rights.role_id = #{roleId} AND sys_rights.role_id = #{roleId}
+    </select>
+
+    <select id="getRightsNavigators" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+        SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,sys_navigator.nav_url,
+                sys_navigator.icon_cls,sys_navigator.attributes,sys_navigator.nav_type
+          FROM  sys_permissions
+          JOIN  sys_navigator ON sys_permissions.nav_id = sys_navigator.id
+        WHERE  sys_permissions.user_id = #{userId}
+                AND sys_permissions.role_id=#{roleId}
+                AND sys_navigator.pid = #{pid}
+                AND (sys_navigator.nav_type = 'D' OR sys_navigator.nav_type = 'L')
+    </select>
+
+</mapper>

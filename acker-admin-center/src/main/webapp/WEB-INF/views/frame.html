@@ -1,0 +1,65 @@
+<@override name="head">
+<title>Storm Admin</title>
+<link href="${request.contextPath}/static/css/acker.frame.default.css" type="text/css" rel="stylesheet">
+</@override>
+<@override name="body">
+<body id="bodyLayoutId" class="easyui-layout" data-options="fit:true,border:false">
+
+<div data-options="region:'west',split:false,border:false" style="width:220px;">
+    <div class="easyui-layout" data-options="fit:true,border:false" style="width:100%;height:100%;">
+    <#--Logo区域-->
+        <div data-options="region:'north',split:false,border:false" style="height:73px;background-color: #1F262D">
+            <img src="${request.contextPath}/static/images/storm_admin.png" width="199" height="70">
+        </div>
+    <#--导航菜单-->
+        <div data-options="region:'center',border:false" style="background-color: #2E363F">
+            <ul class="easyui-tree" data-options="animate:true,url:'${request.contextPath}/frame/navs',
+         onClick:onClickNav">
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div data-options="region:'center',border:false">
+    <div class="easyui-layout" data-options="fit:true,border:false" style="width:100%;height:100%;">
+    <#--顶部功能区-->
+        <div data-options="region:'north',split:false,border:false" style="height:37px;background-color: #1F262D">
+            <div class="easyui-panel" data-options="fit:true,border:false" style="background-color: #1F262D">
+                <a href="${request.contextPath}/logout" class="easyui-linkbutton" data-options="plain:true"
+                   style="float: right;height: 100%;">
+                    <i class="fa fa-sign-out" aria-hidden="true" style="padding-right: 5px;"></i>退 出</a>
+                <a href="#" class="easyui-linkbutton" data-options="plain:true"
+                   style="float: right;height: 100%;">
+                    <i class="fa fa-cog" aria-hidden="true" style="padding-right: 5px;"></i>设 置</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#language_menu_item',plain:true"
+                   style="float: right;height: 100%;">
+                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>切换语言</a>
+                <a href="#" class="easyui-menubutton" data-options="menu:'#user_menu_item',plain:true"
+                   style="float: right;height: 100%;">
+                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>${loginUser.nickName} </a>
+            </div>
+            <div id="user_menu_item" data-options="itemHeight:30">
+                <div data-options="">用户详情</div>
+                <div data-options="">我的任务</div>
+                <div data-options="">${loginUser.roleName} - ${loginUser.orgName}</div>
+            </div>
+            <div id="language_menu_item" data-options="itemHeight:30">
+                <div data-options="" onclick="changeLanguage('zh_CN')">中文</div>
+                <div data-options="" onclick="changeLanguage('en_US')">英文</div>
+            </div>
+        </div>
+
+        <div data-options="region:'center',border:false">
+            <div class="easyui-tabs" data-options="fit:true,tabHeight:35,scrollIncrement:0,
+            border:false,plain:true,onSelect:onSelectTab"
+                 style="width:100%;height:100%;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/frame.js"></script>
+</body>
+</@override>
+
+<@extends name="common/base.html"/>

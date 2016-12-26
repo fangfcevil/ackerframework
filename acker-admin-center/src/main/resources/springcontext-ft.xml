@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd"
+       default-lazy-init="true">
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:acker.properties"/>
+    <!-- 设置freeMarker的配置文件路径 -->
+    <bean id="freemarkerConfiguration" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+    </bean>
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="exposeRequestAttributes" value="true"/>
+        <property name="exposeSessionAttributes" value="true"/>
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+        <property name="cache" value="true"></property>
+        <property name="suffix" value=".html"></property>
+        <property name="contentType" value="text/html; charset=UTF-8"></property>
+        <property name="requestContextAttribute" value="request"></property>
+    </bean>
+    <bean id="freemarkerConfig" class="com.ackerframework.core.configurer.ShiroTagFreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/WEB-INF/views/"/>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">0</prop>
+                <prop key="default_encoding">UTF-8</prop>
+                <prop key="number_format">0.####</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm</prop>
+                <prop key="classic_compatible">true</prop>
+                <prop key="template_exception_handler">ignore</prop>
+                <!-- 自动获取spring.ftl宏 -->
+                <prop key="auto_import">inc/spring.ftl as spring</prop>
+            </props>
+        </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="block" value-ref="block"/>
+                <entry key="override" value-ref="override"/>
+                <entry key="extends" value-ref="extends"/>
+            </map>
+        </property>
+    </bean>
+    <bean id="block" class="cn.org.rapid_framework.freemarker.directive.BlockDirective"/>
+    <bean id="override" class="cn.org.rapid_framework.freemarker.directive.OverrideDirective"/>
+    <bean id="extends" class="cn.org.rapid_framework.freemarker.directive.ExtendsDirective"/>
+</beans>

@@ -1,0 +1,71 @@
+<@override name="center">
+<div class="topmenu-toolbar">
+    <a href="#" class="easyui-linkbutton" data-options="plain:true"
+       onclick="backList();return false;"><i class='fa fa-reply fa-fw'></i>返回列表</a>
+    <#if look>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
+        <#if detail.userName != "storm">
+            <a href="#" class="easyui-linkbutton" data-options="plain:true"
+               onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
+        </#if>
+    </#if>
+    <#if insert|| update>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="saveItem();return false;"><i class='fa fa-floppy-o fa-fw'></i>保存</a>
+    </#if>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">用户名称</span></div>
+    <div class="kcol-2">
+        <input class="easyui-textbox" name="userName" form-group="detail"
+               data-options="required:true,validType:{length:[0,30]},value:'${detail.userName}'
+                  <#if look>,disabled:true</#if>">
+    </div>
+</div>
+    <#if !look>
+    <div class="krow-1-4">
+        <div class="kcol-1"><span class="kword">密 码</span></div>
+        <div class="kcol-2">
+            <input id="pwd" class="easyui-textbox" name="pwd" form-group="detail"
+                   data-options="type:'password'<#if look>,disabled:true</#if>">
+        </div>
+    </div>
+    <div class="krow-1-4">
+        <div class="kcol-1"><span class="kword">确认密码</span></div>
+        <div class="kcol-2">
+            <input id="repwd" class="easyui-textbox" name="repwd"
+                   data-options="type:'password',validType:{equalspw:['#pwd']}
+               <#if look>,disabled:true</#if>">
+        </div>
+    </div>
+    </#if>
+
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">用户昵称</span></div>
+    <div class="kcol-2">
+        <input class="easyui-textbox" name="nickName" form-group="detail"
+               data-options="value:'${detail.nickName}',validType:{length:[0,30]}
+               <#if look>,disabled:true</#if>">
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">邮箱</span></div>
+    <div class="kcol-2">
+        <input class="easyui-textbox" name="email" form-group="detail"
+               data-options="value:'${detail.email}',validType:'email'
+               <#if look>,disabled:true</#if>">
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">手机号</span></div>
+    <div class="kcol-2">
+        <input class="easyui-numberbox" name="mobile" form-group="detail"
+               data-options="value:'${detail.mobile}',validType:'mobile'
+               <#if look>,disabled:true</#if>">
+    </div>
+</div>
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/sys/user.js"></script>
+</@override>
+<@extends name="common/baseitem.html"/>

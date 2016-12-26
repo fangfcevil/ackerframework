@@ -1,0 +1,27 @@
+.tree {
+    color: darkgray;
+}
+
+.tree-node {
+    padding-top: 8px;
+    height: 26px;
+}
+
+.tree-title {
+    font-size: 14px;
+    padding: 0 4px;
+}
+
+.tabs-header {
+    border-color: #FFF;
+}
+
+.tabs li a.tabs-inner {
+    border-top-color: #FFF;
+    border-right-color: #FFF;
+    border-left-color: #FFF;
+}
+
+.tabs li.tabs-selected a.tabs-inner {
+    border-bottom: 1px solid #902525;
+}

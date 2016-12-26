@@ -1,0 +1,36 @@
+<@override name="center">
+<div class="egrid-toolbar" style="padding: 3px" id="tb_listgrid">
+    <a class="easyui-linkbutton" data-options="plain:true" onclick="insertItem();return false;">
+        <i class="fa fa-plus fa-fw fa-lg"></i>新增</a>
+
+    <div style="float: right">
+        <input id="commonQuery" style="width:200px" class="easyui-searchbox" data-options="prompt:'搜索 登录名/昵称'">
+        <a class="open-serchbox">
+            <span class="color-orange">展开筛选<i class="fa fa-caret-square-o-down" style="padding-left: 5px" "></i></span>
+        </a>
+    </div>
+    <div class="serching-box hide">
+
+    </div>
+</div>
+<table class="easyui-datagrid" data-options="toolbar:'#tb_listgrid',onBeforeLoad:onBeforeLoad">
+    <thead>
+    <tr>
+        <th field="gridOptions"><@spring.message "sys.options"/></th>
+        <th field="userName">登录名</th>
+        <th field="nickName">昵称</th>
+        <th field="email">邮箱</th>
+        <th field="mobile">手机</th>
+        <th field="createName">创建人</th>
+        <th field="createTime">创建时间</th>
+        <th field="modifyName">修改人</th>
+        <th field="modifyTime">修改时间</th>
+    </tr>
+    </thead>
+</table>
+</@override>
+
+<@override name="javascript">
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/sys/user.js"></script>
+</@override>
+<@extends name="common/baselist.html"/>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM
+        "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<!--日志记录的优先级，分为OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL-->
+<log4j:configuration debug="true">
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss:SSS}[%p][%C][%M]:%m %n"/>
+        </layout>
+    </appender>
+
+    <appender name="consolesql" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="[===MyBatis===]:%m %n"/>
+        </layout>
+    </appender>
+
+    <appender name="syslog" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="driver" value="com.mysql.jdbc.Driver"></param>
+        <param name="URL"
+               value="jdbc:mysql://localhost:3306/storm?useUnicode=true&amp;characterEncoding=UTF-8"></param>
+        <param name="user" value="root"></param>
+        <param name="password" value="alpha5217"></param>
+        <param name="sql"
+               value="INSERT INTO sys_log (
+                                            class_name,
+                                            mothod_name,
+                                            log_level,
+                                            log_message,
+                                            create_time
+                                            )
+                                     VALUES
+                                            (
+                                                '%C',
+                                                '%M',
+                                                '%p',
+                                                '%m',
+                                                '%d{yyyy-MM-dd hh:mm:ss}'
+                                            )"></param>
+    </appender>
+
+    <appender name="marklog" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="driver" value="com.mysql.jdbc.Driver"></param>
+        <param name="URL"
+               value="jdbc:mysql://localhost:3306/storm?useUnicode=true&amp;characterEncoding=UTF-8"></param>
+        <param name="user" value="root"></param>
+        <param name="password" value="alpha5217"></param>
+        <param name="sql"
+               value="
+               INSERT INTO sys_marklog (
+                            mothod_namecn,
+                            class_name,
+                            mothod_name,
+                            mothod_params,
+                            log_message,
+                            create_time,
+                            invoke_status,
+                            mothod_ex
+                        )
+                    VALUES
+                        (
+                            '%X{mothodNamecn}',
+                            '%X{className}',
+                            '%X{mothodName}',
+                            '%X{mothodParams}',
+                            '%m',
+                            '%d{yyyy-MM-dd hh:mm:ss}',
+                            '%X{invokeStatus}',
+                            '%X{mothodEx}'
+                        )"></param>
+    </appender>
+
+    <appender name="mybatislog" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="driver" value="com.mysql.jdbc.Driver"></param>
+        <param name="URL"
+               value="jdbc:mysql://localhost:3306/storm?useUnicode=true&amp;characterEncoding=UTF-8"></param>
+        <param name="user" value="root"></param>
+        <param name="password" value="alpha5217"></param>
+        <param name="sql"
+               value="INSERT INTO sys_log (
+                                            class_name,
+                                            mothod_name,
+                                            log_level,
+                                            log_message,
+                                            create_time
+                                            )
+                                     VALUES
+                                            (
+                                                '%C',
+                                                '%M',
+                                                '%p',
+                                                '%m',
+                                                '%d{yyyy-MM-dd hh:mm:ss}'
+                                            )"></param>
+    </appender>
+
+    <appender name="exlog" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="driver" value="com.mysql.jdbc.Driver"></param>
+        <param name="URL"
+               value="jdbc:mysql://localhost:3306/storm?useUnicode=true&amp;characterEncoding=UTF-8"></param>
+        <param name="user" value="root"></param>
+        <param name="password" value="alpha5217"></param>
+        <param name="sql"
+               value="INSERT INTO sys_exlog (ex_name,log_message,create_time) VALUES ('%X{exName}','%m','%d{yyyy-MM-dd hh:mm:ss}')"></param>
+    </appender>
+
+    <logger name="syslog" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="syslog"/>
+    </logger>
+
+    <logger name="marklog" additivity="false">
+        <level value="INFO"/>
+        <appender-ref ref="marklog"/>
+    </logger>
+
+    <logger name="com.stormframework.achieve.admin" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="consolesql"/>
+    </logger>
+
+    <logger name="exlog" additivity="true">
+        <level value="DEBUG"/>
+        <appender-ref ref="exlog"/>
+    </logger>
+
+    <root>
+        <level value="ERROR"/>
+        <!--<level value="DEBUG"/>-->
+        <appender-ref ref="console"/>
+    </root>
+</log4j:configuration>

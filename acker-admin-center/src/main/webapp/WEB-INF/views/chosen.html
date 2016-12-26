@@ -1,0 +1,44 @@
+<@override name="head">
+<title>角色权限选择</title>
+</@override>
+<@override name="body">
+<body id="bodyLayoutId" class="easyui-layout" data-options="fit:true,border:false">
+<div data-options="region:'north',split:false,border:false" style="height:20%;"></div>
+<div data-options="region:'center',border:false">
+    <table class="easyui-datagrid" data-options="pagination:false,height:'auto'">
+        <thead>
+        <tr>
+            <th data-options="field:'roleCode',width:'22%'">角色代码</th>
+            <th data-options="field:'roleName',width:'22%'">角色名称</th>
+            <th data-options="field:'orgCode',width:'22%'">组织代码</th>
+            <th data-options="field:'orgName',width:'22%'">组织名称</th>
+            <th data-options="field:'option',width:'12%'">操 作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <#list userRightses as userRights >
+            <tr>
+                <td>${userRights.roleCode}</td>
+                <td>${userRights.roleName}</td>
+                <td>${userRights.orgCode}</td>
+                <td>${userRights.orgName}</td>
+                <td><a href="#" class="easyui-linkbutton" data-options="plain:true"
+                       onclick="selectedUserRights(${userRights.roleId},${userRights.orgId})">进 入</a></td>
+
+            </tr>
+            </#list>
+
+        </tbody>
+    </table>
+</div>
+<div data-options="region:'east',split:false,border:false" style="width:30%;"></div>
+<div data-options="region:'west',split:false,border:false" style="width:30%;"></div>
+<script type="text/javascript">
+    function selectedUserRights(roleId, orgId) {
+        $.fForm.redirect("${request.contextPath}/redirectframe", {roleId: roleId, orgId: orgId});
+    }
+</script>
+</body>
+</@override>
+
+<@extends name="common/base.html"/>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ackerframework.admin.center.rights.dao.UserDao">
+
+    <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.EgridUsers">
+        SELECT id,user_name,pass_word,nick_name,email,mobile,create_name,create_time,modify_name,modify_time
+        <include refid="grid_list_where"></include>
+    </select>
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM sys_user WHERE 1=1
+    </select>
+    <sql id="grid_list_where">
+        FROM sys_user WHERE 1=1 AND has_removed = FALSE
+    </sql>
+
+    <select id="getByName" resultType="com.ackerframework.admin.center.rights.entity.User">
+        SELECT id,user_name,pass_word,nick_name,email,mobile,create_name,create_time,modify_name,modify_time
+        FROM sys_user WHERE 1=1 AND user_name = #{userName} AND has_removed = FALSE
+    </select>
+
+    <select id="get" resultType="com.ackerframework.admin.center.rights.entity.User">
+        SELECT id,user_name,pass_word,nick_name,email,mobile,create_name,create_time,modify_name,modify_time
+        FROM sys_user WHERE 1=1 AND id = #{id} AND has_removed = FALSE
+    </select>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_user (user_name,pass_word,nick_name,email,mobile,create_name,create_time)
+        VALUES(#{userName},#{passWord},#{nickName},#{email},#{mobile},#{createName},#{createTime})
+    </insert>
+
+    <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.User">
+        UPDATE sys_user
+        <trim prefix="set" suffixOverrides=",">
+            <if test="nickName!=null">nick_name=#{nickName},</if>
+            <if test="email!=null">email=#{email},</if>
+            <if test="mobile!=null">mobile=#{mobile},</if>
+            <if test="modifyName!=null">modify_name=#{modifyName},</if>
+            <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
+        </trim>
+        WHERE id = #{id}
+    </update>
+
+
+</mapper>

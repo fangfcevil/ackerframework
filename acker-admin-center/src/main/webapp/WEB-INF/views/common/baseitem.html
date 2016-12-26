@@ -1,0 +1,12 @@
+<@override name="body">
+<body class="easyui-layout">
+<div data-options="region:'center',border:false" style="background:#FFF">
+    <@block name="center">
+    </@block>
+</div>
+<input id="itemId" form-group="detail" hidden="hidden" name="id" value="${detail.id}">
+    <@block name="javascript">
+    </@block>
+</body>
+</@override>
+<@extends name="common/base.html"/>
