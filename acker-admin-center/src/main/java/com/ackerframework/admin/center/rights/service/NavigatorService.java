@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
@@ -33,5 +35,9 @@ public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
             return new Result(false, "导航类型不能为空!");
         }
         return new Result();
+    }
+
+    public List<Navigator> authingNav(Integer pid, Integer roleId) {
+        return navigatorDao.authingNav(pid, roleId);
     }
 }

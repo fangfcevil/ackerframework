@@ -1,0 +1,11 @@
+<@override name="center">
+<div class="topmenu-toolbar">
+    正在为${role.roleName}(${role.roleCode})授权
+</div>
+<ul class="easyui-tree" data-options="checkbox:true,lines:true,
+    url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}'">
+
+</ul>
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/authrole.js"></script>
+</@override>
+<@extends name="common/baseitem.html"/>

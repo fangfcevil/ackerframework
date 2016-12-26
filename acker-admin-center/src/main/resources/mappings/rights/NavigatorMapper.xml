@@ -4,7 +4,7 @@
 
     <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.EgridNavigator">
         SELECT id,pid,sno,nav_name,permission,nav_type,attributes,nav_url,icon_cls,
-                create_name,create_time,modify_name,modify_time
+        create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
     </select>
     <select id="listCount" resultType="java.lang.Integer">
@@ -45,6 +45,14 @@
         </trim>
         WHERE id = #{id}
     </update>
-
+    <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+       SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,
+               IFNULL(sys_permissions.role_id,#{roleId}) as role_id,
+               sys_navigator.icon_cls,IF (ISNULL(sys_permissions.nav_id),0,1) AS checked
+         FROM sys_navigator
+               LEFT JOIN sys_permissions
+               ON (sys_navigator.id = sys_permissions.nav_id AND sys_permissions.role_id =  #{roleId})
+        WHERE sys_navigator.pid = #{pid}
+    </select>
 
 </mapper>

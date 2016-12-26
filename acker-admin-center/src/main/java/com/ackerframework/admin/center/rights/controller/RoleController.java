@@ -1,6 +1,7 @@
 package com.ackerframework.admin.center.rights.controller;
 
 import com.ackerframework.admin.center.rights.entity.EgridRole;
+import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.rights.entity.Role;
 import com.ackerframework.admin.center.rights.params.RoleParam;
 import com.ackerframework.admin.center.rights.service.RoleService;
@@ -51,6 +52,15 @@ public class RoleController extends BaseController {
         return MV;
     }
 
+    @RequestMapping(value = "/auth")
+    public ModelAndView authRole(ModelAndView MV,
+                                 @RequestParam(value = Constant.ID) Integer id) {
+        MV.setViewName("/rights/authrole");
+        MV.addObject("role", roleService.get(id));
+        return MV;
+    }
+
+
     @RequiresAuthentication
     @RequestMapping(value = Constant.GRIDLIST, method = RequestMethod.GET)
     public Result gridList(HttpServletRequest request) {
@@ -86,4 +96,5 @@ public class RoleController extends BaseController {
     public Result delete(@RequestParam(value = Constant.ID) Integer id) {
         return roleService.delete(id);
     }
+
 }

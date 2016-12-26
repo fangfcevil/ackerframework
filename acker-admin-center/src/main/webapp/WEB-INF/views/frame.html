@@ -24,18 +24,17 @@
     <div class="easyui-layout" data-options="fit:true,border:false" style="width:100%;height:100%;">
     <#--顶部功能区-->
         <div data-options="region:'north',split:false,border:false" style="height:37px;background-color: #1F262D">
-            <div class="easyui-panel" data-options="fit:true,border:false" style="background-color: #1F262D">
-                <a href="${request.contextPath}/logout" class="easyui-linkbutton" data-options="plain:true"
-                   style="float: right;height: 100%;">
+            <div class="easyui-panel" data-options="fit:true,border:false" style="background-color: #1F262D;
+                  border-left: 1px solid #000;">
+                <a href="${request.contextPath}/logout" class="easyui-linkbutton top-menu-r"
+                   data-options="plain:true,height:37">
                     <i class="fa fa-sign-out" aria-hidden="true" style="padding-right: 5px;"></i>退 出</a>
-                <a href="#" class="easyui-linkbutton" data-options="plain:true"
-                   style="float: right;height: 100%;">
+                <a href="#" class="easyui-linkbutton top-menu-r" data-options="plain:true,height:37">
                     <i class="fa fa-cog" aria-hidden="true" style="padding-right: 5px;"></i>设 置</a>
-                <a href="#" class="easyui-menubutton" data-options="menu:'#language_menu_item',plain:true"
-                   style="float: right;height: 100%;">
-                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>切换语言</a>
-                <a href="#" class="easyui-menubutton" data-options="menu:'#user_menu_item',plain:true"
-                   style="float: right;height: 100%;">
+                <a href="#" class="easyui-menubutton top-menu-r" data-options="menu:'#language_menu_item',
+                plain:true,height:37"><i class="fa fa-user" aria-hidden="true" style="padding-right: 5px">
+                </i>切换语言</a>
+                <a href="#" class="easyui-menubutton top-menu-r" data-options="menu:'#user_menu_item',plain:true,height:37">
                     <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>${loginUser.nickName} </a>
             </div>
             <div id="user_menu_item" data-options="itemHeight:30">

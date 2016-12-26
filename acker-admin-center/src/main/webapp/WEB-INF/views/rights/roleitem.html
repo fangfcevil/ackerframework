@@ -1,0 +1,61 @@
+<@override name="center">
+<div class="topmenu-toolbar">
+    <a href="#" class="easyui-linkbutton" data-options="plain:true"
+       onclick="backList();return false;"><i class='fa fa-reply fa-fw'></i>返回列表</a>
+    <#if look>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
+        <#if detail.userName != "storm">
+            <a href="#" class="easyui-linkbutton" data-options="plain:true"
+               onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
+        </#if>
+    </#if>
+    <#if insert|| update>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="saveItem();return false;"><i class='fa fa-floppy-o fa-fw'></i>保存</a>
+    </#if>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">角色名称</span></div>
+    <div class="kcol-2">
+        <input class="easyui-textbox" name="roleName" form-group="detail"
+               data-options="required:true,validType:{length:[0,30]},value:'${detail.roleName}'
+                  <#if look>,disabled:true</#if>">
+    </div>
+</div>
+    <div class="krow-1-4">
+        <div class="kcol-1"><span class="kword">角色代码</span></div>
+        <div class="kcol-2">
+            <input id="pwd" class="easyui-textbox" name="roleCode" form-group="detail"
+                   data-options="value:'${detail.roleCode}'<#if look>,disabled:true</#if>">
+        </div>
+    </div>
+    <div class="krow-1-4">
+        <div class="kcol-1"><span class="kword">所属组织</span></div>
+        <div class="kcol-2">
+            <input class="easyui-combobox" name="orgId" data-options="valueField:'orgId',
+            textField:'orgName',url:'',value:'${detail.orgId}'
+            <#if look>,disabled:true</#if>" />
+        </div>
+    </div>
+
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">角色状态</span></div>
+    <div class="kcol-2">
+        <input class="easyui-combobox" name="id" data-options="valueField:'roleState',
+            textField:'roleStateCn',url:'',value:'${detail.roleState}'
+            <#if look>,disabled:true</#if>" />
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-1"><span class="kword">备注</span></div>
+    <div class="kcol-2">
+        <input class="easyui-textbox" name="remark" form-group="detail"
+               data-options="value:'${detail.remark}'
+               <#if look>,disabled:true</#if>">
+    </div>
+</div>
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/role.js"></script>
+</@override>
+<@extends name="common/baseitem.html"/>

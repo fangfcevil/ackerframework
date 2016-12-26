@@ -87,4 +87,10 @@ public class NavigatorController extends BaseController {
         return navigatorService.delete(id);
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/authingnav", method = RequestMethod.GET)
+    public List<Navigator> authingNav(@RequestParam(value = "id", defaultValue = "0") Integer pid,
+                                      @RequestParam(value = "roleId") Integer roleId) {
+        return navigatorService.authingNav(pid, roleId);
+    }
 }
