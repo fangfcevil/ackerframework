@@ -11,6 +11,7 @@ import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.GlobalUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -72,8 +73,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = Constant.INSERT, method = RequestMethod.POST)
     //   @RequiresPermissions("sys:user:insert")
     public Result insert(@RequestBody User user) {
-//        String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.pwd_salt).toString();
-//        user.setPassWord(enPassWord);
+        String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.PWD_SALT).toString();
+        user.setPassWord(enPassWord);
         return userService.insert(user);
     }
 

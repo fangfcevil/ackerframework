@@ -22,7 +22,7 @@ import java.util.List;
 public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 
     protected Logger logger = LoggerFactory.getLogger(Constant.LOGGER_SYSLOG);
-    protected LoginUser loginUser = GlobalUtils.getLoginUser();
+
     @Autowired
     protected D dao;
 
@@ -38,25 +38,40 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
         return dao.listCount(entity);
     }
 
+    public Result preInsert(T entity) {
+        return new Result();
+    }
+
     @Transactional(readOnly = false)
     public Result insert(T entity) {
-        entity.setCreateName(loginUser.getUserName());
-        entity.setCreateTime(new Date());
-        Integer iCount = dao.insert(entity);
-        return new Result(iCount);
+        Result result = preInsert(entity);
+        if (result.getStatus()) {
+            entity.setCreateName(GlobalUtils.getLoginUser().getUserName());
+            entity.setCreateTime(new Date());
+            entity.setHasRemoved(false);
+            result.setData(dao.insert(entity));
+            return result;
+        }
+        return result;
+    }
+
+    public Result preUpdate(T entity) {
+        return new Result();
     }
 
     @Transactional(readOnly = false)
     public Result update(T entity) {
-        entity.setModifyName(loginUser.getUserName());
-        entity.setModifyTime(new Date());
-        Integer uCount = dao.update(entity);
-        return new Result(uCount);
+        Result result = preUpdate(entity);
+        if (result.getStatus()) {
+            entity.setModifyName(GlobalUtils.getLoginUser().getUserName());
+            entity.setModifyTime(new Date());
+            result.setData(dao.update(entity));
+        }
+        return result;
     }
 
     @Transactional(readOnly = false)
     public Result delete(Integer id) {
-        Integer dCount = dao.delete(id);
-        return new Result(dCount);
+        return new Result(dao.delete(id));
     }
 }

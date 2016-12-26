@@ -17,20 +17,21 @@
 </div>
 
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">用户名称</span></div>
+    <div class="kcol-1"><span class="kword">用户账号</span></div>
     <div class="kcol-2">
         <input class="easyui-textbox" name="userName" form-group="detail"
                data-options="required:true,validType:{length:[0,30]},value:'${detail.userName}'
                   <#if look>,disabled:true</#if>">
     </div>
 </div>
-    <#if !look>
+<#if !look>
     <div class="krow-1-4">
         <div class="kcol-1"><span class="kword">密 码</span></div>
         <div class="kcol-2">
             <input id="pwd" class="easyui-textbox" name="pwd" form-group="detail"
                    data-options="type:'password'<#if look>,disabled:true</#if>">
         </div>
+        <div class="kcol-3" style="text-align: left;"><span>*未填，默认 123456</span></div>
     </div>
     <div class="krow-1-4">
         <div class="kcol-1"><span class="kword">确认密码</span></div>
@@ -40,7 +41,7 @@
                <#if look>,disabled:true</#if>">
         </div>
     </div>
-    </#if>
+</#if>
 
 <div class="krow-1-4">
     <div class="kcol-1"><span class="kword">用户昵称</span></div>

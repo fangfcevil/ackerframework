@@ -313,6 +313,15 @@
             </plugin>
         </plugins>
     </build>
+    <!--设定仓库-->
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>alimaven</id>-->
+            <!--<name>aliyun maven</name>-->
+            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
+
     <!-- 开发者信息 -->
     <developers>
         <developer>

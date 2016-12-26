@@ -23,7 +23,6 @@ public abstract class BaseController {
 
     //日志对象
     protected Logger logger = LoggerFactory.getLogger(Constant.LOGGER_SYSLOG);
-    protected LoginUser loginUser = GlobalUtils.getLoginUser();
 
     /**
      * 初始化数据绑定
