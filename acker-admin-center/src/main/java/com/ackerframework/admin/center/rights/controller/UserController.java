@@ -9,6 +9,7 @@ import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.GlobalUtils;
+import com.ackerframework.utils.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -73,14 +74,21 @@ public class UserController extends BaseController {
     @RequestMapping(value = Constant.INSERT, method = RequestMethod.POST)
 
     public Result insert(@RequestBody User user) {
-        String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.PWD_SALT).toString();
-        user.setPassWord(enPassWord);
+        if (StringUtils.isBlank(user.getPassWord())) {
+            String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.PWD_SALT).toString();
+            user.setPassWord(enPassWord);
+        } else {
+            user.setPassWord(new Md5Hash(user.getPassWord(), Constant.PWD_SALT).toString());
+        }
         return userService.insert(user);
     }
 
     @ResponseBody
     @RequestMapping(value = Constant.UPDATE, method = RequestMethod.POST)
     public Result update(@RequestBody User user) {
+        if (StringUtils.isNotBlank(user.getPassWord())) {
+            user.setPassWord(new Md5Hash(user.getPassWord(), Constant.PWD_SALT).toString());
+        }
         return userService.update(user);
     }
 

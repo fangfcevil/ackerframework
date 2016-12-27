@@ -13,3 +13,7 @@
     opacity: 0.9;
     filter: alpha(opacity=90);
 }
+.tree-node {
+    padding-top: 4px;
+    height: 20px;
+}

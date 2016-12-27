@@ -17,53 +17,46 @@
 </div>
 
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">用户账号</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
         <input class="easyui-textbox" name="userName" form-group="detail"
-               data-options="required:true,validType:{length:[0,30]},value:'${detail.userName}'
+               data-options="label:'用户账号',required:true,validType:{length:[0,30]},value:'${detail.userName}'
                   <#if look>,disabled:true</#if>">
     </div>
 </div>
-<#if !look>
+    <#if !look>
     <div class="krow-1-4">
-        <div class="kcol-1"><span class="kword">密 码</span></div>
-        <div class="kcol-2">
-            <input id="pwd" class="easyui-textbox" name="pwd" form-group="detail"
-                   data-options="type:'password'<#if look>,disabled:true</#if>">
+        <div class="kcol-3">
+            <input id="pwd" class="easyui-passwordbox" name="passWord" form-group="detail"
+                   data-options="label:'密 码'<#if look>,disabled:true</#if>">
         </div>
         <div class="kcol-3" style="text-align: left;"><span>*未填，默认 123456</span></div>
     </div>
     <div class="krow-1-4">
-        <div class="kcol-1"><span class="kword">确认密码</span></div>
-        <div class="kcol-2">
-            <input id="repwd" class="easyui-textbox" name="repwd"
-                   data-options="type:'password',validType:{equalspw:['#pwd']}
+        <div class="kcol-3">
+            <input class="easyui-passwordbox" data-options="label:'确认密码',validType:{samepw:['#pwd']}
                <#if look>,disabled:true</#if>">
         </div>
     </div>
-</#if>
+    </#if>
 
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">用户昵称</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
         <input class="easyui-textbox" name="nickName" form-group="detail"
-               data-options="value:'${detail.nickName}',validType:{length:[0,30]}
+               data-options="label:'用户昵称',value:'${detail.nickName}',validType:{length:[0,30]}
                <#if look>,disabled:true</#if>">
     </div>
 </div>
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">邮箱</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
         <input class="easyui-textbox" name="email" form-group="detail"
-               data-options="value:'${detail.email}',validType:'email'
+               data-options="label:'邮 箱',value:'${detail.email}',validType:'email'
                <#if look>,disabled:true</#if>">
     </div>
 </div>
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">手机号</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
         <input class="easyui-numberbox" name="mobile" form-group="detail"
-               data-options="value:'${detail.mobile}',validType:'mobile'
+               data-options="label:'手机号',value:'${detail.mobile}',validType:'mobile'
                <#if look>,disabled:true</#if>">
     </div>
 </div>

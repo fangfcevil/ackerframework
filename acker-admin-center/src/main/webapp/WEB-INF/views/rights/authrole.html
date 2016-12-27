@@ -1,11 +1,16 @@
 <@override name="center">
-<div class="topmenu-toolbar">
-    正在为${role.roleName}(${role.roleCode})授权
+<div class="easyui-layout" data-options="fit:true">
+    <div data-options="region:'north',split:false" style="height:30px;">
+        正在为${role.roleName}(${role.roleCode})授权
+    </div>
+    <div data-options="region:'west',split:false" style="width:300px;">
+        <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,
+          url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}'">
+        </ul>
+    </div>
+    <div data-options="region:'center'," style="padding:5px;"></div>
 </div>
-<ul class="easyui-tree" data-options="checkbox:true,lines:true,
-    url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}'">
 
-</ul>
 <script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/authrole.js"></script>
 </@override>
 <@extends name="common/baseitem.html"/>

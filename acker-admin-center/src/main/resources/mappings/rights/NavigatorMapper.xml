@@ -45,9 +45,9 @@
         </trim>
         WHERE id = #{id}
     </update>
-    <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+    <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.EtreeNavigator">
        SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,
-               IFNULL(sys_permissions.role_id,#{roleId}) as role_id,
+               IFNULL(sys_permissions.role_id,#{roleId}) as role_id,sys_navigator.nav_type,
                sys_navigator.icon_cls,IF (ISNULL(sys_permissions.nav_id),0,1) AS checked
          FROM sys_navigator
                LEFT JOIN sys_permissions

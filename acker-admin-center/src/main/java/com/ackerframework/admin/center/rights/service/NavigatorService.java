@@ -1,6 +1,7 @@
 package com.ackerframework.admin.center.rights.service;
 
 import com.ackerframework.admin.center.rights.dao.NavigatorDao;
+import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseService;
@@ -37,7 +38,7 @@ public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
         return new Result();
     }
 
-    public List<Navigator> authingNav(Integer pid, Integer roleId) {
+    public List<EtreeNavigator> authingNav(Integer pid, Integer roleId) {
         return navigatorDao.authingNav(pid, roleId);
     }
 }

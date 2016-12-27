@@ -32,6 +32,7 @@
         UPDATE sys_user
         <trim prefix="set" suffixOverrides=",">
             <if test="nickName!=null">nick_name=#{nickName},</if>
+            <if test="passWord!=null">pass_word=#{passWord},</if>
             <if test="email!=null">email=#{email},</if>
             <if test="mobile!=null">mobile=#{mobile},</if>
             <if test="modifyName!=null">modify_name=#{modifyName},</if>

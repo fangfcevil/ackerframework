@@ -1,5 +1,6 @@
 package com.ackerframework.admin.center.sys.dao;
 
+import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.sys.entity.UserRights;
 import com.ackerframework.core.annotation.MyBatisDao;
@@ -18,6 +19,6 @@ public interface SysDao {
     UserRights getUserRights(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
                              @Param("orgId") Integer orgId);
 
-    List<Navigator> getRightsNavigators(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
-                                        @Param("pid") Integer pid);
+    List<EtreeNavigator> getRightsNavigators(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
+                                             @Param("pid") Integer pid);
 }

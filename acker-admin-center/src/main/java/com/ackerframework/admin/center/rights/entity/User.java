@@ -12,7 +12,7 @@ import java.util.Date;
 public class User extends BaseEntity {
 
     private String userName;// 登录名
-    @JsonIgnore
+//    @JsonIgnore
     private String passWord;// 密码
     private String nickName;    // 昵称
     private String email;    // 邮箱

@@ -1,5 +1,6 @@
 package com.ackerframework.admin.center.sys.controller;
 
+import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.base.entity.LoginUser;
 import com.ackerframework.admin.center.sys.service.SysService;
@@ -31,7 +32,7 @@ public class FrameController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/frame/navs", method = RequestMethod.GET)
-    public List<Navigator> getRightsNavigators(@RequestParam(value = "id", defaultValue = "0") Integer pid) {
+    public List<EtreeNavigator> getRightsNavigators(@RequestParam(value = "id", defaultValue = "0") Integer pid) {
         LoginUser loginUser = GlobalUtils.getLoginUser();
         return sysService.getRightsNavigators(loginUser.getId(), loginUser.getRoleId(), pid);
     }

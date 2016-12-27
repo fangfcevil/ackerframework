@@ -21,7 +21,7 @@
         WHERE sys_rights.user_id = #{userId} AND sys_rights.role_id = #{roleId} AND sys_rights.role_id = #{roleId}
     </select>
 
-    <select id="getRightsNavigators" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+    <select id="getRightsNavigators" resultType="com.ackerframework.admin.center.rights.entity.EtreeNavigator">
         SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,sys_navigator.nav_url,
                 sys_navigator.icon_cls,sys_navigator.attributes,sys_navigator.nav_type
           FROM  sys_permissions

@@ -1,5 +1,23 @@
+
+//region 验证控件  validatebox
+$.extend($.fn.validatebox.defaults, {
+    labelAlign: 'right',
+    width: '100%',
+    height: 25
+});
+//endregion
+
 //region 文本框  TextBox
 $.extend($.fn.textbox.defaults, {
+    labelAlign: 'right',
+    width: '100%',
+    height: 25
+});
+//endregion
+
+//region 密码框  passwordbox
+$.extend($.fn.passwordbox.defaults, {
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -7,6 +25,7 @@ $.extend($.fn.textbox.defaults, {
 
 //region 下拉框  ComBo
 $.extend($.fn.combo.defaults, {
+    labelAlign: 'right',
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
@@ -16,6 +35,7 @@ $.extend($.fn.combo.defaults, {
 
 //region 下拉框  ComboBox
 $.extend($.fn.combobox.defaults, {
+    labelAlign: 'right',
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
@@ -25,6 +45,7 @@ $.extend($.fn.combobox.defaults, {
 
 //region 下拉列表  ComboGrid
 $.extend($.fn.combogrid.defaults, {
+    labelAlign: 'right',
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
@@ -34,6 +55,7 @@ $.extend($.fn.combogrid.defaults, {
 
 //region 下拉树  ComboTree
 $.extend($.fn.combotree.defaults, {
+    labelAlign: 'right',
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
@@ -45,6 +67,7 @@ $.extend($.fn.combotree.defaults, {
 
 //region 日期控件  DateBox
 $.extend($.fn.datebox.defaults, {
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -52,6 +75,7 @@ $.extend($.fn.datebox.defaults, {
 
 //region 时间控件  TimeSpinner
 $.extend($.fn.timespinner.defaults, {
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -59,6 +83,7 @@ $.extend($.fn.timespinner.defaults, {
 
 //region 日期时间控件  DateTimeBox
 $.extend($.fn.datetimebox.defaults, {
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -66,6 +91,8 @@ $.extend($.fn.datetimebox.defaults, {
 
 //region 数字框  NumberBox
 $.extend($.fn.numberbox.defaults, {
+    labelAlign: 'right',
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -73,6 +100,7 @@ $.extend($.fn.numberbox.defaults, {
 
 //region 数字Spinner框  NumberSpinner
 $.extend($.fn.numberspinner.defaults, {
+    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -193,7 +221,7 @@ $.extend($.fn.panel.defaults, {
 //region 验证控件 validatebox
 $.extend($.fn.validatebox.defaults.rules, {
     //验证两个控件是否相等
-    equalspw: {
+    samepw: {
         validator: function (value, param) {
             return value == $(param[0]).val();
         },

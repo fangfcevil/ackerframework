@@ -1,6 +1,7 @@
 package com.ackerframework.admin.center.rights.controller;
 
 import com.ackerframework.admin.center.rights.entity.EgridNavigator;
+import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.rights.params.NavigatorParam;
 import com.ackerframework.admin.center.rights.service.NavigatorService;
@@ -89,8 +90,8 @@ public class NavigatorController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/authingnav", method = RequestMethod.GET)
-    public List<Navigator> authingNav(@RequestParam(value = "id", defaultValue = "0") Integer pid,
-                                      @RequestParam(value = "roleId") Integer roleId) {
+    public List<EtreeNavigator> authingNav(@RequestParam(value = "id", defaultValue = "0") Integer pid,
+                                                     @RequestParam(value = "roleId") Integer roleId) {
         return navigatorService.authingNav(pid, roleId);
     }
 }

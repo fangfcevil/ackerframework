@@ -10,11 +10,8 @@ public class Navigator extends BaseEntity {
     private String navUrl;
     private String navType;
     private String permission;
-    //..Easyui 树固定字段
-    private String text;
     private String iconCls;
     private String attributes;
-    private String state = "closed";
 
     public Integer getPid() {
         return pid;
@@ -64,14 +61,6 @@ public class Navigator extends BaseEntity {
         this.permission = permission;
     }
 
-    public String getText() {
-        return getNavName();
-    }
-
-    public void setText(String text) {
-        setNavName(text);
-    }
-
     public String getIconCls() {
         return iconCls;
     }
@@ -88,11 +77,4 @@ public class Navigator extends BaseEntity {
         this.attributes = attributes;
     }
 
-    public String getState() {
-        return "D".equals(this.navType) ? "closed" : "open";
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
 }

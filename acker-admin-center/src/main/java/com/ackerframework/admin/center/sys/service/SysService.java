@@ -1,5 +1,6 @@
 package com.ackerframework.admin.center.sys.service;
 
+import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.sys.dao.SysDao;
 import com.ackerframework.admin.center.sys.entity.UserRights;
@@ -23,7 +24,7 @@ public class SysService {
         return sysDao.getUserRights(userId, roleId, orgId);
     }
 
-    public List<Navigator> getRightsNavigators(Integer userId, Integer roleId, Integer pid) {
+    public List<EtreeNavigator> getRightsNavigators(Integer userId, Integer roleId, Integer pid) {
         return sysDao.getRightsNavigators(userId, roleId, pid);
     }
 }

@@ -17,42 +17,37 @@
 </div>
 
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">角色名称</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
         <input class="easyui-textbox" name="roleName" form-group="detail"
-               data-options="required:true,validType:{length:[0,30]},value:'${detail.roleName}'
+               data-options="label:'角色名称',required:true,validType:{length:[0,30]},value:'${detail.roleName}'
                   <#if look>,disabled:true</#if>">
     </div>
 </div>
-    <div class="krow-1-4">
-        <div class="kcol-1"><span class="kword">角色代码</span></div>
-        <div class="kcol-2">
-            <input id="pwd" class="easyui-textbox" name="roleCode" form-group="detail"
-                   data-options="value:'${detail.roleCode}'<#if look>,disabled:true</#if>">
-        </div>
-    </div>
-    <div class="krow-1-4">
-        <div class="kcol-1"><span class="kword">所属组织</span></div>
-        <div class="kcol-2">
-            <input class="easyui-combobox" name="orgId" data-options="valueField:'orgId',
-            textField:'orgName',url:'',value:'${detail.orgId}'
-            <#if look>,disabled:true</#if>" />
-        </div>
-    </div>
-
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">角色状态</span></div>
-    <div class="kcol-2">
-        <input class="easyui-combobox" name="id" data-options="valueField:'roleState',
-            textField:'roleStateCn',url:'',value:'${detail.roleState}'
-            <#if look>,disabled:true</#if>" />
+    <div class="kcol-3">
+        <input id="pwd" class="easyui-textbox" name="roleCode" form-group="detail"
+               data-options="label:'角色代码',value:'${detail.roleCode}'<#if look>,disabled:true</#if>">
     </div>
 </div>
 <div class="krow-1-4">
-    <div class="kcol-1"><span class="kword">备注</span></div>
-    <div class="kcol-2">
+    <div class="kcol-3">
+        <input class="easyui-combobox" name="orgId" data-options="label:'所属组织',valueField:'orgId',
+            textField:'orgName',url:'',value:'${detail.orgId}'
+            <#if look>,disabled:true</#if>"/>
+    </div>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-combobox" name="roleState"
+               data-options="label:'角色状态',valueField:'roleState',textField:'roleStateCn',url:'',
+               value:'${detail.roleState}'<#if look>,disabled:true</#if>"/>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
         <input class="easyui-textbox" name="remark" form-group="detail"
-               data-options="value:'${detail.remark}'
+               data-options="label:'备 注',value:'${detail.remark}',multiline:true,height:80
                <#if look>,disabled:true</#if>">
     </div>
 </div>

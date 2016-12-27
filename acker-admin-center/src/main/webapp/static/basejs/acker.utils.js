@@ -101,6 +101,7 @@
                 var widgetName = className.replace("easyui-", "");
                 switch (className) {
                     case 'easyui-textbox':
+                    case 'easyui-passwordbox':
                     case 'easyui-numberbox':
                     case 'easyui-numberspinner':
                     case 'easyui-datebox':
@@ -169,6 +170,7 @@
                 var widgetName = className.replace("easyui-", "");
                 switch (className) {
                     case 'easyui-textbox':
+                    case 'easyui-passwordbox':
                     case 'easyui-numberbox':
                     case 'easyui-numberspinner':
                     case 'easyui-datebox':
