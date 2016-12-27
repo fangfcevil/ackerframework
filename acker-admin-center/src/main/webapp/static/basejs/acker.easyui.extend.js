@@ -1,4 +1,3 @@
-
 //region 验证控件  validatebox
 $.extend($.fn.validatebox.defaults, {
     labelAlign: 'right',
@@ -196,6 +195,7 @@ $.extend($.fn.treegrid.defaults, {
     rownumbers: true,//默认显示行号
     striped: true,//隔行换色
     loader: function (param, success, error) {
+        console.log("1");
         var opts = $(this).treegrid("options");
         if (!opts.url) {
             return false;
@@ -205,7 +205,7 @@ $.extend($.fn.treegrid.defaults, {
                 $.messager.alert('error', result.message);
                 success({rows: []});
             } else {
-                success(result);
+                success(result.data.rows);
             }
         });
     }

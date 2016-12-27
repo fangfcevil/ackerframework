@@ -40,8 +40,8 @@
 <div class="krow-1-4">
     <div class="kcol-3">
         <input class="easyui-combobox" name="roleState"
-               data-options="label:'角色状态',valueField:'roleState',textField:'roleStateCn',url:'',
-               value:'${detail.roleState}'<#if look>,disabled:true</#if>"/>
+               data-options="label:'角色状态',valueField:'roleState',textField:'roleStateCn',url:'',data:[{roleState:1,roleStateCn:'启用'},{roleState:0,roleStateCn:'停用'}],
+               editable:false,value:'${detail.roleState}'<#if look>,disabled:true</#if>"/>
     </div>
 </div>
 <div class="krow-1-4">

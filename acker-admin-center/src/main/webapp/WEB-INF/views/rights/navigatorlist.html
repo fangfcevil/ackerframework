@@ -1,0 +1,38 @@
+<@override name="center">
+<div class="egrid-toolbar" style="padding: 3px" id="tb_listgrid">
+    <a class="easyui-linkbutton" data-options="plain:true" onclick="insertItem();return false;">
+        <i class="fa fa-plus fa-fw fa-lg"></i>新增</a>
+
+    <div style="float: right">
+        <input id="commonQuery" style="width:200px" class="easyui-searchbox" data-options="prompt:'搜索 导航名称/代码'">
+        <a class="open-serchbox">
+            <span class="color-orange">展开筛选<i class="fa fa-caret-square-o-down" style="padding-left: 5px" "></i></span>
+        </a>
+    </div>
+    <div class="serching-box hide">
+
+    </div>
+</div>
+
+<table class="easyui-treegrid" data-options="treeField:'navName',onBeforeLoad:onBeforeLoad">
+    <thead>
+    <tr>
+        <th data-options="field:'gridOptions'"><@spring.message "sys.options"/></th>
+        <th data-options="field:'navName'">名 称</th>
+        <th data-options="field:'navCode'">代 码</th>
+        <th data-options="field:'permission'">权限标识</th>
+        <th data-options="field:'navUrl'">url/事件</th>
+        <th data-options="field:'attributes'">参数</th>
+        <th data-options="field:'createName'">创建人</th>
+        <th data-options="field:'createTime'">创建时间</th>
+        <th data-options="field:'modifyName'">修改人</th>
+        <th data-options="field:'modifyTime'">修改时间</th>
+    </tr>
+    </thead>
+</table>
+</@override>
+
+<@override name="javascript">
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/navigator.js"></script>
+</@override>
+<@extends name="common/baselist.html"/>

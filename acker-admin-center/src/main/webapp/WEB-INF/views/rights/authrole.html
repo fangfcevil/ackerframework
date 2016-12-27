@@ -1,14 +1,25 @@
 <@override name="center">
 <div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'north',split:false" style="height:30px;">
-        正在为${role.roleName}(${role.roleCode})授权
+    <div data-options="region:'north',split:false" style="height:25px;padding: 3px">
+        正在为 ${role.roleName}(${role.roleCode}) 授权:
     </div>
-    <div data-options="region:'west',split:false" style="width:300px;">
+    <div data-options="region:'west',split:false" style="width:250px;padding: 6px">
         <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,
-          url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}'">
+          url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}',
+          onClick:onClickTree">
         </ul>
     </div>
-    <div data-options="region:'center'," style="padding:5px;"></div>
+    <div data-options="region:'center'," style="padding:5px;">
+        <table class="easyui-treegrid" data-options="idField:'id',treeField:'navName',checkbox:true,
+               url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}',
+               onBeforeLoad:onBeforeLoad_Button">
+            <thead>
+            <tr>
+                <th data-options="field:'navName',width:200">按钮名称</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 
 <script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/authrole.js"></script>
