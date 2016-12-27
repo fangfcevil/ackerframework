@@ -91,7 +91,6 @@ $.extend($.fn.datetimebox.defaults, {
 //region 数字框  NumberBox
 $.extend($.fn.numberbox.defaults, {
     labelAlign: 'right',
-    labelAlign: 'right',
     width: '100%',
     height: 25
 });
@@ -125,7 +124,7 @@ $.extend($.fn.datagrid.defaults, {
         }
         $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
             if (result.status == 0) {
-
+                success({rows: []});
             } else {
                 success(result.data);
             }
@@ -182,7 +181,20 @@ $.extend($.fn.datagrid.methods, {
 
 //region 树 Tree
 $.extend($.fn.tree.defaults, {
-    method: 'get'
+    method: 'get',
+    loader: function (param, success, error) {
+        var opts = $(this).tree("options");
+        if (!opts.url) {
+            return false;
+        }
+        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
+            if (result.status == 0) {
+                success({rows: []});
+            } else {
+                success(result.data);
+            }
+        });
+    }
 
 });
 //endregion
@@ -195,17 +207,15 @@ $.extend($.fn.treegrid.defaults, {
     rownumbers: true,//默认显示行号
     striped: true,//隔行换色
     loader: function (param, success, error) {
-        console.log("1");
         var opts = $(this).treegrid("options");
         if (!opts.url) {
             return false;
         }
         $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
             if (result.status == 0) {
-                $.messager.alert('error', result.message);
                 success({rows: []});
             } else {
-                success(result.data.rows);
+                success(result.data);
             }
         });
     }

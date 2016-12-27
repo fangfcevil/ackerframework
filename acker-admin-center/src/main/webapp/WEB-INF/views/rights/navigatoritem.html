@@ -1,0 +1,76 @@
+<@override name="center">
+<div class="topmenu-toolbar">
+    <a href="#" class="easyui-linkbutton" data-options="plain:true"
+       onclick="backList();return false;"><i class='fa fa-reply fa-fw'></i>返回列表</a>
+    <#if look>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
+        <#if detail.userName != "storm">
+            <a href="#" class="easyui-linkbutton" data-options="plain:true"
+               onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
+        </#if>
+    </#if>
+    <#if insert|| update>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="saveItem();return false;"><i class='fa fa-floppy-o fa-fw'></i>保存</a>
+    </#if>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-combobox" label="类 型" name="navType" form-group="detail"
+               value="${detail.navType}" valueField="valueField" textField="textField"
+               <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="序 号" name="sno" form-group="detail"
+               value="${detail.sno}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="名 称" name="navName" form-group="detail"
+               required="true" value="${detail.navName}" data-options="validType:{length:[0,30]}"
+               <#if look>disabled="disabled"</#if>
+        >
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="代 码" name="navCode" form-group="detail"
+               value="${detail.navCode}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="权限标识" name="permission" form-group="detail"
+               value="${detail.permission}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="URL" name="navUrl" form-group="detail"
+               value="${detail.navUrl}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="参 数" name="attributes" form-group="detail"
+               value="${detail.attributes}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-combobox" label="角色状态" name="roleState" form-group="detail"
+               value="${detail.roleState}" valueField="valueField" textField="textField" editable="false"
+               data-options="data:[{valueField:1,textField:'启用'},{valueField:0,textField:'停用'}]"
+               <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/navigator.js"></script>
+</@override>
+<@extends name="common/baseitem.html"/>

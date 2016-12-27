@@ -90,8 +90,19 @@ public class NavigatorController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/authingnav", method = RequestMethod.GET)
-    public List<EtreeNavigator> authingNav(@RequestParam(value = "id", defaultValue = "0") Integer pid,
-                                                     @RequestParam(value = "roleId") Integer roleId) {
+    public Result authingNav(@RequestParam(value = "id", defaultValue = "0") Integer pid,
+                             @RequestParam(value = "roleId") Integer roleId) {
         return navigatorService.authingNav(pid, roleId);
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/authingbutton", method = RequestMethod.GET)
+    public Result authingButton(@RequestParam(value = "id", defaultValue = "0") Integer pid,
+                             @RequestParam(value = "roleId") Integer roleId) {
+        EasyPage easyPage = new EasyPage();
+        easyPage.setRows(navigatorService.authingButton(pid, roleId));
+        return new Result(easyPage);
+    }
+
+
 }

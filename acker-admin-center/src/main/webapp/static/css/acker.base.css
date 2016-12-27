@@ -35,6 +35,7 @@
     line-height: 25px;
     text-align: right;
     float: left;
+    display: flex;
 }
 
 .kcol-1 {

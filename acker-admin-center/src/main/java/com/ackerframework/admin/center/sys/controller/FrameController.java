@@ -5,6 +5,7 @@ import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.base.entity.LoginUser;
 import com.ackerframework.admin.center.sys.service.SysService;
 import com.ackerframework.base.controller.BaseController;
+import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.GlobalUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,7 @@ public class FrameController extends BaseController {
 
     @ResponseBody
     @RequestMapping(value = "/frame/navs", method = RequestMethod.GET)
-    public List<EtreeNavigator> getRightsNavigators(@RequestParam(value = "id", defaultValue = "0") Integer pid) {
+    public Result getRightsNavigators(@RequestParam(value = "id", defaultValue = "0") Integer pid) {
         LoginUser loginUser = GlobalUtils.getLoginUser();
         return sysService.getRightsNavigators(loginUser.getId(), loginUser.getRoleId(), pid);
     }

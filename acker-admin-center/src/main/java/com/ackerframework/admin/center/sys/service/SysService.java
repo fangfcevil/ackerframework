@@ -4,6 +4,7 @@ import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.sys.dao.SysDao;
 import com.ackerframework.admin.center.sys.entity.UserRights;
+import com.ackerframework.base.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class SysService {
         return sysDao.getUserRights(userId, roleId, orgId);
     }
 
-    public List<EtreeNavigator> getRightsNavigators(Integer userId, Integer roleId, Integer pid) {
-        return sysDao.getRightsNavigators(userId, roleId, pid);
+    public Result getRightsNavigators(Integer userId, Integer roleId, Integer pid) {
+        return new Result(sysDao.getRightsNavigators(userId, roleId, pid));
     }
 }

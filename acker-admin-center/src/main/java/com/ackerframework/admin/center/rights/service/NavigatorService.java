@@ -38,7 +38,13 @@ public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
         return new Result();
     }
 
-    public List<EtreeNavigator> authingNav(Integer pid, Integer roleId) {
+    public Result authingNav(Integer pid, Integer roleId) {
+        return new Result(navigatorDao.authingNav(pid, roleId));
+    }
+
+    public List<EtreeNavigator> authingButton(Integer pid, Integer roleId) {
         return navigatorDao.authingNav(pid, roleId);
     }
+
+
 }

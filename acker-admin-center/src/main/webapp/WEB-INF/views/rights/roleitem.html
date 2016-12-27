@@ -18,37 +18,38 @@
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" name="roleName" form-group="detail"
-               data-options="label:'角色名称',required:true,validType:{length:[0,30]},value:'${detail.roleName}'
-                  <#if look>,disabled:true</#if>">
+        <input class="easyui-textbox" label="角色名称" name="roleName" form-group="detail"
+               value="${detail.roleName}" required="true" data-options="validType:'length[1,30]'"
+            <#if look> disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input id="pwd" class="easyui-textbox" name="roleCode" form-group="detail"
-               data-options="label:'角色代码',value:'${detail.roleCode}'<#if look>,disabled:true</#if>">
+        <input class="easyui-textbox" label="角色代码" name="roleCode" form-group="detail"
+               value="${detail.roleCode}" <#if look> disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" name="orgId" data-options="label:'所属组织',valueField:'orgId',
-            textField:'orgName',url:'',value:'${detail.orgId}'
-            <#if look>,disabled:true</#if>"/>
+        <input class="easyui-combobox" label="所属组织" name="orgId" form-group="detail"
+               value="${detail.orgId}" valueField="orgId" textField="orgName"
+               <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" name="roleState"
-               data-options="label:'角色状态',valueField:'roleState',textField:'roleStateCn',url:'',data:[{roleState:1,roleStateCn:'启用'},{roleState:0,roleStateCn:'停用'}],
-               editable:false,value:'${detail.roleState}'<#if look>,disabled:true</#if>"/>
+        <input class="easyui-combobox" label="角色状态" name="roleState" form-group="detail"
+               value="${detail.roleState}" valueField="valueField" textField="textField" editable="false"
+               data-options="data:[{valueField:1,textField:'启用'},{valueField:0,textField:'停用'}]"
+               <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" name="remark" form-group="detail"
-               data-options="label:'备 注',value:'${detail.remark}',multiline:true,height:80
-               <#if look>,disabled:true</#if>">
+        <input class="easyui-textbox" label="备 注" name="remark" form-group="detail"
+               value="${detail.remark}" multiline="true" data-options="height:80"
+               <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/role.js"></script>
