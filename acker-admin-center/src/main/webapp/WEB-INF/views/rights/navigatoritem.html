@@ -5,8 +5,8 @@
     <#if look>
         <a href="#" class="easyui-linkbutton" data-options="plain:true"
            onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
-            <a href="#" class="easyui-linkbutton" data-options="plain:true"
-               onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
     </#if>
     <#if insert|| update>
         <a href="#" class="easyui-linkbutton" data-options="plain:true"
@@ -27,6 +27,16 @@
     <div class="kcol-3">
         <input class="easyui-textbox" label="序 号" name="sno" form-group="detail"
                value="${detail.sno}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combotree" label="父节点" name="pid" form-group="detail"
+                valueField="id" textField="navName" editable="true"
+                url="${request.contextPath}/admin/center/rights/navigator/navtree"
+                data-options="value:${detail.pid},mode:'remote'"
+                <#if look>disabled="disabled"</#if>>
+        </select>
     </div>
 </div>
 <div class="krow-1-4">

@@ -46,5 +46,7 @@ public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
         return navigatorDao.authingNav(pid, roleId);
     }
 
-
+    public List<EtreeNavigator> initComboTree(Integer id) {
+        return navigatorDao.initComboTree(id);
+    }
 }

@@ -56,5 +56,14 @@
                ON (sys_navigator.id = sys_permissions.nav_id AND sys_permissions.role_id =  #{roleId})
         WHERE sys_navigator.pid = #{pid} AND sys_navigator.delete_mark = FALSE
     </select>
+    <select id="initComboTree" resultType="com.ackerframework.admin.center.rights.entity.EtreeNavigator">
+        SELECT id,pid,nav_name,nav_code FROM sys_navigator WHERE 1=1
+        <if test="nodeId==0">
+            AND pid = 0
+        </if>
+        <if test="nodeId!=0">
+            AND id = #{nodeId}
+        </if>
+    </select>
 
 </mapper>

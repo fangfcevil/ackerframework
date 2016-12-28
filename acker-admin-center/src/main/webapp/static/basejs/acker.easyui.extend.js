@@ -28,20 +28,7 @@ $.extend($.fn.combo.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25,
-    loader: function (param, success, error) {
-        var opts = $(this).combo("options");
-        if (!opts.url) {
-            return false;
-        }
-        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
-            if (result.status == 0) {
-                success({rows: []});
-            } else {
-                success(result.data);
-            }
-        });
-    }
+    height: 25
 });
 //endregion
 
@@ -55,7 +42,7 @@ $.extend($.fn.combobox.defaults, {
     valueField: "valueField",
     textField: "textField",
     loader: function (param, success, error) {
-        var opts = $(this).combobox("options");
+        var opts = $(this).combo("options");
         if (!opts.url) {
             return false;
         }
@@ -90,7 +77,21 @@ $.extend($.fn.combotree.defaults, {
     panelHeight: 'auto',
     height: 25,
     valueField: "valueField",
-    textField: "textField"
+    textField: "textField",
+    loader:function (param,success,error) {
+        // 这边的loader 是tree的
+        var opts = $(this).tree("options");
+        if (!opts.url) {
+            return false;
+        }
+        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
+            if (result.status == 0) {
+                success({rows: []});
+            } else {
+                success(result.data);
+            }
+        });
+    }
 });
 //endregion
 

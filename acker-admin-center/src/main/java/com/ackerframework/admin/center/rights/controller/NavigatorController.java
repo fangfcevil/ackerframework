@@ -104,6 +104,10 @@ public class NavigatorController extends ViewBaseController {
         easyPage.setRows(navigatorService.authingButton(pid, roleId));
         return new Result(easyPage);
     }
-
+    @ResponseBody
+    @RequestMapping(value = "/navtree", method = RequestMethod.GET)
+    public Result initComboTree(@RequestParam(value = "id", defaultValue = "0") Integer id) {
+        return new Result(navigatorService.initComboTree(id));
+    }
 
 }

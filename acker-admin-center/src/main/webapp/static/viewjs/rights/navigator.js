@@ -65,6 +65,7 @@ function onBeforeLoad(param) {
 
 $(document).ready(function () {
     $(".easyui-treegrid").treegrid({url: $.fView.url.gridlist});
+    // $(".easyui-combotree").combotree("setValue",1);
     $(".open-serchbox").bind("click", function () {
         $(this).toggleClass("active");
         $(this).closest(".egrid-toolbar").find(".serching-box").toggleClass("hide");
