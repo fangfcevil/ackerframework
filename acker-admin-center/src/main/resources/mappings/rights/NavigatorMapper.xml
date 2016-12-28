@@ -3,7 +3,7 @@
 <mapper namespace="com.ackerframework.admin.center.rights.dao.NavigatorDao">
 
     <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.EgridNavigator">
-        SELECT id,pid,sno,nav_name,permission,nav_type,attributes,nav_url,icon_cls,
+        SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
         create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
     </select>
@@ -13,20 +13,20 @@
     </select>
     <sql id="grid_list_where">
         FROM sys_navigator
-       WHERE 1=1 AND has_removed = FALSE
+       WHERE 1=1 AND delete_mark = FALSE
     </sql>
 
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
-        SELECT id,pid,sno,nav_name,permission,nav_type,attributes,nav_url,icon_cls,
+        SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
                 create_name,create_time,modify_name,modify_time
           FROM sys_navigator
-         WHERE 1=1 AND id = #{id} AND has_removed = FALSE
+         WHERE 1=1 AND id = #{id} AND delete_mark = FALSE
     </select>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
         INSERT INTO sys_navigator
-                     (pid,sno,nav_name,permission,nav_type,attributes,nav_url,icon_cls,create_name,create_time)
-              VALUES(#{pid},#{sno},#{navName},#{permission},#{navType},#{attributes},#{navUrl},#{iconCls},#{createName},#{createTime})
+                     (pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,create_name,create_time,delete_mark)
+              VALUES(#{pid},#{sno},#{navName},#{navCode},#{permission},#{navType},#{attributes},#{navUrl},#{iconCls},#{useMark},#{createName},#{createTime},#{deleteMark})
     </insert>
 
     <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Navigator">
@@ -35,11 +35,13 @@
             <if test="pid!=null">pid=#{pid},</if>
             <if test="sno!=null">sno=#{sno},</if>
             <if test="navName!=null">nav_name=#{navName},</if>
+            <if test="navCode!=null">nav_code=#{navCode},</if>
             <if test="permission!=null">permission=#{permission},</if>
             <if test="navType!=null">nav_type=#{navType},</if>
             <if test="attributes!=null">attributes=#{attributes},</if>
             <if test="navUrl!=null">nav_url=#{navUrl},</if>
             <if test="iconCls!=null">icon_cls=#{iconCls},</if>
+            <if test="useMark!=null">use_mark=#{useMark},</if>
             <if test="modifyName!=null">modify_name=#{modifyName},</if>
             <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
         </trim>
@@ -52,7 +54,7 @@
          FROM sys_navigator
                LEFT JOIN sys_permissions
                ON (sys_navigator.id = sys_permissions.nav_id AND sys_permissions.role_id =  #{roleId})
-        WHERE sys_navigator.pid = #{pid}
+        WHERE sys_navigator.pid = #{pid} AND sys_navigator.delete_mark = FALSE
     </select>
 
 </mapper>

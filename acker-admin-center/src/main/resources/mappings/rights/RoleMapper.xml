@@ -10,17 +10,17 @@
         SELECT COUNT(1) FROM sys_role WHERE 1=1
     </select>
     <sql id="grid_list_where">
-        FROM sys_role WHERE 1=1 AND has_removed = FALSE
+        FROM sys_role WHERE 1=1 AND delete_mark = FALSE LIMIT #{startIndex},#{pageSize}
     </sql>
 
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Role">
         SELECT id,role_name,role_code,org_id,role_state,remark,create_name,create_time,modify_name,modify_time
-        FROM sys_role WHERE 1=1 AND id = #{id} AND has_removed = FALSE
+        FROM sys_role WHERE 1=1 AND id = #{id} AND delete_mark = FALSE
     </select>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO sys_role (role_name,role_code,org_id,role_state,remark,create_name,create_time)
-        VALUES(#{roleName},#{roleCode},#{orgId},#{roleState},#{remark},#{createName},#{createTime})
+        INSERT INTO sys_role (role_name,role_code,org_id,role_state,remark,create_name,create_time,delete_mark)
+        VALUES(#{roleName},#{roleCode},#{orgId},#{roleState},#{remark},#{createName},#{createTime},#{delete_mark})
     </insert>
 
     <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Role">

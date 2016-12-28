@@ -7,8 +7,8 @@
           SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
                   sys_role.role_name,sys_organization.org_name,sys_organization.org_code
             FROM sys_rights
-            JOIN sys_role ON sys_rights.role_id = sys_role.id
-            JOIN sys_organization ON sys_rights.org_id = sys_organization.id
+            JOIN sys_role ON (sys_rights.role_id = sys_role.id AND sys_role.delete_mark = FALSE)
+            JOIN sys_organization ON (sys_rights.org_id = sys_organization.id AND sys_organization.delete_mark = FALSE)
            WHERE sys_rights.user_id = #{userId}
     </select>
     <!--单个的组织权限-->
@@ -16,8 +16,8 @@
         SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
         sys_role.role_name,sys_organization.org_name,sys_organization.org_code
         FROM sys_rights
-        JOIN sys_role ON sys_rights.role_id = sys_role.id
-        JOIN sys_organization ON sys_rights.org_id = sys_organization.id
+        JOIN sys_role ON (sys_rights.role_id = sys_role.id AND sys_role.delete_mark = FALSE)
+        JOIN sys_organization ON (sys_rights.org_id = sys_organization.id  AND sys_organization.delete_mark = FALSE)
         WHERE sys_rights.user_id = #{userId} AND sys_rights.role_id = #{roleId} AND sys_rights.role_id = #{roleId}
     </select>
 
@@ -25,7 +25,7 @@
         SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,sys_navigator.nav_url,
                 sys_navigator.icon_cls,sys_navigator.attributes,sys_navigator.nav_type
           FROM  sys_permissions
-          JOIN  sys_navigator ON sys_permissions.nav_id = sys_navigator.id
+          JOIN  sys_navigator ON (sys_permissions.nav_id = sys_navigator.id AND sys_navigator.delete_mark = FALSE)
         WHERE  sys_permissions.user_id = #{userId}
                 AND sys_permissions.role_id=#{roleId}
                 AND sys_navigator.pid = #{pid}

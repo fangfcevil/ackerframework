@@ -5,10 +5,8 @@
     <#if look>
         <a href="#" class="easyui-linkbutton" data-options="plain:true"
            onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
-        <#if detail.userName != "storm">
             <a href="#" class="easyui-linkbutton" data-options="plain:true"
                onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
-        </#if>
     </#if>
     <#if insert|| update>
         <a href="#" class="easyui-linkbutton" data-options="plain:true"
@@ -17,9 +15,12 @@
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" label="类 型" name="navType" form-group="detail"
-               value="${detail.navType}" valueField="valueField" textField="textField"
-               <#if look>disabled="disabled"</#if>>
+        <select class="easyui-combobox" label="类 型" name="navType" form-group="detail"
+                value="${detail.navType}" editable="false" <#if look>disabled="disabled"</#if>>
+            <#list comboNavType as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
     </div>
 </div>
 <div class="krow-1-4">
@@ -31,9 +32,8 @@
 <div class="krow-1-4">
     <div class="kcol-3">
         <input class="easyui-textbox" label="名 称" name="navName" form-group="detail"
-               required="true" value="${detail.navName}" data-options="validType:{length:[0,30]}"
-               <#if look>disabled="disabled"</#if>
-        >
+               value="${detail.navName}" required="true" data-options="validType:{length:[0,30]}"
+               <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
@@ -64,10 +64,13 @@
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" label="角色状态" name="roleState" form-group="detail"
-               value="${detail.roleState}" valueField="valueField" textField="textField" editable="false"
-               data-options="data:[{valueField:1,textField:'启用'},{valueField:0,textField:'停用'}]"
-               <#if look>disabled="disabled"</#if>>
+        <select class="easyui-combobox" label="是否启用" name="useMark" form-group="detail"
+                value="${detail.useMark?string("true","false")}" editable="false"
+                <#if look>disabled="disabled"</#if>>
+            <#list comboYesNo as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
     </div>
 </div>
 

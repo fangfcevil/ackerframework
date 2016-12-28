@@ -48,8 +48,8 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
         if (result.getStatus()) {
             entity.setCreateName(GlobalUtils.getLoginUser().getUserName());
             entity.setCreateTime(new Date());
-            entity.setHasRemoved(false);
-            result.setData(dao.insert(entity));
+            dao.insert(entity);
+            result.setData(entity.getId());
             return result;
         }
         return result;
@@ -65,7 +65,8 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
         if (result.getStatus()) {
             entity.setModifyName(GlobalUtils.getLoginUser().getUserName());
             entity.setModifyTime(new Date());
-            result.setData(dao.update(entity));
+            dao.update(entity);
+            result.setData(entity.getId());
         }
         return result;
     }

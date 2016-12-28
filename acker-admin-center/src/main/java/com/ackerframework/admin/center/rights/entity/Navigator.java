@@ -6,12 +6,14 @@ public class Navigator extends BaseEntity {
 
     private Integer pid;
     private Integer sno;
+    private String navCode;
     private String navName;
     private String navUrl;
     private String navType;
     private String permission;
     private String iconCls;
     private String attributes;
+    private Boolean useMark;
 
     public Integer getPid() {
         return pid;
@@ -77,4 +79,19 @@ public class Navigator extends BaseEntity {
         this.attributes = attributes;
     }
 
+    public String getNavCode() {
+        return navCode;
+    }
+
+    public void setNavCode(String navCode) {
+        this.navCode = navCode;
+    }
+
+    public Boolean getUseMark() {
+        return useMark;
+    }
+
+    public void setUseMark(Boolean useMark) {
+        this.useMark = useMark;
+    }
 }

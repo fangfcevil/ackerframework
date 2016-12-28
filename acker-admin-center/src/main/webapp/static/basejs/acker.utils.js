@@ -308,7 +308,7 @@
         },
         initLoading: function (params) {
             var options = {
-                message: "<i class='fa fa-refresh fa-spin fa-fw'></i>正在保存，请稍后...",
+                message: "<i class='fa fa-refresh fa-spin fa-fw'></i>加载中，请稍后...",
                 css: {
                     border: 'none',
                     padding: '15px',

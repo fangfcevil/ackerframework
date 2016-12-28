@@ -29,7 +29,6 @@ function saveItem() {
         var formJson = $.fForm.collect("detail");
         if ($.fView.currentState == $.fView.state.update) {
             $.fForm.post($.fView.url.update, formJson).success(function (result) {
-                console.log(result);
                 if (result.status) {
                     $.fForm.redirect($.fView.url.formitem, {viewState: $.fView.state.look, id: result.data});
                 }

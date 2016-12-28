@@ -1,10 +1,12 @@
 package com.ackerframework.admin.center.rights.controller;
 
+import com.ackerframework.admin.center.base.service.BaseDataService;
 import com.ackerframework.admin.center.rights.entity.EgridNavigator;
 import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.rights.params.NavigatorParam;
 import com.ackerframework.admin.center.rights.service.NavigatorService;
+import com.ackerframework.admin.center.sys.controller.ViewBaseController;
 import com.ackerframework.base.controller.BaseController;
 import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
@@ -19,13 +21,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/center/rights/navigator")
-public class NavigatorController extends BaseController {
+public class NavigatorController extends ViewBaseController {
 
     @Autowired
     private NavigatorService navigatorService;
-
-    private static final String VIEW_LIST_CODE = "user_list";
-    private static final String VIEW_ITEM_CODE = "user_item";
 
     @RequestMapping(value = Constant.FORMLIST)
     public ModelAndView formlist(ModelAndView MV) {
@@ -48,6 +47,8 @@ public class NavigatorController extends BaseController {
                 navigator = new Navigator();
                 break;
         }
+        MV.addObject("comboYesNo", initCombo("yes_no"));
+        MV.addObject("comboNavType", initCombo("nav_type"));
         MV.addObject("detail", navigator);
         return MV;
     }
@@ -98,7 +99,7 @@ public class NavigatorController extends BaseController {
     @ResponseBody
     @RequestMapping(value = "/authingbutton", method = RequestMethod.GET)
     public Result authingButton(@RequestParam(value = "id", defaultValue = "0") Integer pid,
-                             @RequestParam(value = "roleId") Integer roleId) {
+                                @RequestParam(value = "roleId") Integer roleId) {
         EasyPage easyPage = new EasyPage();
         easyPage.setRows(navigatorService.authingButton(pid, roleId));
         return new Result(easyPage);

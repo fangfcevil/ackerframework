@@ -1,9 +1,7 @@
 package com.ackerframework.base.controller;
 
-import com.ackerframework.base.entity.LoginUser;
 import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.DateUtils;
-import com.ackerframework.utils.GlobalUtils;
 import com.ackerframework.utils.StringUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;

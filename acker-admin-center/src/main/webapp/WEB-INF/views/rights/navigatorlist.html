@@ -8,14 +8,14 @@
         <a class="open-serchbox">
             <span class="color-orange">展开筛选<i class="fa fa-caret-square-o-down" style="padding-left: 5px" "></i></span>
         </a>
+
     </div>
     <div class="serching-box hide">
-
     </div>
 </div>
 
 <table class="easyui-treegrid" data-options="treeField:'navName',toolbar:'#tb_listgrid',
-     onBeforeLoad:onBeforeLoad">
+     onBeforeLoad:onBeforeLoad,animate:false">
     <thead>
     <tr>
         <th data-options="field:'gridOptions'"><@spring.message "sys.options"/></th>

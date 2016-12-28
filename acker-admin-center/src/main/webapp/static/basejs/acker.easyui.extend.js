@@ -28,7 +28,20 @@ $.extend($.fn.combo.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25
+    height: 25,
+    loader: function (param, success, error) {
+        var opts = $(this).combo("options");
+        if (!opts.url) {
+            return false;
+        }
+        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
+            if (result.status == 0) {
+                success({rows: []});
+            } else {
+                success(result.data);
+            }
+        });
+    }
 });
 //endregion
 
@@ -38,7 +51,22 @@ $.extend($.fn.combobox.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25
+    height: 25,
+    valueField: "valueField",
+    textField: "textField",
+    loader: function (param, success, error) {
+        var opts = $(this).combobox("options");
+        if (!opts.url) {
+            return false;
+        }
+        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
+            if (result.status == 0) {
+                success({rows: []});
+            } else {
+                success(result.data);
+            }
+        });
+    }
 });
 //endregion
 
@@ -48,7 +76,9 @@ $.extend($.fn.combogrid.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25
+    height: 25,
+    valueField: "valueField",
+    textField: "textField"
 });
 //endregion
 
@@ -59,8 +89,8 @@ $.extend($.fn.combotree.defaults, {
     method: 'get',
     panelHeight: 'auto',
     height: 25,
-    valueField: "id",
-    textField: "text"
+    valueField: "valueField",
+    textField: "textField"
 });
 //endregion
 
@@ -206,6 +236,7 @@ $.extend($.fn.treegrid.defaults, {
     treeField: "text",
     rownumbers: true,//默认显示行号
     striped: true,//隔行换色
+    loadMsg: null,
     loader: function (param, success, error) {
         var opts = $(this).treegrid("options");
         if (!opts.url) {
