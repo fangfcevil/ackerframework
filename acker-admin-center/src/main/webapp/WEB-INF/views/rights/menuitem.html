@@ -32,7 +32,7 @@
 <div class="krow-1-4">
     <div class="kcol-3">
         <select class="easyui-combotree" label="父节点" name="pid" form-group="detail"
-                editable="true" url="${request.contextPath}/admin/center/rights/navigator/navtree?id=${detail.pid}"
+                editable="true" url="${request.contextPath}/admin/center/rights/menu/navtree?id=${detail.id}"
                 data-options="value:'${detail.pid}'"
                 <#if look>disabled="disabled"</#if>>
         </select>
@@ -83,6 +83,6 @@
     </div>
 </div>
 
-<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/navigator.js"></script>
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/menu.js"></script>
 </@override>
 <@extends name="common/baseitem.html"/>

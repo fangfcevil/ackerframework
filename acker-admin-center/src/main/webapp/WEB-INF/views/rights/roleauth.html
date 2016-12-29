@@ -5,13 +5,13 @@
     </div>
     <div data-options="region:'west',split:false" style="width:250px;padding: 6px">
         <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,
-          url:'${request.contextPath}/admin/center/rights/navigator/authingnav?roleId=#{role.id}',
+          url:'${request.contextPath}/admin/center/rights/menu/authingnav?roleId=#{role.id}',
           onClick:onClickTree">
         </ul>
     </div>
     <div data-options="region:'center'," style="padding:5px;">
         <table class="easyui-treegrid" data-options="idField:'id',treeField:'navName',checkbox:true,
-               url:'${request.contextPath}/admin/center/rights/navigator/authingbutton?roleId=#{role.id}',
+               url:'${request.contextPath}/admin/center/rights/menu/authingbutton?roleId=#{role.id}',
                onBeforeLoad:onBeforeLoad_Button">
             <thead>
             <tr>

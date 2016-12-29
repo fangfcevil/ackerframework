@@ -7,7 +7,8 @@ import com.ackerframework.utils.GenerateEasyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EgridRole extends Role {
+public class UserGrid extends User {
+
     private String gridOptions;
 
     public String getGridOptions() {
@@ -24,12 +25,6 @@ public class EgridRole extends Role {
         updateButton.setOnClick("updateItem");
         updateButton.setIcon(Constant.ICON_UPATE);
         buttons.add(updateButton);
-        //授权
-        Button authButton = new Button();
-        authButton.setFnParam(this.getId().toString());
-        authButton.setOnClick("authRole");
-        authButton.setIcon(Constant.ICON_UPATE);
-        buttons.add(authButton);
         //..删除
         Button deleteButton = new Button();
         deleteButton.setFnParam(this.getId().toString());
@@ -42,4 +37,5 @@ public class EgridRole extends Role {
     public void setGridOptions(String gridOptions) {
         this.gridOptions = gridOptions;
     }
+
 }

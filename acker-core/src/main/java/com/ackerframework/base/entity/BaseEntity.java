@@ -33,7 +33,7 @@ public abstract class BaseEntity implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     protected Date modifyTime;    // 更新日期
 
-    protected Boolean deleteMark = false;
+    protected Boolean destroyed = false;
 
     public Integer getId() {
         return id;
@@ -75,11 +75,11 @@ public abstract class BaseEntity implements Serializable {
         this.modifyTime = modifyTime;
     }
 
-    public Boolean getDeleteMark() {
-        return deleteMark;
+    public Boolean getDestroyed() {
+        return destroyed;
     }
 
-    public void setDeleteMark(Boolean deleteMark) {
-        this.deleteMark = deleteMark;
+    public void setDestroyed(Boolean destroyed) {
+        this.destroyed = destroyed;
     }
 }

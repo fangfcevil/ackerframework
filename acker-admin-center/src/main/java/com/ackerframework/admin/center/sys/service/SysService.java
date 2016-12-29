@@ -1,7 +1,5 @@
 package com.ackerframework.admin.center.sys.service;
 
-import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
-import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.sys.dao.SysDao;
 import com.ackerframework.admin.center.sys.entity.UserRights;
 import com.ackerframework.base.entity.Result;

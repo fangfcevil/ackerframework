@@ -1,8 +1,7 @@
 package com.ackerframework.admin.center.rights.service;
 
 import com.ackerframework.admin.center.rights.dao.RoleDao;
-import com.ackerframework.admin.center.rights.entity.EgridUser;
-import com.ackerframework.admin.center.rights.entity.Navigator;
+import com.ackerframework.admin.center.rights.entity.UserGrid;
 import com.ackerframework.admin.center.rights.entity.Role;
 import com.ackerframework.admin.center.rights.params.UserParam;
 import com.ackerframework.base.entity.Result;
@@ -20,7 +19,7 @@ public class RoleService extends BaseService<RoleDao, Role> {
     @Autowired
     protected RoleDao roleDao;
 
-    public List<EgridUser> getGridList(UserParam userParam) {
+    public List<UserGrid> getGridList(UserParam userParam) {
         return roleDao.getGridList(userParam);
     }
 

@@ -1,22 +1,25 @@
 package com.ackerframework.admin.center.rights.entity;
 
-public class EtreeNavigator extends Navigator {
 
+import java.util.List;
+
+public class OrgTree extends Org {
     private String text;
-    private String state = "closed";
-    private Boolean checked = false;
+    private String state;
+    private Boolean checked;
+    private List<OrgTree> orgTrees;
 
     public String getText() {
-        return this.getNavName();
+        return this.getOrgName();
     }
 
     public void setText(String text) {
         this.text = text;
-        this.setNavName(text);
+        this.setOrgName(text);
     }
 
     public String getState() {
-        return "D".equals(this.getNavType()) ? "closed" : "open";
+        return state;
     }
 
     public void setState(String state) {
@@ -29,5 +32,13 @@ public class EtreeNavigator extends Navigator {
 
     public void setChecked(Boolean checked) {
         this.checked = checked;
+    }
+
+    public List<OrgTree> getOrgTrees() {
+        return orgTrees;
+    }
+
+    public void setOrgTrees(List<OrgTree> orgTrees) {
+        this.orgTrees = orgTrees;
     }
 }

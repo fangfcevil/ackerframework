@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.ackerframework.admin.center.rights.dao.NavigatorDao">
+<mapper namespace="com.ackerframework.admin.center.rights.dao.MenuDao">
 
-    <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.EgridNavigator">
+    <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.MenuTreeGrid">
         SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
         create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
@@ -16,7 +16,7 @@
        WHERE 1=1 AND delete_mark = FALSE
     </sql>
 
-    <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+    <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Menu">
         SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
                 create_name,create_time,modify_name,modify_time
           FROM sys_navigator
@@ -29,7 +29,7 @@
               VALUES(#{pid},#{sno},#{navName},#{navCode},#{permission},#{navType},#{attributes},#{navUrl},#{iconCls},#{useMark},#{createName},#{createTime},#{deleteMark})
     </insert>
 
-    <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Navigator">
+    <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Menu">
         UPDATE sys_navigator
         <trim prefix="set" suffixOverrides=",">
             <if test="pid!=null">pid=#{pid},</if>
@@ -47,7 +47,7 @@
         </trim>
         WHERE id = #{id}
     </update>
-    <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.EtreeNavigator">
+    <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
        SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,
                IFNULL(sys_permissions.role_id,#{roleId}) as role_id,sys_navigator.nav_type,
                sys_navigator.icon_cls,IF (ISNULL(sys_permissions.nav_id),0,1) AS checked
@@ -56,7 +56,7 @@
                ON (sys_navigator.id = sys_permissions.nav_id AND sys_permissions.role_id =  #{roleId})
         WHERE sys_navigator.pid = #{pid} AND sys_navigator.delete_mark = FALSE
     </select>
-    <select id="initComboTree" resultType="com.ackerframework.admin.center.rights.entity.EtreeNavigator">
+    <select id="initComboTree" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
         SELECT id,pid,nav_name,nav_code FROM sys_navigator WHERE 1=1
         <if test="nodeId==0">
             AND pid = 0
@@ -65,7 +65,7 @@
             AND id = #{nodeId}
         </if>
     </select>
-    <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+    <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Menu">
          SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
                 create_name,create_time,modify_name,modify_time
           FROM sys_navigator

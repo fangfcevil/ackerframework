@@ -2,13 +2,20 @@ package com.ackerframework.admin.center.rights.entity;
 
 import com.ackerframework.base.entity.BaseEntity;
 
-public class Role extends BaseEntity {
-
+public class Org extends BaseEntity {
+    private Integer pid;
     private String text;
     private String coded;
-    private Integer orgId;
+    private String type;
     private Boolean canUse;
-    private String remark;
+
+    public Integer getPid() {
+        return pid;
+    }
+
+    public void setPid(Integer pid) {
+        this.pid = pid;
+    }
 
     public String getText() {
         return text;
@@ -26,12 +33,12 @@ public class Role extends BaseEntity {
         this.coded = coded;
     }
 
-    public Integer getOrgId() {
-        return orgId;
+    public String getType() {
+        return type;
     }
 
-    public void setOrgId(Integer orgId) {
-        this.orgId = orgId;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Boolean getCanUse() {
@@ -40,13 +47,5 @@ public class Role extends BaseEntity {
 
     public void setCanUse(Boolean canUse) {
         this.canUse = canUse;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 }

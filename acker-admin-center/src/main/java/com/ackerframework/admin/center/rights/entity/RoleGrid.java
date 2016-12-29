@@ -7,10 +7,8 @@ import com.ackerframework.utils.GenerateEasyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EgridUser extends User {
-
+public class RoleGrid extends Role {
     private String gridOptions;
-    private String photoToGrid;
 
     public String getGridOptions() {
         List<Button> buttons = new ArrayList<>();
@@ -26,26 +24,22 @@ public class EgridUser extends User {
         updateButton.setOnClick("updateItem");
         updateButton.setIcon(Constant.ICON_UPATE);
         buttons.add(updateButton);
+        //授权
+        Button authButton = new Button();
+        authButton.setFnParam(this.getId().toString());
+        authButton.setOnClick("authRole");
+        authButton.setIcon(Constant.ICON_UPATE);
+        buttons.add(authButton);
         //..删除
-        if (!"ackerman".equals(this.getUserName())) {
-            Button deleteButton = new Button();
-            deleteButton.setFnParam(this.getId().toString());
-            deleteButton.setOnClick("deleteItem");
-            deleteButton.setIcon(Constant.ICON_DELETE);
-            buttons.add(deleteButton);
-        }
+        Button deleteButton = new Button();
+        deleteButton.setFnParam(this.getId().toString());
+        deleteButton.setOnClick("deleteItem");
+        deleteButton.setIcon(Constant.ICON_DELETE);
+        buttons.add(deleteButton);
         return GenerateEasyUtils.buttonsHtml(buttons);
     }
 
     public void setGridOptions(String gridOptions) {
         this.gridOptions = gridOptions;
-    }
-
-    public String getPhotoToGrid() {
-        return photoToGrid;
-    }
-
-    public void setPhotoToGrid(String photoToGrid) {
-        this.photoToGrid = photoToGrid;
     }
 }

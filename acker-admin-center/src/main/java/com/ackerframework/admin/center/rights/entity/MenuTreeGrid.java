@@ -7,12 +7,12 @@ import com.ackerframework.utils.GenerateEasyUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EgridNavigator extends Navigator {
-    private String gridOptions;
+public class MenuTreeGrid extends Menu {
 
-    //..treeGrid 第一级的父节点必须是Null
+    private String gridOptions;
     private Integer _parentId;
 
+    //..treeGrid 第一级的父节点必须是Null
     public Integer get_parentId() {
         return this.getPid() == 0 ? null : this.getPid();
     }

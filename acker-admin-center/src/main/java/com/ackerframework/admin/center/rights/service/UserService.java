@@ -1,7 +1,6 @@
 package com.ackerframework.admin.center.rights.service;
 
 import com.ackerframework.admin.center.rights.dao.UserDao;
-import com.ackerframework.admin.center.rights.entity.EgridUser;
 import com.ackerframework.admin.center.rights.entity.User;
 import com.ackerframework.admin.center.rights.params.UserParam;
 import com.ackerframework.base.entity.Result;
@@ -10,8 +9,6 @@ import com.ackerframework.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional(readOnly = true)

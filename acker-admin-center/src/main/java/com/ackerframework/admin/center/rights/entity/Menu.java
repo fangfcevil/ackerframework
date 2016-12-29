@@ -2,18 +2,18 @@ package com.ackerframework.admin.center.rights.entity;
 
 import com.ackerframework.base.entity.BaseEntity;
 
-public class Navigator extends BaseEntity {
+public class Menu extends BaseEntity {
 
     private Integer pid;
     private Integer sno;
-    private String navCode;
-    private String navName;
-    private String navUrl;
-    private String navType;
+    private String text;
+    private String coded;
+    private String url;
+    private String type;
     private String permission;
     private String iconCls;
     private String attributes;
-    private Boolean useMark;
+    private Boolean canUse;
 
     public Integer getPid() {
         return pid;
@@ -31,28 +31,36 @@ public class Navigator extends BaseEntity {
         this.sno = sno;
     }
 
-    public String getNavName() {
-        return navName;
+    public String getText() {
+        return text;
     }
 
-    public void setNavName(String navName) {
-        this.navName = navName;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getNavUrl() {
-        return navUrl;
+    public String getCoded() {
+        return coded;
     }
 
-    public void setNavUrl(String navUrl) {
-        this.navUrl = navUrl;
+    public void setCoded(String coded) {
+        this.coded = coded;
     }
 
-    public String getNavType() {
-        return navType;
+    public String getUrl() {
+        return url;
     }
 
-    public void setNavType(String navType) {
-        this.navType = navType;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getPermission() {
@@ -79,19 +87,11 @@ public class Navigator extends BaseEntity {
         this.attributes = attributes;
     }
 
-    public String getNavCode() {
-        return navCode;
+    public Boolean getCanUse() {
+        return canUse;
     }
 
-    public void setNavCode(String navCode) {
-        this.navCode = navCode;
-    }
-
-    public Boolean getUseMark() {
-        return useMark;
-    }
-
-    public void setUseMark(Boolean useMark) {
-        this.useMark = useMark;
+    public void setCanUse(Boolean canUse) {
+        this.canUse = canUse;
     }
 }

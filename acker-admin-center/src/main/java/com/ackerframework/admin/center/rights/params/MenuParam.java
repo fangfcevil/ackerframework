@@ -5,9 +5,9 @@ import com.ackerframework.base.entity.PageParam;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class NavigatorParam extends PageParam {
+public class MenuParam extends PageParam {
 
-    public NavigatorParam(HttpServletRequest request) {
+    public MenuParam(HttpServletRequest request) {
         super(request);
     }
 }

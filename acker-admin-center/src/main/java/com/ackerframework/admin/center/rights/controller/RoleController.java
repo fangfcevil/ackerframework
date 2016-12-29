@@ -1,7 +1,6 @@
 package com.ackerframework.admin.center.rights.controller;
 
-import com.ackerframework.admin.center.rights.entity.EgridRole;
-import com.ackerframework.admin.center.rights.entity.Navigator;
+import com.ackerframework.admin.center.rights.entity.RoleGrid;
 import com.ackerframework.admin.center.rights.entity.Role;
 import com.ackerframework.admin.center.rights.params.RoleParam;
 import com.ackerframework.admin.center.rights.service.RoleService;
@@ -9,9 +8,7 @@ import com.ackerframework.base.controller.BaseController;
 import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.Constant;
-import com.ackerframework.utils.GlobalUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,8 +22,6 @@ public class RoleController extends BaseController {
 
     @Autowired
     private RoleService roleService;
-    private static final String VIEW_LIST_CODE = "user_list";
-    private static final String VIEW_ITEM_CODE = "user_item";
 
     @RequestMapping(value = Constant.FORMLIST)
     public ModelAndView formlist() {
@@ -55,7 +50,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = "/auth")
     public ModelAndView authRole(ModelAndView MV,
                                  @RequestParam(value = Constant.ID) Integer id) {
-        MV.setViewName("/rights/authrole");
+        MV.setViewName("rights/roleauth");
         MV.addObject("role", roleService.get(id));
         return MV;
     }
@@ -65,7 +60,7 @@ public class RoleController extends BaseController {
     @RequestMapping(value = Constant.GRIDLIST, method = RequestMethod.GET)
     public Result gridList(HttpServletRequest request) {
         EasyPage easyPage = new EasyPage();
-        List<EgridRole> roles = roleService.getGridList(new RoleParam(request));
+        List<RoleGrid> roles = roleService.getGridList(new RoleParam(request));
         Integer count = roleService.listCount(new RoleParam(request));
         easyPage.setTotal(count);
         easyPage.setRows(roles);

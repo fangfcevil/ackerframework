@@ -1,6 +1,6 @@
 package com.ackerframework.admin.center.rights.controller;
 
-import com.ackerframework.admin.center.rights.entity.EgridUser;
+import com.ackerframework.admin.center.rights.entity.UserGrid;
 import com.ackerframework.admin.center.rights.entity.User;
 import com.ackerframework.admin.center.rights.params.UserParam;
 import com.ackerframework.admin.center.rights.service.UserService;
@@ -11,7 +11,6 @@ import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.GlobalUtils;
 import com.ackerframework.utils.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +25,6 @@ public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
-    private static final String VIEW_LIST_CODE = "user_list";
-    private static final String VIEW_ITEM_CODE = "user_item";
 
     @RequestMapping(value = Constant.FORMLIST)
     public ModelAndView formlist() {
@@ -57,7 +54,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = Constant.GRIDLIST, method = RequestMethod.GET)
     public Result gridList(HttpServletRequest request) {
         EasyPage easyPage = new EasyPage();
-        List<EgridUser> users = userService.getGridList(new UserParam(request));
+        List<UserGrid> users = userService.getGridList(new UserParam(request));
         Integer count = userService.listCount(new UserParam(request));
         easyPage.setTotal(count);
         easyPage.setRows(users);
