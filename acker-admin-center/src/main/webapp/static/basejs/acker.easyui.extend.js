@@ -63,9 +63,7 @@ $.extend($.fn.combogrid.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25,
-    valueField: "valueField",
-    textField: "textField"
+    height: 25
 });
 //endregion
 
@@ -76,8 +74,6 @@ $.extend($.fn.combotree.defaults, {
     method: 'get',
     panelHeight: 'auto',
     height: 25,
-    valueField: "valueField",
-    textField: "textField",
     loader:function (param,success,error) {
         // 这边的loader 是tree的
         var opts = $(this).tree("options");

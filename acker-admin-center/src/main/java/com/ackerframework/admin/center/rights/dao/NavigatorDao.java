@@ -14,4 +14,6 @@ public interface NavigatorDao extends BaseDao<Navigator> {
     List<EtreeNavigator> authingNav(@Param("pid") Integer pid, @Param("roleId") Integer roleId);
 
     List<EtreeNavigator> initComboTree(@Param("nodeId") Integer nodeId);
+
+    List<Navigator> getNodesByPid(Integer pid);
 }

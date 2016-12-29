@@ -6,10 +6,16 @@ import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseService;
 import com.ackerframework.utils.StringUtils;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -46,7 +52,48 @@ public class NavigatorService extends BaseService<NavigatorDao, Navigator> {
         return navigatorDao.authingNav(pid, roleId);
     }
 
-    public List<EtreeNavigator> initComboTree(Integer id) {
-        return navigatorDao.initComboTree(id);
+    public List<Navigator> getNodesByPid(Integer pid) {
+        return navigatorDao.getNodesByPid(pid);
+    }
+
+    //当前节点的子节点不显示
+    public ArrayNode initComboTree(Integer id) {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode arrayNodeRoot = mapper.createArrayNode();
+        ObjectNode rootNode = arrayNodeRoot.addObject();
+        rootNode.put("id", 0);
+        rootNode.put("text", "无");
+        ArrayNode childrenNode = rootNode.putArray("children");
+        childrenNode.addAll(this.getTreeNode(0, id));
+//        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
+//        try {
+//            String json = objectWriter.writeValueAsString(arrayNodeRoot);
+//            System.out.print(json);
+//        } catch (JsonProcessingException e) {
+//
+//        }
+        return arrayNodeRoot;
+    }
+
+    private ArrayNode getTreeNode(Integer pid, Integer id) {
+        ObjectMapper mapper = new ObjectMapper();
+        ArrayNode arrayNode = mapper.createArrayNode();
+
+        List<Navigator> navigators = navigatorDao.getNodesByPid(pid);
+        Iterator<Navigator> item = navigators.iterator();
+        while (item.hasNext()) {
+            ObjectNode node = arrayNode.addObject();
+            Navigator navigator = item.next();
+            node.put("id", navigator.getId());
+            node.put("pid", navigator.getPid());
+            node.put("text", navigator.getNavName());
+            node.put("navCode", navigator.getNavCode());
+            node.put("permission", navigator.getPermission());
+            node.put("attributes", navigator.getAttributes());
+            if (pid != id) {
+                node.set("children", getTreeNode(navigator.getId(), id));
+            }
+        }
+        return arrayNode;
     }
 }

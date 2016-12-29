@@ -65,5 +65,10 @@
             AND id = #{nodeId}
         </if>
     </select>
-
+    <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Navigator">
+         SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
+                create_name,create_time,modify_name,modify_time
+          FROM sys_navigator
+         WHERE 1=1 AND pid = #{pid} AND delete_mark = FALSE
+    </select>
 </mapper>

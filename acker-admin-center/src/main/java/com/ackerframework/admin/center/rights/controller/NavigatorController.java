@@ -1,16 +1,14 @@
 package com.ackerframework.admin.center.rights.controller;
 
-import com.ackerframework.admin.center.base.service.BaseDataService;
 import com.ackerframework.admin.center.rights.entity.EgridNavigator;
-import com.ackerframework.admin.center.rights.entity.EtreeNavigator;
 import com.ackerframework.admin.center.rights.entity.Navigator;
 import com.ackerframework.admin.center.rights.params.NavigatorParam;
 import com.ackerframework.admin.center.rights.service.NavigatorService;
 import com.ackerframework.admin.center.sys.controller.ViewBaseController;
-import com.ackerframework.base.controller.BaseController;
 import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.Constant;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -106,7 +104,7 @@ public class NavigatorController extends ViewBaseController {
     }
     @ResponseBody
     @RequestMapping(value = "/navtree", method = RequestMethod.GET)
-    public Result initComboTree(@RequestParam(value = "id", defaultValue = "0") Integer id) {
+    public Result initComboTree(@RequestParam(value = "id") Integer id) {
         return new Result(navigatorService.initComboTree(id));
     }
 

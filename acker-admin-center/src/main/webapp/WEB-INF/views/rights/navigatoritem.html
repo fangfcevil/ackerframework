@@ -32,9 +32,8 @@
 <div class="krow-1-4">
     <div class="kcol-3">
         <select class="easyui-combotree" label="父节点" name="pid" form-group="detail"
-                valueField="id" textField="navName" editable="true"
-                url="${request.contextPath}/admin/center/rights/navigator/navtree"
-                data-options="value:${detail.pid},mode:'remote'"
+                editable="true" url="${request.contextPath}/admin/center/rights/navigator/navtree?id=${detail.pid}"
+                data-options="value:'${detail.pid}'"
                 <#if look>disabled="disabled"</#if>>
         </select>
     </div>
