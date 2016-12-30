@@ -4,6 +4,7 @@ import com.ackerframework.admin.center.rights.entity.RoleGrid;
 import com.ackerframework.admin.center.rights.entity.Role;
 import com.ackerframework.admin.center.rights.params.RoleParam;
 import com.ackerframework.admin.center.rights.service.RoleService;
+import com.ackerframework.admin.center.sys.controller.ViewBaseController;
 import com.ackerframework.base.controller.BaseController;
 import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/center/rights/role")
-public class RoleController extends BaseController {
+public class RoleController extends ViewBaseController {
 
     @Autowired
     private RoleService roleService;
@@ -43,7 +44,9 @@ public class RoleController extends BaseController {
                 role = new Role();
                 break;
         }
-        MV.addObject("detail", role);
+        MV.addObject("comboCanUse", initCombo("can_use"));
+        MV.addObject("comboYesNo", initCombo("yes_no"));
+        MV.addObject(Constant.DETAIL, role);
         return MV;
     }
 

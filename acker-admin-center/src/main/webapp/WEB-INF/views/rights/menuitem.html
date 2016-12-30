@@ -15,8 +15,8 @@
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <select class="easyui-combobox" label="类 型" name="navType" form-group="detail"
-                value="${detail.navType}" editable="false" <#if look>disabled="disabled"</#if>>
+        <select class="easyui-combobox" label="类 型" name="types" form-group="detail"
+                data-options="value:'${detail.types}'" editable="false" <#if look>disabled="disabled"</#if>>
             <#list comboNavType as item>
                 <option value="${item.valueField}">${item.textField}</option>
             </#list>
@@ -32,23 +32,22 @@
 <div class="krow-1-4">
     <div class="kcol-3">
         <select class="easyui-combotree" label="父节点" name="pid" form-group="detail"
-                editable="true" url="${request.contextPath}/admin/center/rights/menu/navtree?id=${detail.id}"
-                data-options="value:'${detail.pid}'"
-                <#if look>disabled="disabled"</#if>>
+                editable="true" url="${request.contextPath}/admin/center/rights/menu/initparent?id=${detail.id}"
+                data-options="value:'${detail.pid}'" <#if look>disabled="disabled"</#if>>
         </select>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="名 称" name="navName" form-group="detail"
-               value="${detail.navName}" required="true" data-options="validType:{length:[0,30]}"
+        <input class="easyui-textbox" label="名 称" name="text" form-group="detail"
+               value="${detail.text}" required="true" data-options="validType:{length:[0,30]}"
                <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="代 码" name="navCode" form-group="detail"
-               value="${detail.navCode}" <#if look>disabled="disabled"</#if>>
+        <input class="easyui-textbox" label="代 码" name="coded" form-group="detail"
+               value="${detail.coded}" <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 
@@ -61,8 +60,8 @@
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="URL" name="navUrl" form-group="detail"
-               value="${detail.navUrl}" <#if look>disabled="disabled"</#if>>
+        <input class="easyui-textbox" label="URL" name="url" form-group="detail"
+               value="${detail.url}" <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
@@ -73,10 +72,10 @@
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <select class="easyui-combobox" label="是否启用" name="useMark" form-group="detail"
-                value="${detail.useMark?string("true","false")}" editable="false"
+        <select class="easyui-combobox" label="是否启用" name="canUse" form-group="detail"
+                data-options="value:'${detail.canUse?string("true","false")}'" editable="false"
                 <#if look>disabled="disabled"</#if>>
-            <#list comboYesNo as item>
+            <#list comboCanUse as item>
                 <option value="${item.valueField}">${item.textField}</option>
             </#list>
         </select>

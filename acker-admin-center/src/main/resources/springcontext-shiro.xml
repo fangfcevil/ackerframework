@@ -96,7 +96,10 @@
         <property name="configLocation" value="classpath:/ehcache-local.xml"/>
     </bean>
 
-    <bean id="formAuthenticationFilter" class="com.ackerframework.core.filter.FormAuthenticationFilter"></bean>
+    <bean id="formAuthenticationFilter" class="com.ackerframework.core.filter.FormAuthenticationFilter">
+        <property name="usernameParam" value="account"></property>
+        <property name="passwordParam" value="password"></property>
+    </bean>
     <bean id="sysAuthorizingRealm" class="com.ackerframework.admin.center.sys.realm.SysAuthorizingRealm">
         <property name="cachingEnabled" value="false"></property>
         <!--身份验证缓存-->
@@ -105,6 +108,5 @@
         <!--授权信息缓存-->
         <property name="authorizationCachingEnabled" value="false"></property>
         <!--<property name="authorizationCacheName" value=""></property>-->
-
     </bean>
 </beans>

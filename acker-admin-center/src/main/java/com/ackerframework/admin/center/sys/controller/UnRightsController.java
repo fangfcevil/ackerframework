@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class UnUserRightsController {
-    @RequestMapping(value = "/unuserrights")
+public class UnRightsController {
+    @RequestMapping(value = "/unrights")
     public ModelAndView init(ModelAndView MV) {
-        MV.setViewName("unuserrights");
+        MV.setViewName("unrights");
         return MV;
     }
 }

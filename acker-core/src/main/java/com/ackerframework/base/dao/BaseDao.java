@@ -38,4 +38,6 @@ public interface BaseDao<T extends BaseEntity> {
      */
     Integer delete(Integer id);
 
+
+
 }

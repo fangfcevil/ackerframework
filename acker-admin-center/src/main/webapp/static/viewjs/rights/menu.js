@@ -1,10 +1,10 @@
 $.fView.url = {
-    formlist: $.fView.contextPath + "/admin/center/rights/navigator/formlist",
-    gridlist: $.fView.contextPath + "/admin/center/rights/navigator/gridlist",
-    formitem: $.fView.contextPath + "/admin/center/rights/navigator/formitem",
-    insert: $.fView.contextPath + "/admin/center/rights/navigator/insert",
-    update: $.fView.contextPath + "/admin/center/rights/navigator/update",
-    delete: $.fView.contextPath + "/admin/center/rights/navigator/delete"
+    formlist: $.fView.contextPath + "/admin/center/rights/menu/formlist",
+    gridlist: $.fView.contextPath + "/admin/center/rights/menu/gridlist",
+    formitem: $.fView.contextPath + "/admin/center/rights/menu/formitem",
+    insert: $.fView.contextPath + "/admin/center/rights/menu/insert",
+    update: $.fView.contextPath + "/admin/center/rights/menu/update",
+    delete: $.fView.contextPath + "/admin/center/rights/menu/delete"
 };
 
 function lookItem(id) {

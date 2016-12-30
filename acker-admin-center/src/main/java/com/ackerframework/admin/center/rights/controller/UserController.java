@@ -1,10 +1,10 @@
 package com.ackerframework.admin.center.rights.controller;
 
-import com.ackerframework.admin.center.rights.entity.UserGrid;
 import com.ackerframework.admin.center.rights.entity.User;
+import com.ackerframework.admin.center.rights.entity.UserGrid;
 import com.ackerframework.admin.center.rights.params.UserParam;
 import com.ackerframework.admin.center.rights.service.UserService;
-import com.ackerframework.base.controller.BaseController;
+import com.ackerframework.admin.center.sys.controller.ViewBaseController;
 import com.ackerframework.base.entity.EasyPage;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.Constant;
@@ -21,7 +21,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/admin/center/rights/user")
-public class UserController extends BaseController {
+public class UserController extends ViewBaseController {
 
     @Autowired
     private UserService userService;
@@ -44,9 +44,11 @@ public class UserController extends BaseController {
                 break;
             case Constant.INSERT:
                 user = new User();
+                user.setCanUse(true);
                 break;
         }
-        MV.addObject("detail", user);
+        MV.addObject("comboCanUse", initCombo("can_use"));
+        MV.addObject(Constant.DETAIL, user);
         return MV;
     }
 
@@ -71,11 +73,11 @@ public class UserController extends BaseController {
     @RequestMapping(value = Constant.INSERT, method = RequestMethod.POST)
 
     public Result insert(@RequestBody User user) {
-        if (StringUtils.isBlank(user.getPassWord())) {
+        if (StringUtils.isBlank(user.getPassword())) {
             String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.PWD_SALT).toString();
-            user.setPassWord(enPassWord);
+            user.setPassword(enPassWord);
         } else {
-            user.setPassWord(new Md5Hash(user.getPassWord(), Constant.PWD_SALT).toString());
+            user.setPassword(new Md5Hash(user.getPassword(), Constant.PWD_SALT).toString());
         }
         return userService.insert(user);
     }
@@ -83,8 +85,8 @@ public class UserController extends BaseController {
     @ResponseBody
     @RequestMapping(value = Constant.UPDATE, method = RequestMethod.POST)
     public Result update(@RequestBody User user) {
-        if (StringUtils.isNotBlank(user.getPassWord())) {
-            user.setPassWord(new Md5Hash(user.getPassWord(), Constant.PWD_SALT).toString());
+        if (StringUtils.isNotBlank(user.getPassword())) {
+            user.setPassword(new Md5Hash(user.getPassword(), Constant.PWD_SALT).toString());
         }
         return userService.update(user);
     }

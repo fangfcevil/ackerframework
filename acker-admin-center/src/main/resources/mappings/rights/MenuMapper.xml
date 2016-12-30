@@ -3,7 +3,7 @@
 <mapper namespace="com.ackerframework.admin.center.rights.dao.MenuDao">
 
     <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.MenuTreeGrid">
-        SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
+        SELECT id,pid,sno,text,coded,permission,types,attributes,url,icon_cls,can_use,state,
         create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
     </select>
@@ -12,52 +12,40 @@
         <include refid="grid_list_where"></include>
     </select>
     <sql id="grid_list_where">
-        FROM sys_navigator
-       WHERE 1=1 AND delete_mark = FALSE
+        FROM sys_menu
+       WHERE 1=1 AND destroyed = FALSE order by sno
     </sql>
 
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Menu">
-        SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
+        SELECT id,pid,sno,text,coded,permission,types,attributes,url,icon_cls,can_use,state,
                 create_name,create_time,modify_name,modify_time
-          FROM sys_navigator
-         WHERE 1=1 AND id = #{id} AND delete_mark = FALSE
+          FROM sys_menu
+         WHERE 1=1 AND id = #{id} AND destroyed = FALSE
     </select>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO sys_navigator
-                     (pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,create_name,create_time,delete_mark)
-              VALUES(#{pid},#{sno},#{navName},#{navCode},#{permission},#{navType},#{attributes},#{navUrl},#{iconCls},#{useMark},#{createName},#{createTime},#{deleteMark})
+        INSERT INTO sys_menu
+                     (pid,sno,text,coded,permission,types,attributes,url,icon_cls,can_use,create_name,create_time,delete_mark)
+              VALUES(#{pid},#{sno},#{text},#{coded},#{permission},#{types},#{attributes},#{url},#{iconCls},#{can_use},#{createName},#{createTime},#{deleteMark})
     </insert>
 
     <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Menu">
-        UPDATE sys_navigator
-        <trim prefix="set" suffixOverrides=",">
-            <if test="pid!=null">pid=#{pid},</if>
-            <if test="sno!=null">sno=#{sno},</if>
-            <if test="navName!=null">nav_name=#{navName},</if>
-            <if test="navCode!=null">nav_code=#{navCode},</if>
-            <if test="permission!=null">permission=#{permission},</if>
-            <if test="navType!=null">nav_type=#{navType},</if>
-            <if test="attributes!=null">attributes=#{attributes},</if>
-            <if test="navUrl!=null">nav_url=#{navUrl},</if>
-            <if test="iconCls!=null">icon_cls=#{iconCls},</if>
-            <if test="useMark!=null">use_mark=#{useMark},</if>
-            <if test="modifyName!=null">modify_name=#{modifyName},</if>
-            <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
-        </trim>
+        UPDATE sys_menu SET
+        pid=#{pid},sno=#{sno},text=#{text},coded=#{coded},permission=#{permission},types=#{types},attributes=#{attributes},
+        url=#{url},icon_cls=#{iconCls},can_use=#{canUse},modify_name=#{modifyName},modify_time=#{modifyTime}
         WHERE id = #{id}
     </update>
     <select id="authingNav" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
-       SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,
-               IFNULL(sys_permissions.role_id,#{roleId}) as role_id,sys_navigator.nav_type,
-               sys_navigator.icon_cls,IF (ISNULL(sys_permissions.nav_id),0,1) AS checked
-         FROM sys_navigator
+       SELECT sys_menu.id,sys_menu.pid,sys_menu.nav_name,
+               IFNULL(sys_permissions.role_id,#{roleId}) as role_id,sys_menu.types,
+               sys_menu.icon_cls,IF (ISNULL(sys_permissions.nav_id),0,1) AS checked
+         FROM sys_menu
                LEFT JOIN sys_permissions
-               ON (sys_navigator.id = sys_permissions.nav_id AND sys_permissions.role_id =  #{roleId})
-        WHERE sys_navigator.pid = #{pid} AND sys_navigator.delete_mark = FALSE
+               ON (sys_menu.id = sys_permissions.menu_id AND sys_permissions.role_id =  #{roleId})
+        WHERE sys_menu.pid = #{pid} AND sys_menu.destroyed = FALSE
     </select>
     <select id="initComboTree" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
-        SELECT id,pid,nav_name,nav_code FROM sys_navigator WHERE 1=1
+        SELECT id,pid,text,coded FROM sys_menu WHERE 1=1
         <if test="nodeId==0">
             AND pid = 0
         </if>
@@ -66,9 +54,20 @@
         </if>
     </select>
     <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Menu">
-         SELECT id,pid,sno,nav_name,nav_code,permission,nav_type,attributes,nav_url,icon_cls,use_mark,
+         SELECT id,pid,sno,text,coded,permission,types,attributes,url,icon_cls,can_use,
                 create_name,create_time,modify_name,modify_time
-          FROM sys_navigator
-         WHERE 1=1 AND pid = #{pid} AND delete_mark = FALSE
+          FROM sys_menu
+         WHERE 1=1 AND pid = #{pid} AND destroyed = FALSE
+    </select>
+
+    <select id="getRightsTreeNode" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
+        SELECT  sys_menu.id,sys_menu.pid,sys_menu.text,sys_menu.url,sys_menu.icon_cls,
+                 sys_menu.attributes,sys_menu.types,sys_menu.state
+        FROM  sys_permissions
+        JOIN  sys_menu ON (sys_permissions.menu_id = sys_menu.id AND sys_menu.destroyed = FALSE)
+        WHERE  sys_permissions.user_id = #{userId}
+        AND sys_permissions.role_id=#{roleId}
+        AND sys_menu.pid = #{pid}
+        AND sys_menu.types = 1
     </select>
 </mapper>

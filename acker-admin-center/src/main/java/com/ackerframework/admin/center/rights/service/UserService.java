@@ -16,8 +16,8 @@ public class UserService extends BaseService<UserDao, User> {
     @Autowired
     protected UserDao userDao;
 
-    public User getByUserName(String userName) {
-        User user = userDao.getByName(new UserParam(userName));
+    public User getByAccount(String account) {
+        User user = userDao.getByAccount(account);
         return user;
     }
 
@@ -32,10 +32,10 @@ public class UserService extends BaseService<UserDao, User> {
     }
 
     private Result validateUser(User user) {
-        if (StringUtils.isBlank(user.getUserName())) {
-            return new Result(false, "用户名称不能为空!");
+        if (StringUtils.isBlank(user.getAccount())) {
+            return new Result(false, "用户账号不能为空!");
         }
-        if (StringUtils.isBlank(user.getNickName())) {
+        if (StringUtils.isBlank(user.getNickname())) {
             return new Result(false, "用户昵称不能为空!");
         }
         return new Result();

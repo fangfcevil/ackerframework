@@ -8,6 +8,7 @@ public class Role extends BaseEntity {
     private String coded;
     private Integer orgId;
     private Boolean canUse;
+    private Boolean sysMark;
     private String remark;
 
     public String getText() {
@@ -40,6 +41,14 @@ public class Role extends BaseEntity {
 
     public void setCanUse(Boolean canUse) {
         this.canUse = canUse;
+    }
+
+    public Boolean getSysMark() {
+        return sysMark;
+    }
+
+    public void setSysMark(Boolean sysMark) {
+        this.sysMark = sysMark;
     }
 
     public String getRemark() {

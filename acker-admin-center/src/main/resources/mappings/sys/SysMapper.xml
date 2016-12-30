@@ -2,34 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ackerframework.admin.center.sys.dao.SysDao">
-    <!--所有的组织权限-->
+    <!--所有的组织权限 用户组织权限选择-->
     <select id="getUserRightses" resultType="com.ackerframework.admin.center.sys.entity.UserRights">
-          SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
-                  sys_role.role_name,sys_organization.org_name,sys_organization.org_code
-            FROM sys_rights
-            JOIN sys_role ON (sys_rights.role_id = sys_role.id AND sys_role.delete_mark = FALSE)
-            JOIN sys_organization ON (sys_rights.org_id = sys_organization.id AND sys_organization.delete_mark = FALSE)
-           WHERE sys_rights.user_id = #{userId}
-    </select>
-    <!--单个的组织权限-->
-    <select id="getUserRights" resultType="com.ackerframework.admin.center.sys.entity.UserRights">
-        SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.role_code,
-        sys_role.role_name,sys_organization.org_name,sys_organization.org_code
+        SELECT sys_rights.user_id,sys_rights.role_id,sys_rights.org_id,sys_role.coded as role_code,
+        sys_role.text as role_name,sys_org.text as org_name,sys_org.coded as org_code
         FROM sys_rights
-        JOIN sys_role ON (sys_rights.role_id = sys_role.id AND sys_role.delete_mark = FALSE)
-        JOIN sys_organization ON (sys_rights.org_id = sys_organization.id  AND sys_organization.delete_mark = FALSE)
-        WHERE sys_rights.user_id = #{userId} AND sys_rights.role_id = #{roleId} AND sys_rights.role_id = #{roleId}
+        JOIN sys_role ON (sys_rights.role_id = sys_role.id AND sys_role.destroyed = FALSE)
+        JOIN sys_org ON (sys_rights.org_id = sys_org.id AND sys_org.destroyed = FALSE)
+        WHERE sys_rights.user_id = #{userId}
+        <if test="roleId!=null">AND sys_rights.role_id = #{roleId}</if>
     </select>
-
-    <select id="getRightsNavigators" resultType="com.ackerframework.admin.center.rights.entity.MenuTree">
-        SELECT sys_navigator.id,sys_navigator.pid,sys_navigator.nav_name,sys_navigator.nav_url,
-                sys_navigator.icon_cls,sys_navigator.attributes,sys_navigator.nav_type
-          FROM  sys_permissions
-          JOIN  sys_navigator ON (sys_permissions.nav_id = sys_navigator.id AND sys_navigator.delete_mark = FALSE)
-        WHERE  sys_permissions.user_id = #{userId}
-                AND sys_permissions.role_id=#{roleId}
-                AND sys_navigator.pid = #{pid}
-                AND (sys_navigator.nav_type = 'D' OR sys_navigator.nav_type = 'L')
-    </select>
-
 </mapper>

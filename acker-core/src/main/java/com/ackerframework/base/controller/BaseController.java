@@ -2,6 +2,7 @@ package com.ackerframework.base.controller;
 
 import com.ackerframework.utils.Constant;
 import com.ackerframework.utils.DateUtils;
+import com.ackerframework.utils.GlobalUtils;
 import com.ackerframework.utils.StringUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.Logger;
@@ -73,5 +74,6 @@ public abstract class BaseController {
             model.addAttribute(Constant.UPDATE, Constant.UPDATE.equals(viewState) ? true : false);
             model.addAttribute(Constant.VIEWSTATE, viewState);
         }
+        model.addAttribute("loginUser", GlobalUtils.getLoginUser());
     }
 }

@@ -14,29 +14,27 @@ import javax.servlet.http.HttpServletRequest;
 public class LoginController extends BaseController {
 
     @RequestMapping(value = {"/", "/login"}, method = RequestMethod.GET)
-    public ModelAndView login(HttpServletRequest request) {
+    public ModelAndView login(ModelAndView MV) {
         LoginUser loginUser = GlobalUtils.getLoginUser();
         // 如果已经登录，则跳转到管理首页
         if (loginUser != null) {
-            ModelAndView MV = new ModelAndView(GlobalUtils.getConfig("frameTemplet"));
-            MV.addObject("loginUser", loginUser);
+            MV.setViewName("redirect:" + GlobalUtils.getConfig("frameTemplet"));
             return MV;
         }
         return new ModelAndView(GlobalUtils.getConfig("loginTemplet"));
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView loginFail(HttpServletRequest request) {
+    public ModelAndView loginFail(HttpServletRequest request, ModelAndView MV) {
 
         LoginUser loginUser = GlobalUtils.getLoginUser();
 
         // 如果已经登录，则跳转到管理首页
         if (loginUser != null) {
-            ModelAndView MV = new ModelAndView(GlobalUtils.getConfig("frameTemplet"));
-            MV.addObject("loginUser", loginUser);
+            MV.setViewName("redirect:" + GlobalUtils.getConfig("frameTemplet"));
             return MV;
         } else {
-            ModelAndView MV = new ModelAndView(GlobalUtils.getConfig("loginTemplet"));
+            MV.setViewName(GlobalUtils.getConfig("loginTemplet"));
             String message = (String) request.getAttribute("message");
             MV.addObject("userName", request.getParameter("username"));
             MV.addObject("errorMessage", message);

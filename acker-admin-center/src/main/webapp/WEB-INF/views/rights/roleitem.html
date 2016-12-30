@@ -18,15 +18,15 @@
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="角色名称" name="roleName" form-group="detail"
-               value="${detail.roleName}" required="true" data-options="validType:'length[1,30]'"
+        <input class="easyui-textbox" label="角色名称" name="text" form-group="detail"
+               value="${detail.text}" required="true" data-options="validType:'length[1,30]'"
             <#if look> disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="角色代码" name="roleCode" form-group="detail"
-               value="${detail.roleCode}" <#if look> disabled="disabled"</#if>>
+        <input class="easyui-textbox" label="角色代码" name="coded" form-group="detail"
+               value="${detail.coded}" <#if look> disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
@@ -36,13 +36,26 @@
                <#if look>disabled="disabled"</#if>>
     </div>
 </div>
-
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" label="角色状态" name="roleState" form-group="detail"
-               value="${detail.roleState}" valueField="valueField" textField="textField" editable="false"
-               data-options="data:[{valueField:1,textField:'启用'},{valueField:0,textField:'停用'}]"
-               <#if look>disabled="disabled"</#if>>
+        <select class="easyui-combobox" label="是否系统参数" name="canUse" form-group="detail"
+                value="${detail.sysMark?string("true","false")}" editable="false"
+                <#if look>disabled="disabled"</#if>>
+            <#list comboYesNo as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combobox" label="角色状态" name="canUse" form-group="detail"
+                value="${detail.canUse?string("true","false")}" editable="false"
+                <#if look>disabled="disabled"</#if>>
+            <#list comboCanUse as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
     </div>
 </div>
 <div class="krow-1-4">

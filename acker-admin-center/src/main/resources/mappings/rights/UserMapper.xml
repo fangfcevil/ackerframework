@@ -3,7 +3,7 @@
 <mapper namespace="com.ackerframework.admin.center.rights.dao.UserDao">
 
     <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.UserGrid">
-        SELECT id,user_name,pass_word,nick_name,email,mobile,create_name,create_time,modify_name,modify_time
+        SELECT id,account,password,nickname,email,mobile,can_use,create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
     </select>
     <select id="listCount" resultType="java.lang.Integer">
@@ -11,36 +11,30 @@
         <include refid="grid_list_where"></include>
     </select>
     <sql id="grid_list_where">
-        FROM sys_user WHERE 1=1 AND delete_mark = FALSE LIMIT #{startIndex},#{pageSize}
+        FROM sys_user WHERE 1=1 AND destroyed = FALSE LIMIT #{startIndex},#{pageSize}
     </sql>
 
-    <select id="getByName" resultType="com.ackerframework.admin.center.rights.entity.User">
-        SELECT id,user_name,pass_word,nick_name,email,mobile,use_mark,create_name,create_time,modify_name,modify_time
-        FROM sys_user WHERE 1=1 AND user_name = #{userName} AND delete_mark = FALSE
-    </select>
-
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.User">
-        SELECT id,user_name,pass_word,nick_name,email,mobile,use_mark,create_name,create_time,modify_name,modify_time
-        FROM sys_user WHERE 1=1 AND id = #{id} AND delete_mark = FALSE
+        SELECT id,account,password,nickname,email,mobile,can_use,create_name,create_time,modify_name,modify_time
+        FROM sys_user WHERE 1=1 AND id = #{id} AND destroyed = FALSE
     </select>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO sys_user (user_name,pass_word,nick_name,email,mobile,create_name,create_time,delete_mark)
-        VALUES(#{userName},#{passWord},#{nickName},#{email},#{mobile},#{createName},#{createTime},#{delete_mark})
+        INSERT INTO sys_user (account,password,nickname,email,mobile,can_use,create_name,create_time,destroyed)
+        VALUES(#{account},#{password},#{nickname},#{email},#{mobile},#{canUse},#{createName},#{createTime},FALSE)
     </insert>
 
     <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.User">
-        UPDATE sys_user
-        <trim prefix="set" suffixOverrides=",">
-            <if test="nickName!=null">nick_name=#{nickName},</if>
-            <if test="passWord!=null">pass_word=#{passWord},</if>
-            <if test="email!=null">email=#{email},</if>
-            <if test="mobile!=null">mobile=#{mobile},</if>
-            <if test="modifyName!=null">modify_name=#{modifyName},</if>
-            <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
-        </trim>
+        UPDATE sys_user SET
+        <if test="password!=null">password=#{password},</if>
+        nickname=#{nickname},email=#{email},mobile=#{mobile},can_use=#{canUse},
+        modify_name=#{modifyName},modify_time=#{modifyTime}
         WHERE id = #{id}
     </update>
 
+    <select id="getByAccount" resultType="com.ackerframework.admin.center.rights.entity.User">
+        SELECT id,account,password,nickname,email,mobile,can_use,create_name,create_time,modify_name,modify_time
+        FROM sys_user WHERE 1=1 AND account = #{account} AND destroyed = FALSE
+    </select>
 
 </mapper>

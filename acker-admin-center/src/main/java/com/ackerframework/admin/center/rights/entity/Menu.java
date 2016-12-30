@@ -1,18 +1,16 @@
 package com.ackerframework.admin.center.rights.entity;
 
-import com.ackerframework.base.entity.BaseEntity;
+import com.ackerframework.base.entity.BaseTreeEntity;
 
-public class Menu extends BaseEntity {
+public class Menu extends BaseTreeEntity<Menu> {
 
     private Integer pid;
     private Integer sno;
-    private String text;
     private String coded;
     private String url;
-    private String type;
+    private String types;
     private String permission;
     private String iconCls;
-    private String attributes;
     private Boolean canUse;
 
     public Integer getPid() {
@@ -31,14 +29,6 @@ public class Menu extends BaseEntity {
         this.sno = sno;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public String getCoded() {
         return coded;
     }
@@ -55,12 +45,12 @@ public class Menu extends BaseEntity {
         this.url = url;
     }
 
-    public String getType() {
-        return type;
+    public String getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(String types) {
+        this.types = types;
     }
 
     public String getPermission() {
@@ -77,14 +67,6 @@ public class Menu extends BaseEntity {
 
     public void setIconCls(String iconCls) {
         this.iconCls = iconCls;
-    }
-
-    public String getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(String attributes) {
-        this.attributes = attributes;
     }
 
     public Boolean getCanUse() {

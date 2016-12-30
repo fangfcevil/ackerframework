@@ -8,8 +8,8 @@
         SELECT sys_basedata.value_field,sys_basedata.text_field
           FROM sys_basedata
           JOIN sys_basedata_class ON sys_basedata.class_id = sys_basedata_class.id
-         WHERE sys_basedata_class.class_code = #{classCode}
-                AND sys_basedata.use_mark = TRUE AND sys_basedata.delete_mark=FALSE
-               AND sys_basedata_class.use_mark = TRUE AND sys_basedata_class.delete_mark = FALSE
+         WHERE sys_basedata_class.coded = #{coded}
+                AND sys_basedata.can_use = TRUE AND sys_basedata.destroyed=FALSE
+                AND sys_basedata_class.can_use = TRUE AND sys_basedata_class.destroyed = FALSE
     </select>
 </mapper>

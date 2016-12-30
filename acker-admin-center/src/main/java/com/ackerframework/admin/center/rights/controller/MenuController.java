@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/admin/center/rights/navigator")
+@RequestMapping(value = "/admin/center/rights/menu")
 public class MenuController extends ViewBaseController {
 
     @Autowired
@@ -42,11 +42,12 @@ public class MenuController extends ViewBaseController {
                 break;
             case Constant.INSERT:
                 menu = new Menu();
+                menu.setCanUse(true);
                 break;
         }
-        MV.addObject("comboYesNo", initCombo("yes_no"));
+        MV.addObject("comboCanUse", initCombo("yes_no"));
         MV.addObject("comboNavType", initCombo("nav_type"));
-        MV.addObject("detail", menu);
+        MV.addObject(Constant.DETAIL, menu);
         return MV;
     }
 
@@ -101,10 +102,11 @@ public class MenuController extends ViewBaseController {
         easyPage.setRows(menuService.authingButton(pid, roleId));
         return new Result(easyPage);
     }
+
     @ResponseBody
-    @RequestMapping(value = "/navtree", method = RequestMethod.GET)
-    public Result initComboTree(@RequestParam(value = "id") Integer id) {
-        return new Result(menuService.initComboTree(id));
+    @RequestMapping(value = "/initparent", method = RequestMethod.GET)
+    public Result initComboParentTree(@RequestParam(value = "id") Integer id) {
+        return new Result(menuService.initComboParentTree(id));
     }
 
 }

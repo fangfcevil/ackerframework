@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Service基类
- */
 @Transactional(readOnly = true)
 public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
 
@@ -46,7 +43,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
     public Result insert(T entity) {
         Result result = preInsert(entity);
         if (result.getStatus()) {
-            entity.setCreateName(GlobalUtils.getLoginUser().getUserName());
+            entity.setCreateName(GlobalUtils.getLoginUser().getAccount());
             entity.setCreateTime(new Date());
             dao.insert(entity);
             result.setData(entity.getId());
@@ -63,7 +60,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
     public Result update(T entity) {
         Result result = preUpdate(entity);
         if (result.getStatus()) {
-            entity.setModifyName(GlobalUtils.getLoginUser().getUserName());
+            entity.setModifyName(GlobalUtils.getLoginUser().getAccount());
             entity.setModifyTime(new Date());
             dao.update(entity);
             result.setData(entity.getId());
@@ -75,4 +72,5 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
     public Result delete(Integer id) {
         return new Result(dao.delete(id));
     }
+
 }

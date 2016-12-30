@@ -12,6 +12,7 @@ public class Constant {
     public static final String INSERT = "insert";
     public static final String UPDATE = "update";
     public static final String DELETE = "delete";
+    public static final String DETAIL = "detail";
     public static final String PWD_SALT = "acker.password.salt";
     public static final String ICON_UPATE = "<i class='fa fa-pencil-square-o fa-fw fa-lg color-blue'></i>";
     public static final String ICON_DELETE = "<i class='fa fa-trash-o fa-fw fa-lg color-red'></i>";

@@ -24,16 +24,12 @@ public class ChosenController extends BaseController {
     public ModelAndView init(ModelAndView MV) {
         MV.setViewName("chosen");
         LoginUser loginUser = GlobalUtils.getLoginUser();
-        if (loginUser == null) {
-            MV.setViewName(GlobalUtils.getConfig("loginTemplet"));
-            return MV;
-        }
         //初始化组织选择
         //根据登录用户查询当 所属组织
         List<UserRights> userRightses = sysService.getUserRightses(loginUser.getId());
         //未分配 权限
         if (userRightses.size() == 0) {
-            MV.setViewName("redirect:/unuserrights");
+            MV.setViewName("redirect:/frame");
         }
         //如果只有一个，直接进入
         if (userRightses.size() == 1) {
@@ -56,21 +52,17 @@ public class ChosenController extends BaseController {
                                       @RequestParam(value = "roleId") Integer roleId,
                                       @RequestParam(value = "orgId") Integer orgId) {
         LoginUser loginUser = GlobalUtils.getLoginUser();
-        if (loginUser == null) {
-            MV.setViewName(GlobalUtils.getConfig("loginTemplet"));
-            return MV;
-        }
         //..清空当前登录人的权限缓存
 
         //..赋值当前权限组织的信息
-        UserRights userRights = sysService.getUserRights(loginUser.getId(), roleId, orgId);
-        if (userRights != null) {
-            loginUser.setRoleId(userRights.getRoleId());
-            loginUser.setRoleCode(userRights.getRoleCode());
-            loginUser.setRoleName(userRights.getRoleName());
-            loginUser.setOrgId(userRights.getOrgId());
-            loginUser.setOrgCode(userRights.getOrgCode());
-            loginUser.setOrgName(userRights.getOrgName());
+        List<UserRights> userRights = sysService.getUserRights(loginUser.getId(), roleId, orgId);
+        if (userRights.size() == 1) {
+            loginUser.setRoleId(userRights.get(0).getRoleId());
+            loginUser.setRoleCode(userRights.get(0).getRoleCode());
+            loginUser.setRoleName(userRights.get(0).getRoleName());
+            loginUser.setOrgId(userRights.get(0).getOrgId());
+            loginUser.setOrgCode(userRights.get(0).getOrgCode());
+            loginUser.setOrgName(userRights.get(0).getOrgName());
             MV.setViewName("redirect:/frame");
             return MV;
         }

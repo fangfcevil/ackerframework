@@ -11,13 +11,7 @@ import java.util.List;
 public interface SysDao {
 
     //..获取当前登录用户的所有 组织权限
-    List<UserRights> getUserRightses(Integer userId);
-
-    //..获取当前登录用户的一个 组织权限
-
-    UserRights getUserRights(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
-                             @Param("orgId") Integer orgId);
-
-    List<MenuTree> getRightsNavigators(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
-                                       @Param("pid") Integer pid);
+    List<UserRights> getUserRightses(@Param("userId") Integer userId,
+                                     @Param("roleId") Integer roleId,
+                                     @Param("orgId") Integer orgId);
 }

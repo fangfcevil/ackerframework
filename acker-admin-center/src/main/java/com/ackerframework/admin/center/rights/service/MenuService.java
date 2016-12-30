@@ -5,6 +5,7 @@ import com.ackerframework.admin.center.rights.entity.MenuTree;
 import com.ackerframework.admin.center.rights.entity.Menu;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseService;
+import com.ackerframework.base.service.BaseTreeService;
 import com.ackerframework.utils.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -13,12 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class MenuService extends BaseService<MenuDao, Menu> {
+public class MenuService extends BaseTreeService<MenuDao, Menu> {
     @Autowired
     protected MenuDao menuDao;
 
@@ -33,10 +35,10 @@ public class MenuService extends BaseService<MenuDao, Menu> {
     }
 
     private Result validateUser(Menu menu) {
-        if (StringUtils.isBlank(menu.getNavName())) {
+        if (StringUtils.isBlank(menu.getText())) {
             return new Result(false, "导航名称不能为空!");
         }
-        if (StringUtils.isBlank(menu.getNavType())) {
+        if (StringUtils.isBlank(menu.getTypes())) {
             return new Result(false, "导航类型不能为空!");
         }
         return new Result();
@@ -55,44 +57,27 @@ public class MenuService extends BaseService<MenuDao, Menu> {
     }
 
     //当前节点的子节点不显示
-    public ArrayNode initComboTree(Integer id) {
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayNode arrayNodeRoot = mapper.createArrayNode();
-        ObjectNode rootNode = arrayNodeRoot.addObject();
-        rootNode.put("id", 0);
-        rootNode.put("text", "无");
-        ArrayNode childrenNode = rootNode.putArray("children");
-        childrenNode.addAll(this.getTreeNode(0, id));
-//        ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();
-//        try {
-//            String json = objectWriter.writeValueAsString(arrayNodeRoot);
-//            System.out.print(json);
-//        } catch (JsonProcessingException e) {
-//
-//        }
-        return arrayNodeRoot;
+    public List<Menu> initComboParentTree(Integer id) {
+        List<Menu> menus = new ArrayList<Menu>();
+        Menu menu = new Menu();
+        menu.setId(0);
+        menu.setText("无");
+        menu.setChildren(this.getTreeNode(0, id));
+        menus.add(menu);
+        return menus;
     }
 
-    private ArrayNode getTreeNode(Integer pid, Integer id) {
-        ObjectMapper mapper = new ObjectMapper();
-        ArrayNode arrayNode = mapper.createArrayNode();
-
+    private List<Menu> getTreeNode(Integer pid, Integer id) {
         List<Menu> menus = menuDao.getNodesByPid(pid);
+        List<Menu> resultMenus = new ArrayList<Menu>();
         Iterator<Menu> item = menus.iterator();
         while (item.hasNext()) {
             Menu menu = item.next();
             if (menu.getId() != id) {
-                ObjectNode node = arrayNode.addObject();
-                node.put("id", menu.getId());
-                node.put("pid", menu.getPid());
-                node.put("text", menu.getNavName());
-                node.put("navCode", menu.getNavCode());
-                node.put("permission", menu.getPermission());
-                node.put("attributes", menu.getAttributes());
-                node.set("children", getTreeNode(menu.getId(), id));
+                resultMenus.add(menu);
+                menu.setChildren(getTreeNode(menu.getId(), id));
             }
-
         }
-        return arrayNode;
+        return resultMenus;
     }
 }

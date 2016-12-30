@@ -35,14 +35,12 @@
                 plain:true,height:37"><i class="fa fa-user" aria-hidden="true" style="padding-right: 5px">
                 </i>切换语言</a>
                 <a href="#" class="easyui-menubutton top-menu-r" data-options="menu:'#user_menu_item',plain:true,height:37">
-                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>${loginUser.nickName} </a>
+                    <i class="fa fa-user" aria-hidden="true" style="padding-right: 5px"></i>${loginUser.nickname} </a>
             </div>
             <div id="user_menu_item" data-options="itemHeight:30">
-                <div data-options="">${loginUser.roleName} - ${loginUser.orgName}</div>
+                <div data-options="">${loginUser.roleName!"未分配角色"} - ${loginUser.orgName!"未分配组织"}</div>
                 <div class="menu-sep"></div>
                 <div data-options="">用户详情</div>
-                <div data-options="">我的任务</div>
-
             </div>
             <div id="language_menu_item" data-options="itemHeight:30">
                 <div data-options="" onclick="changeLanguage('zh_CN')">中文</div>

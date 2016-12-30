@@ -14,15 +14,16 @@
     </div>
 </div>
 
-<table class="easyui-treegrid" data-options="treeField:'navName',toolbar:'#tb_listgrid',
+<table class="easyui-treegrid" data-options="treeField:'text',toolbar:'#tb_listgrid',
      onBeforeLoad:onBeforeLoad,animate:false">
     <thead>
     <tr>
         <th data-options="field:'gridOptions'"><@spring.message "sys.options"/></th>
-        <th data-options="field:'navName'">名 称</th>
-        <th data-options="field:'navCode'">代 码</th>
+        <th data-options="field:'sno',align:'right',editor:'numberbox'">序号</th>
+        <th data-options="field:'text'">名 称</th>
+        <th data-options="field:'coded'">代 码</th>
         <th data-options="field:'permission'">权限标识</th>
-        <th data-options="field:'navUrl'">url/事件</th>
+        <th data-options="field:'url'">url/事件</th>
         <th data-options="field:'attributes'">参数</th>
         <th data-options="field:'createName'">创建人</th>
         <th data-options="field:'createTime'">创建时间</th>

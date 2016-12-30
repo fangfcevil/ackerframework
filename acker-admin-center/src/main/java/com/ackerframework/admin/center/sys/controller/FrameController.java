@@ -5,6 +5,8 @@ import com.ackerframework.admin.center.sys.service.SysService;
 import com.ackerframework.base.controller.BaseController;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.utils.GlobalUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,15 +25,13 @@ public class FrameController extends BaseController {
             MV.setViewName(GlobalUtils.getConfig("loginTemplet"));
             return MV;
         }
-        MV.addObject("loginUser", loginUser);
         return MV;
     }
 
     @ResponseBody
     @RequestMapping(value = "/frame/navs", method = RequestMethod.GET)
     public Result getRightsNavigators(@RequestParam(value = "id", defaultValue = "0") Integer pid) {
-        LoginUser loginUser = GlobalUtils.getLoginUser();
-        return sysService.getRightsNavigators(loginUser.getId(), loginUser.getRoleId(), pid);
+        return sysService.getRightsNavigators(pid);
     }
 
 }

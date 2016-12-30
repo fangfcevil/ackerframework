@@ -6,7 +6,7 @@ public class Org extends BaseEntity {
     private Integer pid;
     private String text;
     private String coded;
-    private String type;
+    private String types;
     private Boolean canUse;
 
     public Integer getPid() {
@@ -33,12 +33,12 @@ public class Org extends BaseEntity {
         this.coded = coded;
     }
 
-    public String getType() {
-        return type;
+    public String getTypes() {
+        return types;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTypes(String types) {
+        this.types = types;
     }
 
     public Boolean getCanUse() {

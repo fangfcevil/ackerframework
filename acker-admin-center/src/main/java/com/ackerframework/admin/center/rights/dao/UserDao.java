@@ -7,5 +7,7 @@ import com.ackerframework.core.annotation.MyBatisDao;
 
 @MyBatisDao
 public interface UserDao extends BaseDao<User> {
-    User getByName(UserParam userParam);
+
+    User getByAccount(String account);
+
 }

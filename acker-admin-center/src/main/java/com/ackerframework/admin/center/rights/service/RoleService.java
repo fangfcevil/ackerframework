@@ -34,10 +34,10 @@ public class RoleService extends BaseService<RoleDao, Role> {
     }
 
     private Result validateUser(Role role) {
-        if (StringUtils.isBlank(role.getRoleName())) {
+        if (StringUtils.isBlank(role.getText())) {
             return new Result(false, "角色名称不能为空!");
         }
-        if (StringUtils.isBlank(role.getRoleCode())) {
+        if (StringUtils.isBlank(role.getCoded())) {
             return new Result(false, "角色代码不能为空!");
         }
         return new Result();

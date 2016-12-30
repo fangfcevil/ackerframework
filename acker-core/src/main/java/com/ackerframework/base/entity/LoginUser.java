@@ -6,8 +6,8 @@ public class LoginUser implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id; // 当前登录用户id
-    private String userName; // 登录账号
-    private String nickName; // 用户昵称
+    private String account; // 登录账号
+    private String nickname; // 用户昵称
     private Integer roleId;//当前用户角色id
     private String roleCode;//当前用户角色代码
     private String roleName;//当前用户角色名称
@@ -25,20 +25,20 @@ public class LoginUser implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public Integer getRoleId() {

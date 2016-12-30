@@ -3,36 +3,30 @@
 <mapper namespace="com.ackerframework.admin.center.rights.dao.RoleDao">
 
     <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.RoleGrid">
-        SELECT id,role_name,role_code,org_id,role_state,remark,create_name,create_time,modify_name,modify_time
+        SELECT id,text,coded,org_id,can_use,sys_mark,remark,create_name,create_time,modify_name,modify_time
         <include refid="grid_list_where"></include>
     </select>
     <select id="listCount" resultType="java.lang.Integer">
         SELECT COUNT(1) FROM sys_role WHERE 1=1
     </select>
     <sql id="grid_list_where">
-        FROM sys_role WHERE 1=1 AND delete_mark = FALSE LIMIT #{startIndex},#{pageSize}
+        FROM sys_role WHERE 1=1 AND destroyed = FALSE LIMIT #{startIndex},#{pageSize}
     </sql>
 
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Role">
-        SELECT id,role_name,role_code,org_id,role_state,remark,create_name,create_time,modify_name,modify_time
-        FROM sys_role WHERE 1=1 AND id = #{id} AND delete_mark = FALSE
+        SELECT id,text,coded,org_id,can_use,sys_mark,remark,create_name,create_time,modify_name,modify_time
+        FROM sys_role WHERE 1=1 AND id = #{id} AND destroyed = FALSE
     </select>
 
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO sys_role (role_name,role_code,org_id,role_state,remark,create_name,create_time,delete_mark)
-        VALUES(#{roleName},#{roleCode},#{orgId},#{roleState},#{remark},#{createName},#{createTime},#{delete_mark})
+        INSERT INTO sys_role (text,coded,org_id,can_use,sys_mark,remark,create_name,create_time,destroyed)
+        VALUES(#{text},#{coded},#{orgId},#{can_use},#{sysMark},#{remark},#{createName},#{createTime},FALSE)
     </insert>
 
     <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Role">
         UPDATE sys_role
-        <trim prefix="set" suffixOverrides=",">
-            <if test="roleName!=null">role_name=#{roleName},</if>
-            <if test="roleCode!=null">role_code=#{roleCode},</if>
-            <if test="orgId!=null">org_id=#{orgId},</if>
-            <if test="roleState!=null">role_state=#{roleState},</if>
-            <if test="modifyName!=null">modify_name=#{modifyName},</if>
-            <if test="modifyTime!=null">modify_time=#{modifyTime},</if>
-        </trim>
+           SET text=#{text},coded=#{coded},org_id=#{orgId},can_use=#{canUse},sys_mark=#{sysMark},
+                modify_name=#{modifyName},modify_time=#{modifyTime}
         WHERE id = #{id}
     </update>
 

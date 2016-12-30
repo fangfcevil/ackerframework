@@ -18,31 +18,31 @@
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="用户账号" name="userName" form-group="detail"
-               value="${detail.userName}" required="true" data-options="validType:{length:[0,30]}"
+        <input class="easyui-textbox" label="用户账号" name="account" form-group="detail"
+               value="${detail.account}" required="true" data-options="validType:{length:[0,30]}"
                <#if look>disabled="disabled"</#if>>
     </div>
 </div>
     <#if !look>
     <div class="krow-1-4">
         <div class="kcol-3">
-            <input id="pwd" class="easyui-passwordbox" label="密 码" name="passWord" form-group="detail"
+            <input id="pwd" class="easyui-passwordbox" label="密 码" name="password" form-group="detail"
                    <#if look>disabled="disabled"</#if>>
         </div>
         <div class="kcol-3" style="text-align: left;"><span>*未填，默认 123456</span></div>
     </div>
     <div class="krow-1-4">
         <div class="kcol-3">
-        <input class="easyui-passwordbox" label="确认密码" data-options="validType:{samepw:['#pwd']}"
-               <#if look>disabled="disabled"</#if>>
+            <input class="easyui-passwordbox" label="确认密码" data-options="validType:{samepw:['#pwd']}"
+                   <#if look>disabled="disabled"</#if>>
         </div>
     </div>
     </#if>
 
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-textbox" label="用户昵称" name="nickName" form-group="detail"
-               value="${detail.nickName}" data-options="validType:{length:[0,30]}"
+        <input class="easyui-textbox" label="用户昵称" name="nickname" form-group="detail"
+               value="${detail.nickname}" data-options="validType:{length:[0,30]}" required="true"
                <#if look>disabled="disabled"</#if>>
     </div>
 </div>
@@ -58,6 +58,17 @@
         <input class="easyui-numberbox" label="手机号" name="mobile" form-group="detail"
                value="${detail.mobile}" data-options="validType:'mobile'"
                <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combobox" label="用户状态" name="canUse" form-group="detail"
+                data-options="value:'${detail.canUse?string("true","false")}'" editable="false"
+                <#if look>disabled="disabled"</#if>>
+            <#list comboCanUse as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
     </div>
 </div>
 <script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/user.js"></script>
