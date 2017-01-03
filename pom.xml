@@ -8,6 +8,8 @@
     <artifactId>acker-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
+    <url>https://github.com/fangfcevil/ackerframework</url>
+
     <modules>
         <module>acker-core</module>
         <module>acker-admin-center</module>
@@ -32,6 +34,10 @@
         <guava.version>17.0</guava.version>
         <dozer.version>5.5.1</dozer.version>
         <freemarker.version>2.3.22</freemarker.version>
+        <!-- environment setting -->
+        <jdk.version>1.8</jdk.version>
+        <tomcat.version>2.2</tomcat.version>
+        <webserver.port>8181</webserver.port>
     </properties>
     <dependencies>
         <dependency>
@@ -304,24 +310,66 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.5.1</version>
+                <version>3.5.1</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                     <showWarnings>true</showWarnings>
                 </configuration>
             </plugin>
+            <!-- tomcat7插件 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat.version}</version>
+                <configuration>
+                    <port>${webserver.port}</port>
+                    <path>/${project.artifactId}</path>
+                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
+                </configuration>
+            </plugin>
+            <!-- resource插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+            </plugin>
+            <!-- install插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.5.2</version>
+            </plugin>
+            <!-- clean插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.6.1</version>
+            </plugin>
+            <!-- dependency插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
         </plugins>
     </build>
-    <!--设定仓库-->
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>alimaven</id>-->
-            <!--<name>aliyun maven</name>-->
-            <!--<url>http://maven.aliyun.com/nexus/content/groups/public/</url>-->
-        <!--</repository>-->
-    <!--</repositories>-->
-
+    <!--设定主仓库-->
+    <repositories>
+        <repository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
+    <!-- 设定插件仓库 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>alimaven</id>
+            <name>aliyun maven</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </pluginRepository>
+    </pluginRepositories>
     <!-- 开发者信息 -->
     <developers>
         <developer>

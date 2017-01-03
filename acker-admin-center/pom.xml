@@ -9,7 +9,6 @@
     <artifactId>acker-admin-center</artifactId>
     <packaging>war</packaging>
     <name>acker-admin-center Maven Webapp</name>
-    <url>http://maven.apache.org</url>
     <dependencies>
         <dependency>
             <groupId>com.ackerframework</groupId>
