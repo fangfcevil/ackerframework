@@ -10,9 +10,6 @@ import java.util.List;
  */
 public interface BaseTreeDao<T extends BaseTreeEntity> extends BaseDao<T> {
 
-    //获取当前登录用户的 导航 菜单
-    List<T> getRightsTreeNode(@Param("userId") Integer userId,
-                              @Param("roleId") Integer roleId,
-                              @Param("pid") Integer pid);
+    List<T> getNodesByPid(Integer pid);
 
 }

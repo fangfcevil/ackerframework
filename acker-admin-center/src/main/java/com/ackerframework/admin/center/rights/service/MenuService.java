@@ -3,9 +3,11 @@ package com.ackerframework.admin.center.rights.service;
 import com.ackerframework.admin.center.rights.dao.MenuDao;
 import com.ackerframework.admin.center.rights.entity.MenuTree;
 import com.ackerframework.admin.center.rights.entity.Menu;
+import com.ackerframework.base.entity.LoginUser;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseService;
 import com.ackerframework.base.service.BaseTreeService;
+import com.ackerframework.utils.GlobalUtils;
 import com.ackerframework.utils.StringUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -52,32 +54,26 @@ public class MenuService extends BaseTreeService<MenuDao, Menu> {
         return menuDao.authingNav(pid, roleId);
     }
 
-    public List<Menu> getNodesByPid(Integer pid) {
-        return menuDao.getNodesByPid(pid);
+    //获取  导航权限菜单
+    public List<Menu> generateTree(Integer pid) {
+        LoginUser loginUser = GlobalUtils.getLoginUser();
+        List<Menu> treeNodes = super.dao.getRightsTreeNode(loginUser.getId(), loginUser.getRoleId(), pid);
+        Iterator<Menu> item = treeNodes.iterator();
+        while (item.hasNext()) {
+            Menu node = item.next();
+            node.setChildren(this.generateTree(node.getId()));
+        }
+        return treeNodes;
     }
 
-    //当前节点的子节点不显示
+    //初始化父节点下拉框
     public List<Menu> initComboParentTree(Integer id) {
-        List<Menu> menus = new ArrayList<Menu>();
+        List<Menu> menus = new ArrayList<>();
         Menu menu = new Menu();
         menu.setId(0);
         menu.setText("无");
-        menu.setChildren(this.getTreeNode(0, id));
+        menu.setChildren(this.initComboParentTree(0, id));
         menus.add(menu);
         return menus;
-    }
-
-    private List<Menu> getTreeNode(Integer pid, Integer id) {
-        List<Menu> menus = menuDao.getNodesByPid(pid);
-        List<Menu> resultMenus = new ArrayList<Menu>();
-        Iterator<Menu> item = menus.iterator();
-        while (item.hasNext()) {
-            Menu menu = item.next();
-            if (menu.getId() != id) {
-                resultMenus.add(menu);
-                menu.setChildren(getTreeNode(menu.getId(), id));
-            }
-        }
-        return resultMenus;
     }
 }

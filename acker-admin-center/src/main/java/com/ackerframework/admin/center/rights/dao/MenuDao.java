@@ -12,9 +12,11 @@ import java.util.List;
 @MyBatisDao
 public interface MenuDao extends BaseTreeDao<Menu> {
 
-    List<MenuTree> authingNav(@Param("pid") Integer pid, @Param("roleId") Integer roleId);
+    //获取当前登录用户的 导航 菜单
+    List<Menu> getRightsTreeNode(@Param("userId") Integer userId, @Param("roleId") Integer roleId,
+                              @Param("pid") Integer pid);
 
-    List<MenuTree> initComboTree(@Param("nodeId") Integer nodeId);
+    List<MenuTree> authingNav(@Param("pid") Integer pid, @Param("roleId") Integer roleId);
 
     List<Menu> getNodesByPid(Integer pid);
 }

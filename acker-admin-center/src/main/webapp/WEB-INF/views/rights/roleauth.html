@@ -1,7 +1,7 @@
 <@override name="center">
 <div class="easyui-layout" data-options="fit:true">
     <div data-options="region:'north',split:false" style="height:25px;padding: 3px">
-        正在为 ${role.roleName}(${role.roleCode}) 授权:
+        正在为 ${role.text}(${role.coded}) 授权:
     </div>
     <div data-options="region:'west',split:false" style="width:250px;padding: 6px">
         <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,
@@ -15,7 +15,7 @@
                onBeforeLoad:onBeforeLoad_Button">
             <thead>
             <tr>
-                <th data-options="field:'navName',width:200">按钮名称</th>
+                <th data-options="field:'text',width:200">按钮名称</th>
             </tr>
             </thead>
         </table>
