@@ -47,12 +47,25 @@ public class MenuService extends BaseTreeService<MenuDao, Menu> {
     }
 
     public Result authingNav(Integer pid, Integer roleId) {
-        return new Result(menuDao.authingNav(pid, roleId));
+        return new Result(getAuthingNavTree(pid, roleId, 1));
     }
 
-    public List<MenuTree> authingButton(Integer pid, Integer roleId) {
-        return menuDao.authingNav(pid, roleId);
+    //获取授权按钮
+    public List<Menu> authingButton(Integer pid, Integer roleId) {
+        return getAuthingNavTree(pid, roleId, 2);
     }
+
+    //获取授权树
+    private List<Menu> getAuthingNavTree(Integer pid, Integer roleId, Integer types) {
+        List<Menu> treeNodes = menuDao.authingNav(pid, roleId,types);
+        Iterator<Menu> item = treeNodes.iterator();
+        while (item.hasNext()) {
+            Menu node = item.next();
+            node.setChildren(this.getAuthingNavTree(node.getId(), roleId, types));
+        }
+        return treeNodes;
+    }
+
 
     //获取  导航权限菜单
     public List<Menu> generateTree(Integer pid) {

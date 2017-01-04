@@ -7,6 +7,7 @@ public abstract class BaseTreeEntity<T> extends BaseEntity {
     private String state;
     private Boolean checked;
     private String attributes;
+    private String iconCls;
     public List<T> children;
 
     public String getText() {
@@ -39,6 +40,14 @@ public abstract class BaseTreeEntity<T> extends BaseEntity {
 
     public void setAttributes(String attributes) {
         this.attributes = attributes;
+    }
+
+    public String getIconCls() {
+        return iconCls;
+    }
+
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 
     public List<T> getChildren() {

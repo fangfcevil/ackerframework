@@ -10,7 +10,7 @@ public class Menu extends BaseTreeEntity<Menu> {
     private String url;
     private String types;
     private String permission;
-    private String iconCls;
+
     private Boolean canUse;
 
     public Integer getPid() {
@@ -59,14 +59,6 @@ public class Menu extends BaseTreeEntity<Menu> {
 
     public void setPermission(String permission) {
         this.permission = permission;
-    }
-
-    public String getIconCls() {
-        return iconCls;
-    }
-
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
     }
 
     public Boolean getCanUse() {

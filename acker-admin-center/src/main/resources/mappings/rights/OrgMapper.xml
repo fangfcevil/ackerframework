@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ackerframework.admin.center.rights.dao.OrgDao">
+
+    <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.OrgTreeGrid">
+        SELECT id,pid,text,coded,types,can_use,create_name,create_time,modify_name,modify_time
+        <include refid="grid_list_where"></include>
+    </select>
+    <select id="listCount" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        <include refid="grid_list_where"></include>
+    </select>
+    <sql id="grid_list_where">
+        FROM sys_org
+       WHERE 1=1 AND destroyed = FALSE
+    </sql>
+
+    <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Org">
+        SELECT id,pid,text,coded,types,can_use,create_name,create_time,modify_name,modify_time
+          FROM sys_org
+         WHERE 1=1 AND id = #{id} AND destroyed = FALSE
+    </select>
+
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO sys_org
+                     (pid,text,coded,types,can_use,create_name,create_time,destroyed)
+              VALUES(#{pid},#{text},#{coded},#{types},#{canUse},#{createName},#{createTime},FALSE )
+    </insert>
+
+    <update id="update" parameterType="com.ackerframework.admin.center.rights.entity.Org">
+        UPDATE sys_org SET
+        pid=#{pid},text=#{text},coded=#{coded},types=#{types},can_use=#{canUse},modify_name=#{modifyName},modify_time=#{modifyTime}
+        WHERE id = #{id}
+    </update>
+
+
+    <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Org">
+        SELECT id,pid,text,coded,types,can_use,create_name,create_time,modify_name,modify_time
+          FROM sys_org
+         WHERE 1=1 AND pid = #{pid} AND destroyed = FALSE
+    </select>
+</mapper>

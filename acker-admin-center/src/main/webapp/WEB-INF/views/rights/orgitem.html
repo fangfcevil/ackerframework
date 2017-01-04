@@ -1,0 +1,62 @@
+<@override name="center">
+<div class="topmenu-toolbar">
+    <a href="#" class="easyui-linkbutton" data-options="plain:true"
+       onclick="backList();return false;"><i class='fa fa-reply fa-fw'></i>返回列表</a>
+    <#if look>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="insertItem();return false;"><i class="fa fa-plus fa-fw size14"></i>新增</a>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="updateItem();return false;"><i class="fa fa-pencil-square-o fa-fw size14"></i>修改</a>
+    </#if>
+    <#if insert|| update>
+        <a href="#" class="easyui-linkbutton" data-options="plain:true"
+           onclick="saveItem();return false;"><i class='fa fa-floppy-o fa-fw'></i>保存</a>
+    </#if>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combobox" label="组织类型" name="types" form-group="detail"
+                data-options="value:'${detail.types}'" editable="false" <#if look>disabled="disabled"</#if>>
+            <#list comboOrgType as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combotree" label="父节点" name="pid" form-group="detail"
+                editable="true" url="${request.contextPath}/admin/center/rights/org/initparent?id=${detail.id}"
+                data-options="value:'${detail.pid}'" <#if look>disabled="disabled"</#if>>
+        </select>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="组织名称" name="text" form-group="detail"
+               value="${detail.text}" required="true" data-options="validType:{length:[0,30]}"
+               <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <input class="easyui-textbox" label="组织代码" name="coded" form-group="detail"
+               value="${detail.coded}" <#if look>disabled="disabled"</#if>>
+    </div>
+</div>
+
+<div class="krow-1-4">
+    <div class="kcol-3">
+        <select class="easyui-combobox" label="是否启用" name="canUse" form-group="detail"
+                data-options="value:'${detail.canUse?string("true","false")}'" editable="false"
+                <#if look>disabled="disabled"</#if>>
+            <#list comboCanUse as item>
+                <option value="${item.valueField}">${item.textField}</option>
+            </#list>
+        </select>
+    </div>
+</div>
+
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/org.js"></script>
+</@override>
+<@extends name="common/baseitem.html"/>

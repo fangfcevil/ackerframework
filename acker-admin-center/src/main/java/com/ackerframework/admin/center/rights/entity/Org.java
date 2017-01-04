@@ -1,10 +1,9 @@
 package com.ackerframework.admin.center.rights.entity;
 
-import com.ackerframework.base.entity.BaseEntity;
+import com.ackerframework.base.entity.BaseTreeEntity;
 
-public class Org extends BaseEntity {
+public class Org extends BaseTreeEntity {
     private Integer pid;
-    private String text;
     private String coded;
     private String types;
     private Boolean canUse;
@@ -15,14 +14,6 @@ public class Org extends BaseEntity {
 
     public void setPid(Integer pid) {
         this.pid = pid;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 
     public String getCoded() {

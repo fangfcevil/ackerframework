@@ -3,16 +3,15 @@
     <div data-options="region:'north',split:false" style="height:25px;padding: 3px">
         正在为 ${role.text}(${role.coded}) 授权:
     </div>
-    <div data-options="region:'west',split:false" style="width:250px;padding: 6px">
+    <div data-options="region:'west',split:false,title:'界面授权',collapsible:false" style="width:250px;padding: 6px">
         <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,
           url:'${request.contextPath}/admin/center/rights/menu/authingnav?roleId=#{role.id}',
           onClick:onClickTree">
         </ul>
     </div>
-    <div data-options="region:'center'," style="padding:5px;">
-        <table class="easyui-treegrid" data-options="idField:'id',treeField:'navName',checkbox:true,
-               url:'${request.contextPath}/admin/center/rights/menu/authingbutton?roleId=#{role.id}',
-               onBeforeLoad:onBeforeLoad_Button">
+    <div data-options="region:'center',title:'按钮授权'" style="padding:5px;">
+        <table class="easyui-treegrid" data-options="checkbox:true,
+               url:'${request.contextPath}/admin/center/rights/menu/authingbutton?roleId=#{role.id}'">
             <thead>
             <tr>
                 <th data-options="field:'text',width:200">按钮名称</th>
