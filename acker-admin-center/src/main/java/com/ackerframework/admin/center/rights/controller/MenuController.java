@@ -103,6 +103,14 @@ public class MenuController extends ViewBaseController {
         return new Result(easyPage);
     }
 
+    //分配角色权限
+    @ResponseBody
+    @RequestMapping(value = "/assignrights", method = RequestMethod.GET)
+    public Result assignPrivileges(@RequestParam(value = "id") Integer id, @RequestParam(value = "roleId") Integer roleId,
+                                   @RequestParam(value = "checked") Boolean checked) {
+        return new Result(menuService.assignPrivileges(id, roleId, checked));
+    }
+
     @ResponseBody
     @RequestMapping(value = "/initparent", method = RequestMethod.GET)
     public Result initComboParentTree(@RequestParam(value = "id") Integer id) {

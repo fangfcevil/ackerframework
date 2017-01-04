@@ -48,6 +48,14 @@
         WHERE sys_menu.pid = #{pid} AND sys_menu.destroyed = FALSE AND sys_menu.types = #{types}
     </select>
 
+    <insert id="addPermissions">
+        INSERT IGNORE INTO sys_permissions (role_id,menu_id) VALUES (#{roleId},#{menuId});
+    </insert>
+
+    <delete id="deletePermissions">
+        DELETE FROM sys_permissions WHERE role_id=#{roleId} AND menu_id=#{menuId}
+    </delete>
+
     <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Menu">
          SELECT id,pid,sno,text,coded,permission,types,attributes,url,icon_cls,can_use,
                 create_name,create_time,modify_name,modify_time
@@ -60,7 +68,6 @@
                  sys_menu.attributes,sys_menu.types,sys_menu.state
           FROM  sys_permissions
                 JOIN  sys_menu ON (sys_permissions.menu_id = sys_menu.id AND sys_menu.destroyed = FALSE)
-         WHERE sys_permissions.user_id = #{userId}
-                AND sys_permissions.role_id=#{roleId} AND sys_menu.pid = #{pid} AND sys_menu.types = 1
+         WHERE sys_permissions.role_id=#{roleId} AND sys_menu.pid = #{pid} AND sys_menu.types = 1
     </select>
 </mapper>

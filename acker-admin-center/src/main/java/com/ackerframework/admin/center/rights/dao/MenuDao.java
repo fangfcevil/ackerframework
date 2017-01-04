@@ -11,9 +11,13 @@ import java.util.List;
 public interface MenuDao extends BaseTreeDao<Menu> {
 
     //获取当前登录用户的 导航 菜单
-    List<Menu> getRightsTreeNode(@Param("userId") Integer userId, @Param("roleId") Integer roleId, @Param("pid") Integer pid);
+    List<Menu> getRightsTreeNode(@Param("roleId") Integer roleId, @Param("pid") Integer pid);
 
     List<Menu> authingNav(@Param("pid") Integer pid, @Param("roleId") Integer roleId, @Param("types") Integer types);
 
     List<Menu> getNodesByPid(Integer pid);
+
+    Integer addPermissions(@Param("menuId") Integer menuId, @Param("roleId") Integer roleId);
+
+    Integer deletePermissions(@Param("menuId") Integer menuId, @Param("roleId") Integer roleId);
 }

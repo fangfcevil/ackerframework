@@ -57,7 +57,7 @@ public class MenuService extends BaseTreeService<MenuDao, Menu> {
 
     //获取授权树
     private List<Menu> getAuthingNavTree(Integer pid, Integer roleId, Integer types) {
-        List<Menu> treeNodes = menuDao.authingNav(pid, roleId,types);
+        List<Menu> treeNodes = menuDao.authingNav(pid, roleId, types);
         Iterator<Menu> item = treeNodes.iterator();
         while (item.hasNext()) {
             Menu node = item.next();
@@ -66,11 +66,20 @@ public class MenuService extends BaseTreeService<MenuDao, Menu> {
         return treeNodes;
     }
 
+    //分配权限
+    @Transactional(readOnly = false)
+    public Integer assignPrivileges(Integer menuId, Integer roleId, Boolean checked) {
+        if (checked) {
+            return menuDao.addPermissions(menuId, roleId);
+        } else {
+            return menuDao.deletePermissions(menuId, roleId);
+        }
+    }
 
     //获取  导航权限菜单
     public List<Menu> generateTree(Integer pid) {
         LoginUser loginUser = GlobalUtils.getLoginUser();
-        List<Menu> treeNodes = super.dao.getRightsTreeNode(loginUser.getId(), loginUser.getRoleId(), pid);
+        List<Menu> treeNodes = super.dao.getRightsTreeNode(loginUser.getRoleId(), pid);
         Iterator<Menu> item = treeNodes.iterator();
         while (item.hasNext()) {
             Menu node = item.next();
