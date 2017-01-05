@@ -13,6 +13,7 @@
     <modules>
         <module>acker-core</module>
         <module>acker-admin-center</module>
+        <module>acker-admin-filem</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
