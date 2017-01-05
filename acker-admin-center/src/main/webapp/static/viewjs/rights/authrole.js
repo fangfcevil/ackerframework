@@ -1,6 +1,11 @@
 $.fView.url = {
-    assignrights: $.fView.contextPath + "/admin/center/rights/menu/assignrights",
+    formlist: $.fView.contextPath + "/admin/center/rights/role/formlist",
+    assignrights: $.fView.contextPath + "/admin/center/rights/menu/assignrights"
 };
+
+function backList() {
+    $.fForm.redirect($.fView.url.formlist);
+}
 
 function onClickTree(node) {
     $('.easyui-treegrid').treegrid({

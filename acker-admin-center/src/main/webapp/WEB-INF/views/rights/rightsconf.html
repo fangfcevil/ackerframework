@@ -1,0 +1,55 @@
+<@override name="body">
+<body class="easyui-layout">
+<div data-options="region:'west',split:false,width:'40%'" style="background:#eee;padding: 5px">
+    <table class="easyui-treegrid" data-options="treeField:'text',animate:false,onClickRow:onClickOrgRow">
+        <thead>
+        <tr>
+            <th data-options="field:'text'">组织名称</th>
+            <th data-options="field:'coded'">组织代码</th>
+            <th data-options="field:'types'">组织类型</th>
+            <th data-options="field:'canUse'">状 态</th>
+            <th data-options="field:'gridOptions'"><@spring.message "sys.options"/></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div data-options="region:'center',border:false" style="background:#eee;padding: 5px">
+    <table class="easyui-datagrid" data-options="">
+        <thead>
+        <tr>
+            <th field="account">用户账号</th>
+            <th field="nickname">用户昵称</th>
+            <th field="roleCode">角色代码</th>
+            <th field="roleName" data-options="formatter:roleFormatter">角色名称</th>
+            <th data-options="field:'gridOptions'"><@spring.message "sys.options"/></th>
+        </tr>
+        </thead>
+    </table>
+</div>
+<div class="easyui-window" title="添加用户" style="width:400px;height:160px" data-options="">
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="region:'center'">
+            <div class="krow-1-4">
+                <div class="kcol-12">
+                    <select class="easyui-combobox" label="用 户：" name="userId" form-group="detail"
+                            data-options="url:'${request.contextPath}/admin/center/rights/user/combo'" editable="true">
+                    </select>
+                </div>
+            </div>
+            <div class="krow-1-4">
+                <div class="kcol-12">
+                    <select class="easyui-combobox" label="角 色：" name="roleIds" form-group="detail"
+                            data-options="" editable="true">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div data-options="region:'south',split:false" style="height:40px;text-align: center">
+            <a style="margin-top: 7px" class="easyui-linkbutton" data-options="iconCls:'icon-save'">保存</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="${request.contextPath}/static/viewjs/rights/rightsconf.js"></script>
+</body>
+</@override>
+<@extends name="common/base.html"/>

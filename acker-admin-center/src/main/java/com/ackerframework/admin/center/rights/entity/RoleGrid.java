@@ -28,7 +28,7 @@ public class RoleGrid extends Role {
         Button authButton = new Button();
         authButton.setFnParam(this.getId().toString());
         authButton.setOnClick("authRole");
-        authButton.setIcon(Constant.ICON_UPATE);
+        authButton.setIcon("<i class='fa fa-key fa-fw fa-lg'></i>");
         buttons.add(authButton);
         //..删除
         Button deleteButton = new Button();

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ackerframework.admin.center.rights.dao.RightsDao">
+
+    <select id="getGridList" resultType="com.ackerframework.admin.center.rights.entity.RightsGrid">
+      SELECT sys_rights.user_id,sys_rights.org_id, sys_user.account,sys_user.nickname,
+              group_concat(CAST(sys_rights.role_id AS CHAR)) as role_ids,
+              group_concat(sys_role.coded) AS role_code,
+              group_concat(sys_role.text) AS role_name
+        FROM sys_rights
+        JOIN sys_user ON (sys_rights.user_id = sys_user.id AND sys_user.destroyed = FALSE)
+        JOIN sys_role ON sys_rights.role_id = sys_role.id
+        JOIN sys_org ON sys_rights.org_id = sys_org.id
+        WHERE sys_rights.org_id=#{orgId}
+        GROUP BY sys_rights.user_id,sys_rights.org_id
+    </select>
+    <delete id="deleteRights">
+        DELETE FROM sys_rights WHERE user_id=#{userId} AND org_id=#{orgId}
+        <if test="roleId!=null">
+            AND role_id=#{roleId}
+        </if>
+
+    </delete>
+
+</mapper>

@@ -31,14 +31,14 @@
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <input class="easyui-combobox" label="所属组织" name="orgId" form-group="detail"
+        <input class="easyui-combotree" label="所属组织" name="orgId" nameText="orgName" form-group="detail"
                value="${detail.orgId}" valueField="orgId" textField="orgName"
                <#if look>disabled="disabled"</#if>>
     </div>
 </div>
 <div class="krow-1-4">
     <div class="kcol-3">
-        <select class="easyui-combobox" label="是否系统参数" name="canUse" form-group="detail"
+        <select class="easyui-combobox" label="是否系统参数" name="sysMark" form-group="detail"
                 value="${detail.sysMark?string("true","false")}" editable="false"
                 <#if look>disabled="disabled"</#if>>
             <#list comboYesNo as item>

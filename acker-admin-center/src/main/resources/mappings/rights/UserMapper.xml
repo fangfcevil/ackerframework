@@ -37,4 +37,15 @@
         FROM sys_user WHERE 1=1 AND account = #{account} AND destroyed = FALSE
     </select>
 
+    <select id="initUserCombo" resultType="com.ackerframework.admin.center.rights.entity.UserCombo">
+        SELECT id,account,nickname,email,mobile FROM sys_user WHERE 1=1 AND destroyed = FALSE AND can_use = TRUE
+        <if test="account!=null">
+            AND account = #{account}
+        </if>
+        <if test="nickname!=null">
+            AND nickname = #{nickname}
+        </if>
+        LIMIT #{startIndex},#{pageSize}
+    </select>
+
 </mapper>

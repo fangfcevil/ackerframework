@@ -15,6 +15,10 @@
        WHERE 1=1 AND destroyed = FALSE
     </sql>
 
+    <select id="getConfRightsGridList" resultType="com.ackerframework.admin.center.rights.entity.OrgConfRightsGrid">
+        SELECT id,pid,text,coded,types,can_use FROM sys_org WHERE 1=1 AND destroyed = FALSE
+    </select>
+
     <select id="get" resultType="com.ackerframework.admin.center.rights.entity.Org">
         SELECT id,pid,text,coded,types,can_use,create_name,create_time,modify_name,modify_time
           FROM sys_org
@@ -32,7 +36,6 @@
         pid=#{pid},text=#{text},coded=#{coded},types=#{types},can_use=#{canUse},modify_name=#{modifyName},modify_time=#{modifyTime}
         WHERE id = #{id}
     </update>
-
 
     <select id="getNodesByPid" resultType="com.ackerframework.admin.center.rights.entity.Org">
         SELECT id,pid,text,coded,types,can_use,create_name,create_time,modify_name,modify_time

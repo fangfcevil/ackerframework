@@ -71,7 +71,6 @@ public class UserController extends ViewBaseController {
 
     @ResponseBody
     @RequestMapping(value = Constant.INSERT, method = RequestMethod.POST)
-
     public Result insert(@RequestBody User user) {
         if (StringUtils.isBlank(user.getPassword())) {
             String enPassWord = new Md5Hash(GlobalUtils.getConfig("user.default.pwd"), Constant.PWD_SALT).toString();
@@ -95,5 +94,12 @@ public class UserController extends ViewBaseController {
     @RequestMapping(value = Constant.DELETE, method = RequestMethod.GET)
     public Result delete(@RequestParam(value = Constant.ID) Integer id) {
         return userService.delete(id);
+    }
+
+    //用户选择下拉框
+    @ResponseBody
+    @RequestMapping(value = "combo", method = RequestMethod.GET)
+    public Result initUserCombo(HttpServletRequest request) {
+        return new Result(userService.initUserCombo(new UserParam(request)));
     }
 }

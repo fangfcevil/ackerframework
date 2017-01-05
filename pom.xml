@@ -37,7 +37,7 @@
         <!-- environment setting -->
         <jdk.version>1.8</jdk.version>
         <tomcat.version>2.2</tomcat.version>
-        <webserver.port>8181</webserver.port>
+        <webserver.port>8080</webserver.port>
     </properties>
     <dependencies>
         <dependency>

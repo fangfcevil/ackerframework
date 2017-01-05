@@ -5,6 +5,7 @@ import com.ackerframework.admin.center.rights.entity.Org;
 import com.ackerframework.base.entity.Result;
 import com.ackerframework.base.service.BaseTreeService;
 import com.ackerframework.utils.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,9 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class OrgService extends BaseTreeService<OrgDao, Org> {
+
+    @Autowired
+    private OrgDao orgDao;
 
     @Override
     public Result preInsert(Org org) {
@@ -44,5 +48,10 @@ public class OrgService extends BaseTreeService<OrgDao, Org> {
         org.setChildren(this.initComboParentTree(0, id));
         orgs.add(org);
         return orgs;
+    }
+
+
+    public List getConfRightsGridList() {
+        return orgDao.getConfRightsGridList();
     }
 }

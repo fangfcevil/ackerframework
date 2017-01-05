@@ -1,8 +1,13 @@
 <@override name="center">
 <div class="easyui-layout" data-options="fit:true">
-    <div data-options="region:'north',split:false" style="height:25px;padding: 3px">
+    <div data-options="region:'north',split:false" style="height:60px;padding: 3px">
         <input type="hidden" id="roleid" value="${role.id}">
-        正在为 ${role.text}(${role.coded}) 授权:
+        <div class="topmenu-toolbar">
+            <a href="#" class="easyui-linkbutton" data-options="plain:true"
+               onclick="backList();return false;"><i class='fa fa-reply fa-fw'></i>返回列表</a>
+            <span>正在为 ${role.text}(${role.coded}) 授权:</span>
+        </div>
+
     </div>
     <div data-options="region:'west',split:false,title:'界面授权',collapsible:false" style="width:250px;padding: 6px">
         <ul class="easyui-tree" data-options="checkbox:true,lines:true,cascadeCheck:false,

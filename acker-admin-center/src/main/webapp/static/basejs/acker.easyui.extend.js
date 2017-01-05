@@ -74,7 +74,7 @@ $.extend($.fn.combotree.defaults, {
     method: 'get',
     panelHeight: 'auto',
     height: 25,
-    loader:function (param,success,error) {
+    loader: function (param, success, error) {
         // 这边的loader 是tree的
         var opts = $(this).tree("options");
         if (!opts.url) {
@@ -234,6 +234,8 @@ $.extend($.fn.treegrid.defaults, {
     rownumbers: true,//默认显示行号
     striped: true,//隔行换色
     loadMsg: null,
+    width: '100%',
+    height: '100%',
     loader: function (param, success, error) {
         var opts = $(this).treegrid("options");
         if (!opts.url) {
@@ -281,3 +283,16 @@ $.extend($.fn.validatebox.defaults.rules, {
 });
 //endregion
 
+//region 弹出窗 window
+$.extend($.fn.window.defaults, {
+    collapsible: false,
+    minimizable: false,
+    maximizable: false,
+    closed: true,
+    modal: true
+});
+//endregion
+
+//region 布局 layout
+$.extend($.fn.layout.defaults, {});
+//endregion

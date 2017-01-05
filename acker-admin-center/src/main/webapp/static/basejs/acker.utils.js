@@ -127,6 +127,9 @@
                             result[$(element).attr("textboxname")] = value;
                         } else {
                             result[$(element).attr("textboxname")] = eval(" $(element)." + widgetName + "('getValue')");
+                            if (widgetName == "combobox") {
+                                console.log($(element).combobox("getValue"));
+                            }
                         }
                         if ($(element).attr("nameText")) {
                             result[$(element).attr("nameText")] = eval(" $(element)." + widgetName + "('getText')");
