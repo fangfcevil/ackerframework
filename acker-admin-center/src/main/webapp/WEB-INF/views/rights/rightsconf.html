@@ -31,8 +31,17 @@
         <div data-options="region:'center'">
             <div class="krow-1-4">
                 <div class="kcol-12">
-                    <select class="easyui-combobox" label="用 户：" name="userId" form-group="detail"
-                            data-options="url:'${request.contextPath}/admin/center/rights/user/combo'" editable="true">
+                    <select class="easyui-combogrid" label="用 户：" name="id" form-group="detail"
+                            data-options=" idField:'id',textField:'nickname',
+                            url:'${request.contextPath}/admin/center/rights/user/combo',
+                            panelWidth:450,
+                             columns:[[
+                                {field:'account',title:'账 号',width:80},
+                                {field:'nickname',title:'昵 称',width:100},
+                                {field:'email',title:'邮 箱',width:120},
+                                {field:'mobile',title:'电 话',width:100}
+                               ]]
+                      " editable="true">
                     </select>
                 </div>
             </div>

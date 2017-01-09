@@ -63,7 +63,25 @@ $.extend($.fn.combogrid.defaults, {
     width: '100%',
     method: 'get',
     panelHeight: 'auto',
-    height: 25
+    pagination: true,//默认显示分页
+    rownumbers: true,//默认显示行号
+    singleSelect: true,//单选
+    mode: 'remote',
+    height: 25,
+    loader: function (param, success, error) {
+        // 这边的loader 是datagrid的
+        var opts = $(this).datagrid("options");
+        if (!opts.url) {
+            return false;
+        }
+        $.fForm.get(opts.url, param, {type: opts.method}).success(function (result) {
+            if (result.status == 0) {
+                success({rows: []});
+            } else {
+                success(result.data);
+            }
+        });
+    }
 });
 //endregion
 

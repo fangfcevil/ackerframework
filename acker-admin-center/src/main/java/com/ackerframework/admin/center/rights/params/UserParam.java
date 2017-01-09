@@ -2,6 +2,7 @@ package com.ackerframework.admin.center.rights.params;
 
 
 import com.ackerframework.base.entity.PageParam;
+import com.ackerframework.utils.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,20 +10,40 @@ public class UserParam extends PageParam {
 
     public UserParam(HttpServletRequest request) {
         super(request);
-        this.userName = request.getParameter("userName");
+        this.account = request.getParameter("account");
+        this.nickname = request.getParameter("nickname");
+        this.q = request.getParameter("q");
     }
 
-    public UserParam(String userName) {
-        this.userName = userName;
+    public UserParam(String account) {
+        this.account = account;
     }
 
-    private String userName;
+    private String account;
+    private String nickname;
+    private String q;
 
-    public String getUserName() {
-        return userName;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getQ() {
+        return q;
+    }
+
+    public void setQ(String q) {
+        this.q = q;
     }
 }
