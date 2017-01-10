@@ -8,7 +8,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>acker-admin-center</artifactId>
     <packaging>war</packaging>
-    <name>acker-admin-center Maven Webapp</name>
+    <name>acker-admin-center Webapp</name>
     <dependencies>
         <dependency>
             <groupId>com.ackerframework</groupId>

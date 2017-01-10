@@ -94,7 +94,7 @@
         <property name="usernameParam" value="account"></property>
         <property name="passwordParam" value="password"></property>
     </bean>
-    <bean id="sysAuthorizingRealm" class="com.ackerframework.admin.center.sys.realm.SysAuthorizingRealm">
+    <bean id="sysAuthorizingRealm" class="com.ackerframework.admin.filem.sys.realm.SysAuthorizingRealm">
         <property name="cachingEnabled" value="false"></property>
         <!--身份验证缓存-->
         <property name="authenticationCachingEnabled" value="false"></property>

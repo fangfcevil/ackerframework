@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ackerframework.admin.filem.base.dao.DirectorDao">
+    <select id="get" resultType="com.ackerframework.admin.filem.base.entity.Director">
+        SELECT * FROM f_director WHERE id=#{id};
+    </select>
+</mapper>
