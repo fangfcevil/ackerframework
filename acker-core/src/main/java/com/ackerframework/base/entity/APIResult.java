@@ -16,6 +16,11 @@ public class APIResult implements Serializable {
         this.errMsg = errMsg;
     }
 
+    public APIResult(Integer errCode, Object errMsg) {
+        this.errCode = errCode;
+        this.errMsg = errMsg;
+    }
+
     public Integer getErrCode() {
         return errCode;
     }

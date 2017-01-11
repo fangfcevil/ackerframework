@@ -1,10 +1,12 @@
 package com.ackerframework.admin.filem.sys.realm;
 
+import com.ackerframework.base.entity.LoginUser;
 import com.ackerframework.core.security.PassWordCredentialsMatcher;
 import com.ackerframework.core.security.UsernamePasswordToken;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
@@ -48,25 +50,19 @@ public class SysAuthorizingRealm extends AuthorizingRealm {
     //本例中该方法的调用时机为LoginController.login()方法中执行Subject.login()时
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
-        //获取基于用户名和密码的令牌 实际上这个authcToken是从LoginController里面currentUser.login(token)传过来的
+        //获取基于用户名和密码的令牌 实际上这个authcToken是从LoginController里面subject.login(token);传过来的
         UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
 //        User user = userService.getByAccount(token.getUsername());
 //
-//        if (user != null) {
-//            if (!user.getCanUse()) {
-//                throw new AuthenticationException("msg:该帐号已禁止登录.");
-//            }
-//            if (sysService.getUserRightses(user.getId()).size() == 0) {
-//                throw new AuthenticationException("msg:该帐号尚未分配组织权限，请联系管理员！.");
-//            }
-//            LoginUser loginUser = new LoginUser();
-//            loginUser.setId(user.getId());
-//            loginUser.setAccount(user.getAccount());
+        if (token != null) {
+            LoginUser loginUser = new LoginUser();
+            loginUser.setId(1);
+            loginUser.setAccount(token.getUsername());
 //            loginUser.setNickname(user.getNickname());
 //            loginUser.setEmail(user.getEmail());
 //            loginUser.setMobile(user.getMobile());
-//            return new SimpleAuthenticationInfo(loginUser, user.getPassword(), getName());
-//        }
+            return new SimpleAuthenticationInfo(loginUser, "19d558366de21debb575f40aa5847290", getName());
+        }
 //        //没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
 //        System.out.println("用户：" + token.getUsername() + "登录，异常");
         return null;

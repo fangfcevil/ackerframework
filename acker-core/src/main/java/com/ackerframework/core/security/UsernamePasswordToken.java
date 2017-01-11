@@ -14,7 +14,13 @@ public class UsernamePasswordToken extends org.apache.shiro.authc.UsernamePasswo
         super();
     }
 
+    public UsernamePasswordToken(String username, String password, boolean rememberMe) {
+        super(username, password, rememberMe);
+    }
+
     public UsernamePasswordToken(String username, String password, boolean rememberMe, String host) {
         super(username, password, rememberMe, host);
     }
+
+
 }

@@ -11,7 +11,7 @@ public class DirectorControllerTest extends BaseControllerTest{
 
     @Test
     public void get() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/admin/filem/base/director/get?id=1"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/admin/base/director/get?id=1"))
                 .andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 }

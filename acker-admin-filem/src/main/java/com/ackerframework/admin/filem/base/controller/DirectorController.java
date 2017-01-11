@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/admin/filem/base/director")
+@RequestMapping(value = "/admin/base/director")
 public class DirectorController extends BaseController {
     @Autowired
     private DirectorService directorService;
@@ -19,5 +19,4 @@ public class DirectorController extends BaseController {
     public APIResult get(@RequestParam(value = Constant.ID) Integer id) {
         return new APIResult(directorService.get(id));
     }
-
 }
