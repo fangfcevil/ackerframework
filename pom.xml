@@ -37,8 +37,6 @@
         <freemarker.version>2.3.22</freemarker.version>
         <!-- environment setting -->
         <jdk.version>1.8</jdk.version>
-        <tomcat.version>2.2</tomcat.version>
-        <webserver.port>8080</webserver.port>
     </properties>
     <dependencies>
         <dependency>
@@ -323,17 +321,6 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                     <showWarnings>true</showWarnings>
-                </configuration>
-            </plugin>
-            <!-- tomcat7插件 -->
-            <plugin>
-                <groupId>org.apache.tomcat.maven</groupId>
-                <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>${tomcat.version}</version>
-                <configuration>
-                    <port>${webserver.port}</port>
-                    <path>/${project.artifactId}</path>
-                    <uriEncoding>${project.build.sourceEncoding}</uriEncoding>
                 </configuration>
             </plugin>
             <!-- resource插件 -->
