@@ -5,4 +5,12 @@
     <select id="get" resultType="com.ackerframework.admin.filem.base.entity.Director">
         SELECT * FROM f_director WHERE id=#{id};
     </select>
+    <select id="getFilemDirectors" resultType="net.sf.json.JSONObject">
+          SELECT f_director.*
+            FROM f_director
+            JOIN f_relation_pd ON f_director.id = f_relation_pd.director_id
+           WHERE f_relation_pd.principal_id = #{filemId}
+    </select>
+
+
 </mapper>

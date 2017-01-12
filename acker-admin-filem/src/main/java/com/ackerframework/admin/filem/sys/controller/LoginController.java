@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class LoginController extends BaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public APIResult login(@RequestParam String username, @RequestParam String password,
+    public APIResult login(HttpServletRequest request, HttpServletResponse response,@RequestParam String username, @RequestParam String password,
                            @RequestParam(required = false, defaultValue = "false") boolean rememberMe) {
 
         Subject subject = SecurityUtils.getSubject();
@@ -31,7 +32,6 @@ public class LoginController extends BaseController {
             UsernamePasswordToken token = new UsernamePasswordToken(username, password, rememberMe);
             try {
                 subject.login(token);
-
                 return new APIResult(subject.getSession().getId());
             } catch (UnknownAccountException ex) {
                 return new APIResult(1000, "账号错误");

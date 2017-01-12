@@ -21,6 +21,8 @@ public interface BaseDao<T extends BaseEntity> {
 
     List getGridList(BaseParam param);
 
+    List getList(BaseParam param);
+
     Integer listCount(BaseParam param);
 
     /**

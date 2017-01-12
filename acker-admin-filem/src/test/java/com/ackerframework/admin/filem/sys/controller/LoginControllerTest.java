@@ -23,5 +23,4 @@ public class LoginControllerTest extends BaseControllerTest {
                 .cookie(new Cookie("storm.session.id", "0240ef34-80ae-429f-a98e-c00de54f1776"))
         ).andExpect(status().isOk()).andDo(print());
     }
-
 }

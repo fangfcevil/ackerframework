@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ackerframework.admin.filem.base.dao.PrincipalDao">
+    <select id="getMainFilemList" resultType="net.sf.json.JSONObject">
+            SELECT
+                f_principal.id,
+                f_principal.title,
+                f_principal.original_title,
+                f_principal.subtype,
+                f_principal.`year`,
+                f_principal.alt,
+                f_principal.image_large,
+                f_principal.image_medium,
+                f_principal.image_small,
+                f_rating.min,
+                f_rating.max,
+                f_rating.average,
+                f_rating.stars
+            FROM
+                f_principal
+            LEFT JOIN f_rating ON f_principal.id = f_rating.principal_id
+    </select>
+</mapper>

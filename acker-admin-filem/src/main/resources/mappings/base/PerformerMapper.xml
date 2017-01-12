@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ackerframework.admin.filem.base.dao.PerformerDao">
+
+    <select id="getFilemPerformers" resultType="net.sf.json.JSONObject">
+       SELECT f_performer.*
+        FROM f_performer
+        JOIN f_relation_pp ON f_performer.id = f_relation_pp.performer_id
+        WHERE f_relation_pp.principal_id = #{filemId}
+    </select>
+
+</mapper>

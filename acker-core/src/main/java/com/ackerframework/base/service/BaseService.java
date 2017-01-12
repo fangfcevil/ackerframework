@@ -31,6 +31,10 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
         return dao.getGridList(baseParam);
     }
 
+    public List getList(BaseParam baseParam) {
+        return dao.getList(baseParam);
+    }
+
     public Integer listCount(BaseParam entity) {
         return dao.listCount(entity);
     }
