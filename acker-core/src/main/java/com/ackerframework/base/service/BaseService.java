@@ -47,10 +47,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
     public Result insert(T entity) {
         Result result = preInsert(entity);
         if (result.getStatus()) {
-            entity.setCreateName(GlobalUtils.getLoginUser().getAccount());
-            entity.setCreateTime(new Date());
             dao.insert(entity);
-            result.setData(entity.getId());
             return result;
         }
         return result;
@@ -64,10 +61,7 @@ public abstract class BaseService<D extends BaseDao<T>, T extends BaseEntity> {
     public Result update(T entity) {
         Result result = preUpdate(entity);
         if (result.getStatus()) {
-            entity.setModifyName(GlobalUtils.getLoginUser().getAccount());
-            entity.setModifyTime(new Date());
             dao.update(entity);
-            result.setData(entity.getId());
         }
         return result;
     }

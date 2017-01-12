@@ -14,6 +14,7 @@
         <module>acker-core</module>
         <module>acker-admin-center</module>
         <module>acker-admin-filem</module>
+        <module>acker-server-nestfilm</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -222,10 +223,10 @@
         </dependency>
         <!--servlet-->
         <!--<dependency>-->
-            <!--<groupId>javax.servlet</groupId>-->
-            <!--<artifactId>servlet-api</artifactId>-->
-            <!--<version>3.0-alpha-1</version>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>javax.servlet</groupId>-->
+        <!--<artifactId>servlet-api</artifactId>-->
+        <!--<version>3.0-alpha-1</version>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
         <!--Spring4单元测试出现错误:Java.lang.NoClassDefFoundError: javax/servlet/SessionCookieConfig-->
         <dependency>

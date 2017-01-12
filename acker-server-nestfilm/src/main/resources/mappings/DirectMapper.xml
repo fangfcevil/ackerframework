@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ackerframework.server.nestfilm.dao.DirectorDao">
+    <select id="get" resultType="com.ackerframework.server.nestfilm.entity.Director">
+        SELECT * FROM f_director WHERE id=#{id};
+    </select>
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        INSERT INTO f_director (
+        name,
+        original_name,
+        alt,
+        avatar_small,
+        avatar_large,
+        avatar_medium
+        )VALUES (
+        #{name},
+        #{originalName},
+        #{alt},
+        #{avatarSmall},
+        #{avatarLarge},
+        #{avatarMedium}
+        )
+    </insert>
+</mapper>

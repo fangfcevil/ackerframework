@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <description>Spring MVC 配置</description>
+
+    <!-- 加载配置属性文件 -->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:acker.properties"/>
+
+    <!-- 使用Annotation自动注册Bean,只扫描@Controller -->
+    <context:component-scan base-package="com.ackerframework.server" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--默认的注解映射的支持-->
+    <mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
+        <mvc:message-converters register-defaults="true">
+            <!-- 将StringHttpMessageConverter的默认编码设为UTF-8 -->
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+                <constructor-arg value="UTF-8"/>
+            </bean>
+            <!-- 将Jackson2HttpMessageConverter的默认格式化输出为false -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=UTF-8</value>
+                    </list>
+                </property>
+                <property name="prettyPrint" value="false"/>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <!-- 对静态资源文件的访问交给default servlet handler处理 -->
+    <mvc:default-servlet-handler/>
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <!--强制使用 CGLIB 技术来实现AOP-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--跨域配置-->
+    <mvc:cors>
+        <mvc:mapping path="/**" allowed-origins="*" allowed-methods="GET,POST,OPTIONS"/>
+    </mvc:cors>
+    <!--<aop:config proxy-target-class="true"/>-->
+    <bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="mediaTypes">
+            <map>
+                <entry key="xml" value="application/xml"/>
+                <entry key="json" value="application/json"/>
+            </map>
+        </property>
+        <property name="ignoreAcceptHeader" value="true"/>
+        <property name="favorPathExtension" value="true"/>
+    </bean>
+
+    <!--国际化，基于Cookie-->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- i18n资源文件路径 -->
+        <property name="basenames">
+            <list>
+                <value>classpath:/messages/messages</value>
+                <value>classpath:/messages/common</value>
+            </list>
+        </property>
+        <property name="cacheSeconds" value="0"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="useCodeAsDefaultMessage" value="true"></property>
+    </bean>
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+        <property name="defaultLocale" value="zh_CN"></property>
+        <!-- 设置cookieName名称-->
+        <property name="cookieName" value="Language"></property>
+        <!-- 设置最大有效时间，如果是-1，则不存储-->
+        <property name="cookieMaxAge" value="604800"></property>
+        <!-- 设置cookie可见的地址，默认是“/”即对网站所有地址都是可见的-->
+        <property name="cookiePath" value="/"></property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <!--权限认证-->
+                <prop key="org.apache.shiro.authz.UnauthorizedException">/unauthorized</prop>
+                <!--身份认证-->
+                <prop key="org.apache.shiro.authz.UnauthenticatedException">/unauthenticated</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

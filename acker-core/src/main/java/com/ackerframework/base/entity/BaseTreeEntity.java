@@ -2,7 +2,7 @@ package com.ackerframework.base.entity;
 
 import java.util.List;
 
-public abstract class BaseTreeEntity<T> extends BaseEntity {
+public abstract class BaseTreeEntity<T> extends KeyEntity {
     private String text;
     private String state;
     private Boolean checked;
