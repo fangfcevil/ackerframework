@@ -6,20 +6,7 @@
         SELECT * FROM f_director WHERE id=#{id};
     </select>
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        INSERT INTO f_director (
-        name,
-        original_name,
-        alt,
-        avatar_small,
-        avatar_large,
-        avatar_medium
-        )VALUES (
-        #{name},
-        #{originalName},
-        #{alt},
-        #{avatarSmall},
-        #{avatarLarge},
-        #{avatarMedium}
-        )
+        INSERT INTO f_director (namecn,nameen,sex,imdbno,birth_addr,work_tag,birth_date,avatar_small,avatar_large,avatar_medium )
+        VALUES (#{namecn},#{nameen},#{sex},#{imdbno},#{birthAddr},#{workTag},#{birthDate},#{avatarSmall},#{avatarLarge},#{avatarMedium})
     </insert>
 </mapper>
